@@ -1,4 +1,4 @@
-from codecooler_model import Codecooler
+from models.codecooler_model import Codecooler
 
 
 class Manager(Codecooler):
