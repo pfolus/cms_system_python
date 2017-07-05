@@ -57,12 +57,20 @@ def show_grades(grades):
 
 def choose_assingment(number, assingments):
     '''
+    Asks user to choose on of possible
+    assingment and returns it.
+
+    Paramaters
+    ----------
+    number = int
+    assingments = list (assingments from Canvas)
+
     Returns
-    ------
+    -------
     name_of_assingment = str
     '''
     choice = ''
-    possible_choices = range(0, len)
+    possible_choices = range(0, len(assingments))
 
     while choice not in possible_choices:
 
