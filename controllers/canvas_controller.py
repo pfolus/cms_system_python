@@ -153,42 +153,41 @@ def export_data_to_csv(canvas):
                         canvas.managers,
                         canvas.students,
                         canvas.accountants]:
-
         export_codecooler(codecoolers)
 
 
 def export_submissions(submissions):
 
-    for submission in submissions:
-        submission_string = (submission.login +
-                            submission.title +
-                            submission.answer +
-                            submission.date.strftime('%d.%m.%Y') +
-                            str(submission.score) +
-                            str(submission.is_checked))
+    with open('csv_databases/submissions.csv', 'w') as file:
 
-        with open ('csv_databases/submissions.csv', 'w') as file:
-            file.write(submission_string)
+        writer = csv.writer(file, delimiter = '|')
+        for submission in submissions:
+            writer.writerow([submission.login,
+                                submission.title,
+                                submission.answer,
+                                submission.date.strftime('%d.%m.%Y'),
+                                str(submission.score),
+                                str(submission.is_checked)])
+
 
 
 def export_assingments(assingments):
 
-    for assigment in assingments:
-        assigment_string = (assigment.title +
-                            assigment.content +
-                            str(assigme.date) +
-                            assigment.date.strftime('%d.%m.%Y') +
-                            assigment.max_grade)
+    with open ('csv_databases/assingments.csv', 'w') as file:
 
-        with open ('csv_databases/assingments.csv', 'w') as file:
-            file.write(assigment_string)
+        writer = csv.writer(file, delimiter = '|')
+        for assigment in assingments:
+            writer.writerow([assigment.title,
+                                assigment.content,
+                                str(assigme.date),
+                                assigment.date.strftime('%d.%m.%Y'),
+                                str(assigment.max_grade)])
+
 
 def export_codecooler(codecoolers):
-    for codecooler in codecoolers:
-        codecooler_string = (codecooler.login +
-                        codecooler.password +
-                        codecooler.name +
-                        codecooler.surname)
-
-        with open ('csv_databases/codecoolers_list.csv', 'w') as file:
-            file.write(codecooler_string)
+    with open ('csv_databases/codecoolers_list.csv', 'w') as file:
+        for codecooler in codecoolers:
+            writer.writerow([codecooler.login,
+                            codecooler.password,
+                            codecooler.name,
+                            codecooler.surname])
