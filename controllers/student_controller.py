@@ -5,6 +5,19 @@ from models.submission_model import Submission
 
 
 def start_controller(canvas, user):
+    '''
+    Welcomes user, shows menu and asks
+    to choose a function
+
+    Paramaters
+    ----------
+    canvas = obj of Canvas class
+    user = obj of Codecooler class
+
+    Returns
+    -------
+    None
+    '''
     choice = ''
     EXIT = 0
     greet(user)
