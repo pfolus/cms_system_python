@@ -49,4 +49,23 @@ def choose_assingment(number, assingments):
         except ValueError:
             error_number()
 
-    return assingments[choice]
+    chosen_assingment = assingments[choice]
+
+    return chosen_assingment
+
+
+def check_if_submitted(assingment_name, submissions, user_login):
+    '''
+    Paramaters
+    ----------
+    assingment = str (title of assingment)
+    '''
+    for submission in submissions:
+        if submission.title == assingment_name and submission.user_login == user_login:
+            show_sub(submission)
+            print_assingment_done()
+
+
+def add_submission(assingment, user):
+    answer = get_answer()
+    new_sub = Submission(user.login, assingment.title, answer)
