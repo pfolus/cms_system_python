@@ -34,6 +34,11 @@ def show_grades(grades):
 
 
 def choose_assingment(number, assingments):
+    '''
+    Returns
+    ------
+    name_of_assingment = str
+    '''
     choice = ''
     possible_choices = range(0, len)
 
