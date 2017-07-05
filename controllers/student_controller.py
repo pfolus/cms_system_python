@@ -29,14 +29,23 @@ def start_controller(canvas, user):
 
 
 def run_chosen_function(user_input, canvas, user):
+    '''
+    Runs appropriate functions, based on user choice.
 
+    Paramaters
+    ----------
+    user_input = int
+    canvas = obj of Canvas class
+    user = obj of Codecooler class
+    '''
     if user_input == 1:
         show_grades(canvas.grades)
     elif user_input == 2:
         number = show_assingments(canvas.assingments)
         chosen_assingment = choose_assingment(number, canvas.assingments)
         check_if_submitted(chosen_assingment.title, canvas.submissions, user.login)
-        add_submission(chosen_assingment, user)
+        new_sub = add_submission(chosen_assingment, user)
+        add_new_sub_to_list(canvas, new_sub)
 
     elif user_input == 0:
         return user_input
