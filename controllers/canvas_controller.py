@@ -1,5 +1,6 @@
 import os.path
 import csv
+import datetime
 from models.student_model import Student
 from models.mentor_model import Mentor
 from models.manager_model import Manager
@@ -33,6 +34,7 @@ def load_submissions_list_csv(canvas):
             submissions.append(line)
 
     create_and_add_submissions_objects(submissions, canvas)
+
 
 def create_and_add_submissions_objects(submissions, canvas):
 
@@ -121,7 +123,10 @@ def login(canvas):
     LOGIN_INDEX = 0
     PASSWORD_INDEX = 1
 
-    for user in zip(canvas.mentors, canvas.managers, canvas.studens, canvas.accountants):
+    summary_list = [self.mentors + self.managers + self.students + self.accountants]
+
+
+    for user in summary_list:
         if user.login == login and user.password == password:
             return user
 
@@ -138,5 +143,35 @@ def run_controller(user, canvas):
         accountant_controller.start_controller(user, canvas)
     if class_name == 'Manager':
         manager_controller.start_controller(user, canvas)
+
+
+def export_data_to_csv(canvas):
+
+    export_submissions(canvas.submissions)
+    export_assigments(canvas.assigments)
+    for item in [canvas.mentors,
+                 canvas.managers,
+                 canvas.students,
+                 canvas.accountants]:
+        export_students(item)
+
+def export_submissions(submissions):
+
+    for submission in submissions:
+        submission_string = (submission.login +
+                            submission.title +
+                            submission.answer +
+                            str(submission.date) +
+                            submission.date.strftime('%d.%m.%Y') +
+                            str(submission.score) +
+                            str(submission.is_checked))
+
+        with open (os.path.dirname(__file__) + '../csv_databases/submissions.csv', 'a') as file:
+            file.append(submission_string)
+
+
+
+
+
 
 
