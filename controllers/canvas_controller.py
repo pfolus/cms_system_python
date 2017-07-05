@@ -4,7 +4,9 @@ from models.student_model import Student
 from models.mentor_model import Mentor
 from models.manager_model import Manager
 from models.accountant_model import Accountant
-from model.codecoolers_list import CodecoolersList
+from views.codecooler_view import *
+from controllers.codecoolers_list_controller import *
+
 
 
 def start_controller():
@@ -52,5 +54,19 @@ def add_user_to_list(cc_list_object, user):
         cc_list_object.accountants_list.append(user)
     elif class_name == "Manager":
         cc_list_object.managers_list.append(user)
+
+
+def login():
+
+    login = get_login()
+    password = get_password()
+    codecoolers_list = read_codecoolers_list_csv()
+
+    LOGIN_INDEX = 0
+    PASSWORD_INDEX = 1
+
+    for user in codecoolers_list:
+        if user[LOGIN_INDEX] == login and user[PASSWORD_INDEX] == password:
+            return user[LOGIN_INDEX]
 
 
