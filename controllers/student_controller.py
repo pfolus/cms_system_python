@@ -107,5 +107,37 @@ def check_if_submitted(assingment_name, submissions, user_login):
 
 
 def add_submission(assingment, user):
+    '''
+    Adds new submission from Student, for chosen
+    assingment.
+
+    Paramaters
+    ----------
+    assingment = obj of Assingment class
+    user = obj of Codecooler class
+
+    Returns
+    -------
+    new_sub = obj of Submission class
+    '''
     answer = get_answer()
     new_sub = Submission(user.login, assingment.title, answer)
+
+    return new_sub
+
+
+def add_new_sub_to_list(canvas, submission):
+    '''
+    Adds new submission to the list of submissions
+    in canvas object.
+
+    Paramaters
+    ----------
+    canvas = obj of Canvas class
+    submission = obj of Submission class
+
+    Returns
+    -------
+    None
+    '''
+    canvas.submissions.append(submission)
