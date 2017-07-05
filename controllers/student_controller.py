@@ -100,12 +100,20 @@ def check_if_submitted(assingment_name, submissions, user_login):
 
     Returns
     -------
-    None
+    boolean = returns False if submission for this assingment
+    wasn't sent by this Student yes, otherwise returns True.
     '''
     for submission in submissions:
         if submission.title == assingment_name and submission.user_login == user_login:
-            show_sub(submission)
             print_assingment_done()
+            show_sub(submission)
+
+
+def check_if_graded():
+    '''
+    Returns True if submission was already graded, otherwise returns False
+    '''
+    pass
 
 
 def add_submission(assingment, user):
