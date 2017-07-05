@@ -23,7 +23,7 @@ def read_codecoolers_list_csv():
         for line in reader:
             codecoolers_list.append(line)
 
-    return codecoolers_list
+    create_codecoolers()
 
 
 def create_codecoolers(cc_list_object, codecoolers_records):
