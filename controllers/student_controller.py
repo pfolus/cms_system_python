@@ -1,5 +1,7 @@
 from views.student_view import *
-from model.canvas_model import Canvas
+from views.submission_view import *
+from models.canvas_model import Canvas
+from models.submission_model import Submission
 
 
 def start_controller(canvas, user):
