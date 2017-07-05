@@ -6,11 +6,11 @@ from models.manager_model import Manager
 from models.accountant_model import Accountant
 from models.canvas_model import Canvas
 from views.codecooler_view import *
+from views.canvas_view import *
 import manager_controler
 import student_controller
 import accountant_controller
 import mentor_controller
-
 
 
 def start_controller():
@@ -47,7 +47,7 @@ def load_assigments_list_csv(canvas):
 
     with open (os.path.dirname(__file__) + '../csv_databases/assigments.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
-        
+
         assigments = []
 
         for line in reader:
@@ -114,6 +114,7 @@ def add_user_to_list(canvas, user):
 
 def login(canvas):
 
+    show_login_menu()
     login = get_login()
     password = get_password()
 
