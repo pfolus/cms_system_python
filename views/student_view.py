@@ -36,3 +36,15 @@ def show_assingments(assingments):
     for assingment in assingments:
         show_assingment(assingment, number)
         number += 1
+
+    return number
+
+
+def get_assingment_number():
+    choice = int(input("Choose assingment: "))
+
+    return choice
+
+
+def error_number():
+    print('Wrong number.')
