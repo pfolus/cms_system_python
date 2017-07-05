@@ -1,8 +1,9 @@
+import datetime
 import csv
 import datetime
 from models.codecooler_model import *
-#  from models.student_model import Student
-#  from models.mentor_model import Mentor
+#from models.student_model import Student
+#from models.mentor_model import Mentor
 from models.manager_model import Manager
 from models.accountant_model import Accountant
 from models.canvas_model import Canvas
@@ -34,6 +35,8 @@ def load_submissions_list_csv(canvas):
         submissions = []
 
         for line in reader:
+            line[3] = datetime.datetime.strptime(line[3], '%d.%m.%Y')
+            line[4] = int(line[4])
             submissions.append(line)
 
     create_and_add_submissions_objects(submissions, canvas)
@@ -53,6 +56,8 @@ def load_assingments_list_csv(canvas):
         assingments = []
 
         for line in reader:
+            line[2] = datetime.datetime.strptime(line[2], '%d.%m.%Y')
+            line[3] = int(line[3])
             assingments.append(line)
 
     create_and_add_assingments_objects(assingments, canvas)
@@ -151,11 +156,11 @@ def export_data_to_csv(canvas):
 
     export_submissions(canvas.submissions)
     export_assingments(canvas.assingments)
-    for codecoolers in [canvas.mentors,
+    '''for codecoolers in [canvas.mentors,
                         canvas.managers,
                         canvas.students,
                         canvas.accountants]:
-        export_codecooler(codecoolers)
+        export_codecooler(codecoolers)'''
 
 
 def export_submissions(submissions):
@@ -167,28 +172,26 @@ def export_submissions(submissions):
             writer.writerow([submission.user_login,
                                 submission.title,
                                 submission.answer,
-                                submission.date,
+                                submission.date.strftime('%d.%m.%Y'),
                                 str(submission.score),
                                 str(submission.is_checked)])
-#date.strftime('%d.%m.%Y')
 
 
 def export_assingments(assingments):
 
     with open ('csv_databases/assingments.csv', 'w') as file:
 
-
+        writer = csv.writer(file, delimiter = '|')
         for assingment in assingments:
             writer.writerow([assingment.title,
                                 assingment.content,
-                                str(assingment.date),
                                 assingment.date.strftime('%d.%m.%Y'),
                                 str(assingment.max_grade)])
 
 
 def export_codecooler(codecoolers):
     with open ('csv_databases/codecoolers_list.csv', 'w') as file:
-        
+
         writer = csv.writer(file, delimiter = '|')
         for codecooler in codecoolers:
             writer.writerow([codecooler.login,
