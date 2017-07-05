@@ -18,7 +18,7 @@ def start_controller(canvas, user):
 
 def choose_option(user_input, canvas, user):
 
-    options = {1: how_mentors(canvas.mentors),
+    options = {1: show_mentors(canvas.mentors),
                2: pass,
                3: pass,
                4: pass,
