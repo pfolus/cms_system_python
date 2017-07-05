@@ -2,8 +2,7 @@ from views.employee_view import *
 
 
 def greet(user):
-
-    print("Hello " + user.name + "!")
+    print('Hey {}!'.format(user.name))
 
 
 def print_menu():
