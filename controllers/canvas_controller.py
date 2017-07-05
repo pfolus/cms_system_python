@@ -6,6 +6,8 @@ from models.codecooler_model import *
 from models.manager_model import Manager
 from models.accountant_model import Accountant
 from models.canvas_model import Canvas
+from models.assingment_model import Assingment
+from models.submission_model import Submission
 from views.codecooler_view import *
 from views.canvas_view import *
 from controllers import manager_controller
@@ -64,7 +66,7 @@ def create_and_add_assingments_objects(assingments, canvas):
     MAXGRADE_INDEX = 3
 
     for item in assingments:
-        canvas.assingments.append(Assingment(item[0], item[1], item[2], item[3])
+        canvas.assingments.append(Assingment(item[0], item[1], item[2], item[3]))
 
 
 def load_codecoolers_list_csv(canvas):
@@ -91,14 +93,14 @@ def create_codecoolers_objects(codecoolers_list, canvas):
     # creates object codecooler from nested list 'codecoolers_list: user(user[login_index], user[password_index]...'
 
     for user in codecoolers_list:
-        if user[TYPE_INDEX] == "Student":
-            add_user_to_list(canvas, Student(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
-        elif user[TYPE_INDEX] == "Manager":
+        #if user[TYPE_INDEX] == "Student":
+            #add_user_to_list(canvas, Student(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+        if user[TYPE_INDEX] == "Manager":
             add_user_to_list(canvas, Manager(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
         elif user[TYPE_INDEX] == "Accountant":
             add_user_to_list(canvas, Accountant(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
-        elif user[TYPE_INDEX] == "Mentor":
-            add_user_to_list(canvas, Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+        #elif user[TYPE_INDEX] == "Mentor":
+            #add_user_to_list(canvas, Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
 
 
 def add_user_to_list(canvas, user):
@@ -162,30 +164,32 @@ def export_submissions(submissions):
 
         writer = csv.writer(file, delimiter = '|')
         for submission in submissions:
-            writer.writerow([submission.login,
+            writer.writerow([submission.user_login,
                                 submission.title,
                                 submission.answer,
-                                submission.date.strftime('%d.%m.%Y'),
+                                submission.date,
                                 str(submission.score),
                                 str(submission.is_checked)])
-
+#date.strftime('%d.%m.%Y')
 
 
 def export_assingments(assingments):
 
     with open ('csv_databases/assingments.csv', 'w') as file:
 
-        writer = csv.writer(file, delimiter = '|')
-        for assigment in assingments:
-            writer.writerow([assigment.title,
-                                assigment.content,
-                                str(assigme.date),
-                                assigment.date.strftime('%d.%m.%Y'),
-                                str(assigment.max_grade)])
+
+        for assingment in assingments:
+            writer.writerow([assingment.title,
+                                assingment.content,
+                                str(assingment.date),
+                                assingment.date.strftime('%d.%m.%Y'),
+                                str(assingment.max_grade)])
 
 
 def export_codecooler(codecoolers):
     with open ('csv_databases/codecoolers_list.csv', 'w') as file:
+        
+        writer = csv.writer(file, delimiter = '|')
         for codecooler in codecoolers:
             writer.writerow([codecooler.login,
                             codecooler.password,
