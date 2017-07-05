@@ -1,6 +1,7 @@
 import os.path
 import csv
 import datetime
+from models.codecooler_model import *
 from models.student_model import Student
 from models.mentor_model import Mentor
 from models.manager_model import Manager
@@ -21,6 +22,8 @@ def start_controller():
     load_submissions_list_csv(canvas)
     user = login(canvas)
     run_controler(user, canvas)
+    export_data_to_csv(canvas)
+
 
 
 def load_submissions_list_csv(canvas):
@@ -149,11 +152,11 @@ def export_data_to_csv(canvas):
 
     export_submissions(canvas.submissions)
     export_assigments(canvas.assigments)
-    for item in [canvas.mentors,
+    for codecoolers in [canvas.mentors,
                  canvas.managers,
                  canvas.students,
                  canvas.accountants]:
-        export_students(item)
+        export_codecooler(codecoolers)
 
 def export_submissions(submissions):
 
@@ -161,13 +164,38 @@ def export_submissions(submissions):
         submission_string = (submission.login +
                             submission.title +
                             submission.answer +
-                            str(submission.date) +
                             submission.date.strftime('%d.%m.%Y') +
                             str(submission.score) +
                             str(submission.is_checked))
 
-        with open (os.path.dirname(__file__) + '../csv_databases/submissions.csv', 'a') as file:
-            file.append(submission_string)
+        with open (os.path.dirname(__file__) + '../csv_databases/submissions.csv', 'w') as file:
+            file.write(submission_string)
+
+
+def export_assigments(assigments):
+
+    for assigment in assigments:
+        assigment_string = (assigment.title +
+                            assigment.content +
+                            str(assigme.date) +
+                            assigment.date.strftime('%d.%m.%Y') +
+                            assigment.max_grade)
+
+        with open (os.path.dirname(__file__) + '../csv_databases/assigments.csv', 'w') as file:
+            file.write(assigment_string)
+
+def export_codecooler(codecoolers):
+    for codecooler in codecoolers:
+    codecooler_string = (codecooler.login +
+                        codecooler.password +
+                        codecooler.name +
+                        codecooler.surname)
+
+    with open (os.path.dirname(__file__) + '../csv_databases/codecoolers_list.csv', 'w') as file:
+        file.write(codecooler_string)
+
+
+
 
 
 
