@@ -1,3 +1,6 @@
+from views.assingment_view import *
+
+
 def greet(user):
     print('Hey {}!'.format(user.name))
 
