@@ -35,7 +35,8 @@ def choose_assingment(number, assingments):
     while choice not in possible_choices:
 
         try:
-            choice = int(input("Choose assingment: "))
+            choice = get_assingment_number()
         except ValueError:
-            print('Wrong number.')
+            error_number()
+
     return assingments[choice]
