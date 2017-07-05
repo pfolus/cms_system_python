@@ -48,3 +48,13 @@ def get_assingment_number():
 
 def error_number():
     print('Wrong number.')
+
+
+def print_assingment_done():
+    print('You have already done this assingment')
+
+
+def get_answer():
+    answer = input('Type the answer (preferably link to repo on github.com): ')
+
+    return answer
