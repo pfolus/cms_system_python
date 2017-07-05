@@ -2,7 +2,7 @@ import datetime
 import csv
 import datetime
 from models.codecooler_model import *
-#from models.student_model import Student
+from models.student_model import Student
 #from models.mentor_model import Mentor
 from models.manager_model import Manager
 from models.accountant_model import Accountant
@@ -45,12 +45,15 @@ def load_submissions_list_csv(canvas):
 def create_and_add_submissions_objects(submissions, canvas):
 
     for item in submissions:
-        canvas.submissions.append(Submission(item[0], item[1], item[2], item[3], item[4], item[5]))
+        if item[5] == 'False':
+            canvas.submissions.append(Submission(item[0], item[1], item[2], item[3], item[4], ''))
+        else:
+            canvas.submissions.append(Submission(item[0], item[1], item[2], item[3], item[4], item[5]))
 
 
 def load_assingments_list_csv(canvas):
 
-    with open ('csv_databases/assingments.csv', 'r') as file:
+    with open('csv_databases/assingments.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
 
         assingments = []
@@ -98,8 +101,8 @@ def create_codecoolers_objects(codecoolers_list, canvas):
     # creates object codecooler from nested list 'codecoolers_list: user(user[login_index], user[password_index]...'
 
     for user in codecoolers_list:
-        #if user[TYPE_INDEX] == "Student":
-            #add_user_to_list(canvas, Student(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+        if user[TYPE_INDEX] == "Student":
+            add_user_to_list(canvas, Student(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
         if user[TYPE_INDEX] == "Manager":
             add_user_to_list(canvas, Manager(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
         elif user[TYPE_INDEX] == "Accountant":

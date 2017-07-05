@@ -44,11 +44,13 @@ def run_chosen_function(user_input, canvas, user):
         number = show_assingments(canvas.assingments)
         chosen_assingment = choose_assingment(number, canvas.assingments)
         check_if_submitted(chosen_assingment.title, canvas.submissions, user.login)
-        new_sub = add_submission(chosen_assingment, user)
-        add_new_sub_to_list(canvas, new_sub)
+        is_graded = check_if_graded()
+        if not is_graded:
+            new_sub = add_submission(chosen_assingment, user)
+            add_new_sub_to_list(canvas, new_sub)
+            info_submission_added()
 
-    elif user_input == 0:
-        return user_input
+    return user_input
 
 
 def show_grades(grades):
@@ -98,12 +100,20 @@ def check_if_submitted(assingment_name, submissions, user_login):
 
     Returns
     -------
-    None
+    boolean = returns False if submission for this assingment
+    wasn't sent by this Student yes, otherwise returns True.
     '''
     for submission in submissions:
         if submission.title == assingment_name and submission.user_login == user_login:
-            show_sub(submission)
             print_assingment_done()
+            show_sub(submission)
+
+
+def check_if_graded():
+    '''
+    Returns True if submission was already graded, otherwise returns False
+    '''
+    pass
 
 
 def add_submission(assingment, user):
