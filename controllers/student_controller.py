@@ -86,9 +86,19 @@ def choose_assingment(number, assingments):
 
 def check_if_submitted(assingment_name, submissions, user_login):
     '''
+    Based on provided assingment name, checks if Student
+    already sent a submission for it and prints info about
+    it, if he did.
+
     Paramaters
     ----------
-    assingment = str (title of assingment)
+    assingment_name = str (title of assingment)
+    submissions = list (submissions from Canvas)
+    user_login = str
+
+    Returns
+    -------
+    None
     '''
     for submission in submissions:
         if submission.title == assingment_name and submission.user_login == user_login:
