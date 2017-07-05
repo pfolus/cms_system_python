@@ -1,36 +1,34 @@
-import os.path
 import csv
 import datetime
 from models.codecooler_model import *
-from models.student_model import Student
-from models.mentor_model import Mentor
+#  from models.student_model import Student
+#  from models.mentor_model import Mentor
 from models.manager_model import Manager
 from models.accountant_model import Accountant
 from models.canvas_model import Canvas
 from views.codecooler_view import *
 from views.canvas_view import *
-import manager_controler
-import student_controller
-import accountant_controller
-import mentor_controller
+from controllers import manager_controller
+from controllers import student_controller
+from controllers import accountant_controller
+from controllers import mentor_controller
 
 
 def start_controller():
     canvas = Canvas()
     load_codecoolers_list_csv(canvas)
-    load_assigments_list_csv(canvas)
+    load_assingments_list_csv(canvas)
     load_submissions_list_csv(canvas)
     user = login(canvas)
-    run_controler(user, canvas)
+    run_controller(user, canvas)
     export_data_to_csv(canvas)
-
 
 
 def load_submissions_list_csv(canvas):
 
-    with open (os.path.dirname(__file__) + '../csv_databases/submissions.csv', 'r') as file:
+    with open('csv_databases/submissions.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
-        
+
         submissions = []
 
         for line in reader:
@@ -41,45 +39,39 @@ def load_submissions_list_csv(canvas):
 
 def create_and_add_submissions_objects(submissions, canvas):
 
-    # creates object assigment from nested list assigment
-    OBJECT_STRING = 'Submission(item[0], item[1], item[2], item[3], item[4], item[5])'
-
     for item in submissions:
-        canvas.submissions.append(eval(OBJECT_STRING))
+        canvas.submissions.append(Submission(item[0], item[1], item[2], item[3], item[4], item[5]))
 
 
-def load_assigments_list_csv(canvas):
+def load_assingments_list_csv(canvas):
 
-    with open (os.path.dirname(__file__) + '../csv_databases/assigments.csv', 'r') as file:
+    with open ('csv_databases/assingments.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
 
-        assigments = []
+        assingments = []
 
         for line in reader:
-            assigments.append(line)
+            assingments.append(line)
 
-    create_and_add_assigments_objects(assigments, canvas)
+    create_and_add_assingments_objects(assingments, canvas)
 
-def create_and_add_assigments_objects(assigments, canvas):
+
+def create_and_add_assingments_objects(assingments, canvas):
 
     TITLE_INDEX = 0
     CONTENT_INDEX = 1
     RATE_INDEX = 2
     MAXGRADE_INDEX = 3
 
-    # creates object assigment from nested list assigment
-    OBJECT_STRING = 'Assigment(item[0], item[1], item[2], item[3])'
-
-    for item in assigments:
-        canvas.assigments.append(eval(OBJECT_STRING))
-
+    for item in assingments:
+        canvas.assingments.append(Assingment(item[0], item[1], item[2], item[3])
 
 
 def load_codecoolers_list_csv(canvas):
 
-    with open (os.path.dirname(__file__) + '../csv_databases/codecoolers_list.csv', 'r') as file:
+    with open ('csv_databases/codecoolers_list.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
-        
+
         codecoolers_list = []
 
         for line in reader:
@@ -97,10 +89,16 @@ def create_codecoolers_objects(codecoolers_list, canvas):
     TYPE_INDEX = 4
 
     # creates object codecooler from nested list 'codecoolers_list: user(user[login_index], user[password_index]...'
-    OBJECT_STRING = 'user[TYPE_INDEX](user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX])'
 
     for user in codecoolers_list:
-        add_user_to_list(canvas, eval(OBJECT_STRING))
+        if user[TYPE_INDEX] == "Student":
+            add_user_to_list(canvas, Student(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+        elif user[TYPE_INDEX] == "Manager":
+            add_user_to_list(canvas, Manager(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+        elif user[TYPE_INDEX] == "Accountant":
+            add_user_to_list(canvas, Accountant(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+        elif user[TYPE_INDEX] == "Mentor":
+            add_user_to_list(canvas, Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
 
 
 def add_user_to_list(canvas, user):
@@ -126,8 +124,7 @@ def login(canvas):
     LOGIN_INDEX = 0
     PASSWORD_INDEX = 1
 
-    summary_list = [self.mentors + self.managers + self.students + self.accountants]
-
+    summary_list = canvas.mentors + canvas.managers + canvas.students + canvas.accountants
 
     for user in summary_list:
         if user.login == login and user.password == password:
@@ -139,24 +136,26 @@ def run_controller(user, canvas):
     class_name = user.__class__.__name__
 
     if class_name == 'Student':
-        student_controller.start_controller(user, canvas)
+        student_controller.start_controller(canvas, user)
     if class_name == 'Mentor':
-        mentor_controller.start_controller(user, canvas)
+        mentor_controller.start_controller(canvas, user)
     if class_name == 'Accountant':
-        accountant_controller.start_controller(user, canvas)
+        accountant_controller.start_controller(canvas, user)
     if class_name == 'Manager':
-        manager_controller.start_controller(user, canvas)
+        manager_controller.start_controller(canvas, user)
 
 
 def export_data_to_csv(canvas):
 
     export_submissions(canvas.submissions)
-    export_assigments(canvas.assigments)
+    export_assingments(canvas.assingments)
     for codecoolers in [canvas.mentors,
-                 canvas.managers,
-                 canvas.students,
-                 canvas.accountants]:
+                        canvas.managers,
+                        canvas.students,
+                        canvas.accountants]:
+
         export_codecooler(codecoolers)
+
 
 def export_submissions(submissions):
 
@@ -168,38 +167,28 @@ def export_submissions(submissions):
                             str(submission.score) +
                             str(submission.is_checked))
 
-        with open (os.path.dirname(__file__) + '../csv_databases/submissions.csv', 'w') as file:
+        with open ('csv_databases/submissions.csv', 'w') as file:
             file.write(submission_string)
 
 
-def export_assigments(assigments):
+def export_assingments(assingments):
 
-    for assigment in assigments:
+    for assigment in assingments:
         assigment_string = (assigment.title +
                             assigment.content +
                             str(assigme.date) +
                             assigment.date.strftime('%d.%m.%Y') +
                             assigment.max_grade)
 
-        with open (os.path.dirname(__file__) + '../csv_databases/assigments.csv', 'w') as file:
+        with open ('csv_databases/assingments.csv', 'w') as file:
             file.write(assigment_string)
 
 def export_codecooler(codecoolers):
     for codecooler in codecoolers:
-    codecooler_string = (codecooler.login +
+        codecooler_string = (codecooler.login +
                         codecooler.password +
                         codecooler.name +
                         codecooler.surname)
 
-    with open (os.path.dirname(__file__) + '../csv_databases/codecoolers_list.csv', 'w') as file:
-        file.write(codecooler_string)
-
-
-
-
-
-
-
-
-
-
+        with open ('csv_databases/codecoolers_list.csv', 'w') as file:
+            file.write(codecooler_string)

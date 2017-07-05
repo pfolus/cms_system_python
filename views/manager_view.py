@@ -1,4 +1,4 @@
-from views.employee_view imoprt *
+from views.employee_view import *
 
 
 def greet(user):
@@ -9,13 +9,18 @@ def greet(user):
 def print_menu():
 
     print('''1. List mentors
-          2. List mentors with details
-          3. Add mentor
-          4. Remove mentor
-          5. List students
-          6. List students with details
-          0. Log out
+2. List mentors with details
+3. Add mentor
+4. Remove mentor
+5. List students
+6. List students with details
+0. Log out
           ''')
+
+
+def ask_for_option():
+
+    return input("Choose option: ")
 
 
 def option_error():

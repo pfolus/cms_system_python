@@ -1,4 +1,4 @@
-from models.codecooler_model import Codecooler
+from models.employee_model import Employee
 
 
 class Accountant(Employee):

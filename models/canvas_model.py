@@ -5,6 +5,6 @@ class Canvas:
         self.managers = []
         self.students = []
         self.accountants = []
-        self.assigments = []
+        self.assingments = []
         self.submissions = []
         self.grades = []
