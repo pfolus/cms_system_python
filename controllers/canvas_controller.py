@@ -5,8 +5,10 @@ from models.mentor_model import Mentor
 from models.manager_model import Manager
 from models.accountant_model import Accountant
 from views.codecooler_view import *
-from controllers.codecoolers_list_controller import *
-
+import manager_controler
+import student_controller
+import accountant_controller
+import mentor_controller
 
 
 def start_controller():
