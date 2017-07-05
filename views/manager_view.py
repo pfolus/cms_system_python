@@ -1,4 +1,4 @@
-from employee_view imoprt *
+from views.employee_view imoprt *
 
 
 def greet(user):
@@ -40,3 +40,58 @@ def show_mentors(mentors):
     for mentor in mentors:
         print("{}. {} {}".format(index, mentor.name, mentor.surname))
         index += 1
+
+
+def ask_name():
+
+    name = input("Name: ")
+
+    while len(name) < 1 and not name.isalpha():
+        print("Wrong input!")
+        name = input("Name: ")
+
+    return name
+
+
+def ask_surname():
+
+    surname = input("Surame: ")
+
+    while len(surname) < 1 and not surname.isalpha():
+        print("Wrong input!")
+        name = input("Surame: ")
+
+    return surname
+
+
+def ask_login():
+
+    login = input("Login: ")
+
+    while len(login) < 1:
+        print("Wrong input!")
+        login = input("Login: ")
+
+    return login
+
+
+def ask_password():
+
+    password = input("Password: ")
+
+    while len(password) < 4:
+        print("Minimum 4 characters!")
+        password = input("Password: ")
+
+    return password
+
+
+def ask_for_index():
+
+    index = input("Choose mentor index: ")
+
+    while not index.isdigit():
+        print("Enter proper index!")
+        index = input("Choose mentor index: ")
+
+    return int(index)

@@ -19,12 +19,33 @@ def start_controller(canvas, user):
 def choose_option(user_input, canvas, user):
 
     options = {1: show_mentors(canvas.mentors),
-               2: pass,
-               3: pass,
-               4: pass,
+               2: show_mentors_with_details(canvas.mentors),
+               3: add_mentor(canvas.mentors),
+               4: remove_mentor(canvas.mentors),
                5: show_students_list(canvas.students),
                6: show_students_with_details(canvas)}
 
     for option, function in options.items():
         if int(user_input) == option:
             function
+
+
+def add_mentor(mentors):
+
+    login = ask_login()
+    password = ask_password()
+    name = ask_name()
+    surname = ask_surname()
+
+    mentors.append(Mentor(login, password, name, surname))
+
+
+def remove_mentor(mentors):
+
+    show_mentors(mentors)
+
+    try:
+        index = ask_for_index()
+        del mentors[index]
+    except IndexError:
+        option_error()
