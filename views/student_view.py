@@ -26,3 +26,10 @@ def choose_function():
             print('Wrong choice.')
 
     return choice
+
+
+def show_assingments(assingments):
+    number = 0
+    for assingment in assingments:
+        show_assingment(assingment, number)
+        number += 1
