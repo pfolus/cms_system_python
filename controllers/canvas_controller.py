@@ -101,8 +101,8 @@ def create_codecoolers_objects(codecoolers_list, canvas):
     # creates object codecooler from nested list 'codecoolers_list: user(user[login_index], user[password_index]...'
 
     for user in codecoolers_list:
-        #if user[TYPE_INDEX] == "Student":
-            #add_user_to_list(canvas, Student(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+        if user[TYPE_INDEX] == "Student":
+            add_user_to_list(canvas, Student(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
         if user[TYPE_INDEX] == "Manager":
             add_user_to_list(canvas, Manager(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
         elif user[TYPE_INDEX] == "Accountant":
