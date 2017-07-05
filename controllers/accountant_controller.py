@@ -1,5 +1,5 @@
-from accountant_view import *
-from employee_view import *
+from views.accountant_view import *
+from views.employee_view import *
 
 
 def start_controller(canvas, user):
