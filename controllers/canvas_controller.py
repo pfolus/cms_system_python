@@ -9,6 +9,7 @@ from models.accountant_model import Accountant
 from models.canvas_model import Canvas
 from models.assingment_model import Assingment
 from models.submission_model import Submission
+from models.attendance_model import Attendance
 from views.codecooler_view import *
 from views.canvas_view import *
 from controllers import manager_controller
