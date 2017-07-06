@@ -164,11 +164,8 @@ def export_data_to_csv(canvas):
 
     export_submissions(canvas.submissions)
     export_assingments(canvas.assingments)
-    for codecoolers in [canvas.mentors,
-                        canvas.managers,
-                        canvas.students,
-                        canvas.accountants]:
-        export_codecooler(codecoolers)
+    codecoolers = canvas.mentors + canvas.managers + canvas.students + canvas.accountants
+    export_codecooler(codecoolers)
 
 
 def export_submissions(submissions):
