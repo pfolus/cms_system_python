@@ -32,6 +32,18 @@ def start_controller():
     export_data_to_csv(canvas)
 
 
+def load_attendances_list_csv(canvas):
+
+    with open('csv_databases/attendances.csv', 'r') as file:
+        reader = csv.reader(file, delimiter='|')
+
+        for line in reader:
+            login = line[0]
+            average = line[1]
+            attendances = [float(number) for number in line[2].split(",")]
+            canvas.attendances.append(Attendance(login, attendances, average))
+
+
 def load_submissions_list_csv(canvas):
 
     with open('csv_databases/submissions.csv', 'r') as file:
