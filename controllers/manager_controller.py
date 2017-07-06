@@ -1,4 +1,5 @@
 from views.manager_view import *
+from views.codecooler_view import *
 from models.mentor_model import Mentor
 
 
