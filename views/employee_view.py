@@ -5,7 +5,7 @@ def show_students_list(students_list):
     index = 1
     print()
     for student in students_list:
-        print('({}). {} {}'.format(index, student.name, student.surname))
+        print('({}) {} {}'.format(index, student.name, student.surname))
         index += 1
     print()
 
@@ -13,6 +13,7 @@ def show_students_list(students_list):
 def show_students_list_detailed(canvas):
     index = 1
     student_attendance = 0
+    print()
     for student in canvas.students:
         [grades_sum,
          max_grades_sum,
@@ -24,6 +25,7 @@ def show_students_list_detailed(canvas):
             if attendance.student_login == student.login:
                 student_attendance = attendance.average
 
-        print('{}. {} {}, Score: {}/{}, Attendance: {}%'.format(index, student.name, student.surname, grades_sum, max_grades_sum, student_attendance))
+        print('({}) {} {}, Score: {}/{}, Attendance: {:.4}%'.format(index, student.name, student.surname, grades_sum, max_grades_sum, student_attendance))
 
         index += 1
+    print()
