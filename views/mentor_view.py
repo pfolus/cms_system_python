@@ -159,20 +159,11 @@ def show_fullnames(canvas):
         index += 1
 
 
-def get_student(canvas):
-    student_index = get_int('Pick student index: ')
-    while student_index not in range(len(canvas.students)):
-        print('There is no such student index')
-        student_index = get_int('Pick student index: ')
-
-    return canvas.students[student_index]
-
-
 def print_attendance_menu():
-    menu = ['==================',
+    menu = ['\n==================',
             '(1)-->insert absence',
             '(2)-->insert late',
-            '(0)-->back to menu',
+            '(3)-->insert presence',
             '==================']
 
     for item in menu:
