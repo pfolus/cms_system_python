@@ -2,6 +2,9 @@ from models.mentor_model import Mentor
 from views.mentor_view import *
 from models.student_model import Student
 from models.canvas_model import Canvas
+from models.assingment_model import Assingment
+from views.employee_view import *
+from models.submission_model import Submission
 
 def start_controller(canvas, user):
 
@@ -14,11 +17,11 @@ def start_controller(canvas, user):
         choice = get_choice()
 
         if choice == '1':
-            view_student_details()
+            show_students_list_detailed(canvas)
         elif choice == '2':
-            add_assingment()
+            add_assingment(canvas)
         elif choice == '3':
-            grade_assingment()
+            grade_assingment(canvas)
         elif choice == '4':
             check_attendance()
         elif choice == '5':
@@ -37,11 +40,12 @@ def add_student(canvas):
     surname = get_surname()
 
     canvas.students.append(Student(login, password, name, surname))
+    print_done()
 
 
 def remove_student(canvas):
 
-    #show_student_login_list()
+    show_logins(canvas)
     login = get_student_login()
 
     while not login_exist(login, canvas):
@@ -64,17 +68,44 @@ def login_exist(login, canvas):
     return login_exist
 
 
-def add_assignment():
+def add_assingment(canvas):
 
-    pass
+    title = get_string('title')
+    content = get_string('content')
+    date = get_date()
+    max_grade = get_int('Enter max grade: ')
+
+    canvas.assingments.append(Assingment(title, content, date, max_grade))
+    print_done()
 
 
-def grade_assingment():
-    pass
+def grade_assingment(canvas):
 
+    show_submissions(canvas)
+    submission = get_submission(canvas)
+    print('\nSubmission Answer:\n{}'.format(submission.answer))
+
+    grade = get_int('Enter submission grade: ')
+    max_grade = max_grade_by_title(canvas, submission)
+
+    while (grade > max_grade) or (grade < -3):
+        print('Grade must be in range <-3:{}>'.format(max_grade))
+        grade = get_int('Enter submission grade: ')
+
+    submission.score = grade
+    submission.is_checked = True
+    print_done()
+
+def max_grade_by_title(canvas, submission):
+
+    for item in canvas.assingments:
+        if item.title == submission.title:
+            return item.max_grade
 
 def check_attendance():
     pass
+
+
 
 
 
