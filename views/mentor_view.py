@@ -1,6 +1,8 @@
 from controllers.mentor_controller import *
 from models.mentor_model import Mentor
 from datetime import datetime
+from models.student_model import Student
+from models.canvas_model import Canvas
 
 def print_welcome(user):
     print('\n' +'Witamy Szanownego kolegę {}a!'.format(user.name))
@@ -116,4 +118,12 @@ def get_max_grade():
             return max_grade
         except:
             print('Wrong input!')
+
+
+def show_logins(canvas):
+
+    print('\nLogin list: ')
+    for user in canvas.students:
+        print('-> {}'.format(user.login))
+
 
