@@ -170,14 +170,22 @@ def export_submissions(submissions):
 
     with open('csv_databases/submissions.csv', 'w') as file:
 
-        writer = csv.writer(file, delimiter = '|')
+        writer = csv.writer(file, delimiter='|')
         for submission in submissions:
-            writer.writerow([submission.user_login,
+            if submission.is_checked:
+                writer.writerow([submission.user_login,
                                 submission.title,
                                 submission.answer,
                                 submission.date.strftime('%d.%m.%Y'),
                                 str(submission.score),
-                                str(submission.is_checked)])
+                                'True'])
+            else:
+                writer.writerow([submission.user_login,
+                                submission.title,
+                                submission.answer,
+                                submission.date.strftime('%d.%m.%Y'),
+                                str(submission.score),
+                                'False'])
 
 
 def export_assingments(assingments):
