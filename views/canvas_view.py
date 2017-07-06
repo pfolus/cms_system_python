@@ -1,7 +1,7 @@
 import getpass
 
 def wrong_user():
-    print("There isn't such user\n")
+    print("\nThere isn't such user\n")
 
 
 def show_login_menu():
