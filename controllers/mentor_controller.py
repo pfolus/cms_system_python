@@ -22,36 +22,42 @@ def start_controller(canvas, user):
         elif choice == '4':
             check_attendance()
         elif choice == '5':
-            remove_student()
+            remove_student(canvas)
         elif choice == '6':
-            add_student()
+            add_student(canvas)
         elif choice != '0':
             print_bad_choice()
 
 
-def add_student():
+def add_student(canvas):
 
     login = get_login()
     password = get_password()
     name = get_name()
     surname = get_surname()
 
-    Student(login, password, name, surname)
+    canvas.students.append(Student(login, password, name, surname))
 
 
-def remove_student():
+def remove_student(canvas):
 
-    show_student_login_list()
+    #show_student_login_list()
     login = get_student_login()
 
-    while not login_exist():
-        login = gete_student_login()
+    while not login_exist(login, canvas):
+        print_not_exist()
+        login = get_student_login()
+
+    for student in canvas.students:
+        if student.login == login:
+            canvas.students.remove(student)
+            print_done()
 
 
-def login_exist(login):
+def login_exist(login, canvas):
 
     login_exist = False
-    for item in Canvas.students:
+    for item in canvas.students:
         if item.login == login:
             login_exist = True
 
