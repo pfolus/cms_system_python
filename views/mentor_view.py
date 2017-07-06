@@ -1,5 +1,6 @@
 from controllers.mentor_controller import *
 from models.mentor_model import Mentor
+from views.employee_view import *
 from datetime import datetime
 from models.student_model import Student
 from models.canvas_model import Canvas

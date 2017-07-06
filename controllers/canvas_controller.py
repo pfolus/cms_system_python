@@ -9,6 +9,7 @@ from models.accountant_model import Accountant
 from models.canvas_model import Canvas
 from models.assingment_model import Assingment
 from models.submission_model import Submission
+from models.attendance_model import Attendance
 from views.codecooler_view import *
 from views.canvas_view import *
 from controllers import manager_controller
@@ -22,12 +23,25 @@ def start_controller():
     load_codecoolers_list_csv(canvas)
     load_assingments_list_csv(canvas)
     load_submissions_list_csv(canvas)
+    load_attendances_list_csv(canvas)
     show_login_menu()
     logged_in = False
     while not logged_in:
         user, logged_in = login(canvas)
     run_controller(user, canvas)
     export_data_to_csv(canvas)
+
+
+def load_attendances_list_csv(canvas):
+
+    with open('csv_databases/attendances.csv', 'r') as file:
+        reader = csv.reader(file, delimiter='|')
+
+        for line in reader:
+            login = line[0]
+            average = line[1]
+            attendances = [float(number) for number in line[2].split(",")]
+            canvas.attendances.append(Attendance(login, attendances, average))
 
 
 def load_submissions_list_csv(canvas):
@@ -164,6 +178,7 @@ def export_data_to_csv(canvas):
 
     export_submissions(canvas.submissions)
     export_assingments(canvas.assingments)
+    save_atendances_list_csv(canvas)
     codecoolers = canvas.mentors + canvas.managers + canvas.students + canvas.accountants
     export_codecooler(codecoolers)
 
@@ -212,3 +227,14 @@ def export_codecooler(codecoolers):
                             codecooler.name,
                             codecooler.surname,
                             codecooler.__class__.__name__])
+
+
+def save_atendances_list_csv(canvas):
+
+    with open('csv_databases/attendances.csv', 'w') as file:
+        writer = csv.writer(file, delimiter='|')
+
+        for attendance in canvas.attendances:
+            writer.writerow([attendance.login,
+                             attendance.average,
+                             ",".join(attendance.student_attendances)])
