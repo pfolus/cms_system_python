@@ -149,3 +149,18 @@ def get_submission(canvas):
 
     return canvas.submissions[submission_index]
 
+
+def show_fullnames(canvas):
+
+    print('\nPresence List: \n')
+    for user in canvas.students:
+        print('-> {} {}'.format(user.name, user.surname))
+
+
+def get_student(canvas):
+    student_index = get_int('Pick student index: ')
+    while student_index not in range(len(canvas.students)):
+        print('There is no such student index')
+        student_index = get_int('Pick student index: ')
+
+    return canvas.students[student_index]
