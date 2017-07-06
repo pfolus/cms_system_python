@@ -3,7 +3,7 @@ from views.employee_view import *
 
 
 def start_controller(canvas, user):
-    exit = 2
+    exit = 0
     greet(user)
     choice = ''
 
