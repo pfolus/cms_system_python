@@ -59,6 +59,9 @@ def remove_student(canvas):
     for student in canvas.students:
         if student.login == login:
             canvas.students.remove(student)
+            for attendance in canvas.attendances:
+                if attendance.student_login == login:
+                    canvas.attendances.remove(attendance)
             print_done()
 
 
