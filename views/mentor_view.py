@@ -1,5 +1,6 @@
 from controllers.mentor_controller import *
 from models.mentor_model import Mentor
+from views.employee_view import *
 
 def print_welcome(user):
     print('\n' +'Witamy Szanownego kolegę {}a!'.format(user.name))
