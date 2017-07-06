@@ -1,8 +1,6 @@
 from views.assingment_view import *
-
-
-def greet(user):
-    print('Hey {}!'.format(user.name))
+from views.bcolors import Bcolors
+from views.codecooler_view import *
 
 
 def show_menu():
@@ -18,7 +16,7 @@ def choose_function():
     Asks an user for a number, representing function,
     and returns it
     '''
-    DEFAULT_VALUE = 0
+    DEFAULT_VALUE = ''
     choice = DEFAULT_VALUE
     possible_choices = [0, 1, 2]
 
@@ -33,6 +31,7 @@ def choose_function():
 
 def show_assingments(assingments):
     number = 0
+    print('\nAll assingments:\n')
     for assingment in assingments:
         show_assingment(assingment, number)
         number += 1
@@ -51,10 +50,18 @@ def error_number():
 
 
 def print_assingment_done():
-    print('You have already done this assingment')
+    print(Bcolors.HEADER + 'You have already done this assingment' + Bcolors.ENDC)
 
 
 def get_answer():
     answer = input('Type the answer (preferably link to repo on github.com): ')
 
     return answer
+
+
+def info_submission_added():
+    print('Your new submission was added succesfully.')
+
+
+def show_grades_info(grades_sum, max_grades_sum, amount_of_grades):
+    print(Bcolors.BOLD + 'You have {} grades.\nYour score: {}/{}'.format(amount_of_grades, grades_sum, max_grades_sum) + Bcolors.ENDC)

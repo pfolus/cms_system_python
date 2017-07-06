@@ -1,8 +1,5 @@
 from views.employee_view import *
-
-
-def greet(user):
-    print('Hey {}!'.format(user.name))
+from views.codecooler_view import *
 
 
 def print_menu():
@@ -14,7 +11,7 @@ def print_menu():
 5. List students
 6. List students with details
 0. Log out
-          ''')
+''')
 
 
 def ask_for_option():
@@ -92,10 +89,16 @@ def ask_password():
 
 def ask_for_index():
 
-    index = input("Choose mentor index: ")
+    is_correct = False
 
-    while not index.isdigit():
-        print("Enter proper index!")
-        index = input("Choose mentor index: ")
+    while not is_correct:
+        try:
+            index = int(input("Enter index: "))
+            if index < 1:
+                option_error()
+            else:
+                is_correct = True
+        except ValueError:
+            option_error()
 
-    return int(index)
+    return index - 1

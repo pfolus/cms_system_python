@@ -1,5 +1,5 @@
 from views.manager_view import *
-#  from models.mentor_model import Mentor
+from models.mentor_model import Mentor
 
 
 def start_controller(canvas, user):
@@ -29,7 +29,7 @@ def choose_option(user_input, canvas, user):
     elif user_input == "5":
         show_students_list(canvas.students)
     elif user_input == "6":
-        show_students_with_details(canvas)
+        show_students_list_detailed(canvas)
     elif user_input == "0":
         return user_input
     else:

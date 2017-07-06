@@ -3,7 +3,7 @@ import csv
 import datetime
 from models.codecooler_model import *
 from models.student_model import Student
-#from models.mentor_model import Mentor
+from models.mentor_model import Mentor
 from models.manager_model import Manager
 from models.accountant_model import Accountant
 from models.canvas_model import Canvas
@@ -22,7 +22,10 @@ def start_controller():
     load_codecoolers_list_csv(canvas)
     load_assingments_list_csv(canvas)
     load_submissions_list_csv(canvas)
-    user = login(canvas)
+    show_login_menu()
+    logged_in = False
+    while not logged_in:
+        user, logged_in = login(canvas)
     run_controller(user, canvas)
     export_data_to_csv(canvas)
 
@@ -79,7 +82,7 @@ def create_and_add_assingments_objects(assingments, canvas):
 
 def load_codecoolers_list_csv(canvas):
 
-    with open ('csv_databases/codecoolers_list.csv', 'r') as file:
+    with open('csv_databases/codecoolers_list.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
 
         codecoolers_list = []
@@ -107,8 +110,8 @@ def create_codecoolers_objects(codecoolers_list, canvas):
             add_user_to_list(canvas, Manager(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
         elif user[TYPE_INDEX] == "Accountant":
             add_user_to_list(canvas, Accountant(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
-        #elif user[TYPE_INDEX] == "Mentor":
-            #add_user_to_list(canvas, Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+        elif user[TYPE_INDEX] == "Mentor":
+            add_user_to_list(canvas, Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
 
 
 def add_user_to_list(canvas, user):
@@ -127,7 +130,6 @@ def add_user_to_list(canvas, user):
 
 def login(canvas):
 
-    show_login_menu()
     login = get_login()
     password = get_password()
 
@@ -138,7 +140,10 @@ def login(canvas):
 
     for user in summary_list:
         if user.login == login and user.password == password:
-            return user
+            return user, True
+
+    wrong_user()
+    return None, False
 
 
 def run_controller(user, canvas):
@@ -159,11 +164,8 @@ def export_data_to_csv(canvas):
 
     export_submissions(canvas.submissions)
     export_assingments(canvas.assingments)
-    '''for codecoolers in [canvas.mentors,
-                        canvas.managers,
-                        canvas.students,
-                        canvas.accountants]:
-        export_codecooler(codecoolers)'''
+    codecoolers = canvas.mentors + canvas.managers + canvas.students + canvas.accountants
+    export_codecooler(codecoolers)
 
 
 def export_submissions(submissions):
@@ -190,22 +192,23 @@ def export_submissions(submissions):
 
 def export_assingments(assingments):
 
-    with open ('csv_databases/assingments.csv', 'w') as file:
+    with open('csv_databases/assingments.csv', 'w') as file:
 
-        writer = csv.writer(file, delimiter = '|')
+        writer = csv.writer(file, delimiter='|')
         for assingment in assingments:
             writer.writerow([assingment.title,
-                                assingment.content,
-                                assingment.date.strftime('%d.%m.%Y'),
-                                str(assingment.max_grade)])
+                             assingment.content,
+                             assingment.date.strftime('%d.%m.%Y'),
+                             str(assingment.max_grade)])
 
 
 def export_codecooler(codecoolers):
-    with open ('csv_databases/codecoolers_list.csv', 'w') as file:
+    with open('csv_databases/codecoolers_list.csv', 'w') as file:
 
-        writer = csv.writer(file, delimiter = '|')
+        writer = csv.writer(file, delimiter='|')
         for codecooler in codecoolers:
             writer.writerow([codecooler.login,
                             codecooler.password,
                             codecooler.name,
-                            codecooler.surname])
+                            codecooler.surname,
+                            codecooler.__class__.__name__])

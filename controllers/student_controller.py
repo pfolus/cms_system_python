@@ -39,20 +39,85 @@ def run_chosen_function(user_input, canvas, user):
     user = obj of Codecooler class
     '''
     if user_input == 1:
-        show_grades(canvas.grades)
+        run_grades_functions(canvas, user)
     elif user_input == 2:
-        number = show_assingments(canvas.assingments)
-        chosen_assingment = choose_assingment(number, canvas.assingments)
-        check_if_submitted(chosen_assingment.title, canvas.submissions, user.login)
-        new_sub = add_submission(chosen_assingment, user)
+        run_submission_functions(canvas, user)
+
+    return user_input
+
+
+def run_grades_functions(canvas, user):
+    '''
+    Handles flow of showing grades related functions.
+
+    Paramaters
+    ----------
+    canvas = obj of Canvas class
+    user = obj of Codecooler class
+
+    Returns
+    -------
+    None
+    '''
+    grades_sum, max_grades_sum, amount_of_grades = calculate_grades(canvas.assingments, canvas.submissions, user.login)
+    show_grades_info(grades_sum, max_grades_sum, amount_of_grades)
+
+
+def run_submission_functions(canvas, user):
+    '''
+    Handles flow of sending submission related functions.
+
+    Paramaters
+    ----------
+    canvas = obj of Canvas class
+    user = obj of Codecooler class
+
+    Returns
+    -------
+    None
+    '''
+    number = show_assingments(canvas.assingments)
+    chosen_assingment = choose_assingment(number, canvas.assingments)
+    check_if_submitted(chosen_assingment.title, canvas.submissions, user.login)
+    is_graded = check_if_graded(chosen_assingment.title, canvas.submissions, user.login)
+
+    if not is_graded:
+        new_sub = add_submission(chosen_assingment, canvas.submissions, user)
         add_new_sub_to_list(canvas, new_sub)
-
-    elif user_input == 0:
-        return user_input
+        info_submission_added()
 
 
-def show_grades(grades):
-    pass
+def calculate_grades(assingments, submissions, user_login):
+    '''
+    Basing on student's submissions calculates its sum of grades,
+    and maximum amount of grades, that could have been scored.
+    It also sums the number of graded submissions.
+
+    Paramaters
+    ----------
+    assingments = list (Assingment objects)
+    submissions = list (Submission objects)
+    user_login = str
+
+    Returns
+    -------
+    grades_sum = int
+    max_grades_sum = int
+    amount_of_grades = int
+    '''
+    grades_sum = 0
+    max_grades_sum = 0
+    amount_of_grades = 0
+
+    for submission in submissions:
+        if submission.user_login == user_login and submission.is_checked:
+            grades_sum += submission.score
+            amount_of_grades += 1
+            for assingment in assingments:
+                if assingment.title == submission.title:
+                    max_grades_sum += assingment.max_grade
+
+    return grades_sum, max_grades_sum, amount_of_grades
 
 
 def choose_assingment(number, assingments):
@@ -98,15 +163,27 @@ def check_if_submitted(assingment_name, submissions, user_login):
 
     Returns
     -------
-    None
+    boolean = returns False if submission for this assingment
+    wasn't sent by this Student yes, otherwise returns True.
     '''
     for submission in submissions:
         if submission.title == assingment_name and submission.user_login == user_login:
-            show_sub(submission)
             print_assingment_done()
+            show_sub(submission)
 
 
-def add_submission(assingment, user):
+def check_if_graded(assingment_name, submissions, user_name):
+    '''
+    Returns True if submission was already graded, otherwise returns False
+    '''
+    for submission in submissions:
+        if submission.title == assingment_name and user_name == submission.user_login and submission.is_checked:
+            return True
+        elif submission.title == assingment_name and user_name == submission.user_login and submission.is_checked is False:
+            return False
+
+
+def add_submission(assingment, submissions, user):
     '''
     Adds new submission from Student, for chosen
     assingment.
@@ -114,6 +191,7 @@ def add_submission(assingment, user):
     Paramaters
     ----------
     assingment = obj of Assingment class
+    submissions = list (of Submission objects from Canvas)
     user = obj of Codecooler class
 
     Returns
@@ -121,6 +199,10 @@ def add_submission(assingment, user):
     new_sub = obj of Submission class
     '''
     answer = get_answer()
+    for submission in submissions:
+        if assingment.title == submission.title and user.login == submission.user_login:
+            submissions.remove(submission)
+
     new_sub = Submission(user.login, assingment.title, answer)
 
     return new_sub

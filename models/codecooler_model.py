@@ -4,4 +4,4 @@ class Codecooler:
         self.login = login
         self.password = password
         self.name = name
-        self.surmane = surname
+        self.surname = surname

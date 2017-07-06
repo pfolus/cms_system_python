@@ -7,3 +7,4 @@ class Canvas:
         self.accountants = []
         self.assingments = []
         self.submissions = []
+        self.attendances = []

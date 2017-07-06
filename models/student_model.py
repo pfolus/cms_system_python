@@ -1,3 +1,6 @@
+from models.codecooler_model import Codecooler
+
+
 class Student(Codecooler):
 
     def __init__(self, login, password, name, surname):
