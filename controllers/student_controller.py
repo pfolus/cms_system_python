@@ -124,6 +124,7 @@ def add_submission(assingment, user):
     Paramaters
     ----------
     assingment = obj of Assingment class
+    submissions = list (of Submission objects from Canvas)
     user = obj of Codecooler class
 
     Returns
