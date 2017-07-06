@@ -131,6 +131,10 @@ def add_submission(assingment, user):
     new_sub = obj of Submission class
     '''
     answer = get_answer()
+    for submission in submissions:
+        if assingment.title == submission.title and user.login == submission.user_login:
+            submissions.remove(submission)
+
     new_sub = Submission(user.login, assingment.title, answer)
 
     return new_sub
