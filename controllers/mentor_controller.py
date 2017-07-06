@@ -76,11 +76,13 @@ def login_exist(login, canvas):
 
 
 def add_assingment(canvas):
+    max_grade = 0
 
     title = get_string('title')
     content = get_string('content')
     date = get_date()
-    max_grade = get_int('Enter max grade: ')
+    while max_grade <= 0:
+        max_grade = get_int('Enter max grade: ')
 
     canvas.assingments.append(Assingment(title, content, date, max_grade))
     print_done()
