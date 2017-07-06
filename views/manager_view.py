@@ -92,10 +92,16 @@ def ask_password():
 
 def ask_for_index():
 
-    index = input("Choose mentor index: ")
+    is_correct = False
 
-    while not index.isdigit():
-        print("Enter proper index!")
-        index = input("Choose mentor index: ")
+    while not is_correct:
+        try:
+            index = int(input("Enter index: "))
+            if index < 1:
+                is_correct = False
+            else:
+                is_correct = True
+        except ValueError:
+            option_error()
 
-    return int(index)
+    return index - 1
