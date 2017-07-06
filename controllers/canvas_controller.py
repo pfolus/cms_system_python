@@ -140,7 +140,10 @@ def login(canvas):
 
     for user in summary_list:
         if user.login == login and user.password == password:
-            return user
+            return user, True
+
+    wrong_user()
+    return None, False
 
 
 def run_controller(user, canvas):
