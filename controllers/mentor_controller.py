@@ -120,7 +120,6 @@ def check_attendance(canvas):
                 insert_late(canvas.attendances, student.login)
             elif choice == '3':
                 insert_presence(canvas.attendances, student.login)
-                print_done()
             elif choice not in ['1','2','3']:
                 print_bad_choice()
         index += 1
