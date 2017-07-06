@@ -80,3 +80,7 @@ def has_digit(item):
             has_digit = 1
 
     return has_digit
+
+
+def get_student_name():
+    return input('\nType student login: ')
