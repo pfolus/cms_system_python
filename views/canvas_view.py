@@ -1,3 +1,5 @@
+import getpass
+
 def wrong_user():
     print("There isn't such user\n")
 
@@ -17,4 +19,4 @@ def get_login():
 
 def get_password():
 
-    return input("Please provide a password: ")
+    return getpass.getpass("Please provide a password: ")
