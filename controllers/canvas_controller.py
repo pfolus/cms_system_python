@@ -79,7 +79,7 @@ def create_and_add_assingments_objects(assingments, canvas):
 
 def load_codecoolers_list_csv(canvas):
 
-    with open ('csv_databases/codecoolers_list.csv', 'r') as file:
+    with open('csv_databases/codecoolers_list.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
 
         codecoolers_list = []
@@ -190,20 +190,20 @@ def export_submissions(submissions):
 
 def export_assingments(assingments):
 
-    with open ('csv_databases/assingments.csv', 'w') as file:
+    with open('csv_databases/assingments.csv', 'w') as file:
 
-        writer = csv.writer(file, delimiter = '|')
+        writer = csv.writer(file, delimiter='|')
         for assingment in assingments:
             writer.writerow([assingment.title,
-                                assingment.content,
-                                assingment.date.strftime('%d.%m.%Y'),
-                                str(assingment.max_grade)])
+                             assingment.content,
+                             assingment.date.strftime('%d.%m.%Y'),
+                             str(assingment.max_grade)])
 
 
 def export_codecooler(codecoolers):
-    with open ('csv_databases/codecoolers_list.csv', 'w') as file:
+    with open('csv_databases/codecoolers_list.csv', 'w') as file:
 
-        writer = csv.writer(file, delimiter = '|')
+        writer = csv.writer(file, delimiter='|')
         for codecooler in codecoolers:
             writer.writerow([codecooler.login,
                             codecooler.password,
