@@ -4,15 +4,16 @@ from models.student_model import Student
 from models.canvas_model import Canvas
 from models.assingment_model import Assingment
 from views.employee_view import *
+from views.codecooler_view import *
 from models.submission_model import Submission
 from models.attendance_model import Attendance
 from controllers.attendance_controller import *
 
+
 def start_controller(canvas, user):
 
-    print_welcome(user)
+    greet(user)
     choice = '99'
-
 
     while choice != '0':
         print_menu()
