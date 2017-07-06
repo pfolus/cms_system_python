@@ -40,7 +40,10 @@ def load_attendances_list_csv(canvas):
         for line in reader:
             login = line[0]
             average = line[1]
-            attendances = [float(number) for number in line[2].split(",")]
+            try:
+                attendances = [float(number) for number in line[2].split(",")]
+            except ValueError:
+                attendances = []
             canvas.attendances.append(Attendance(login, attendances, average))
 
 
