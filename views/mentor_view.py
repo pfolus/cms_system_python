@@ -29,44 +29,46 @@ def print_bad_choice():
 
 def get_login():
 
-    login = input('Enter student login: ')
+    login = input('\nEnter student login: ')
 
     while len(login) < 6:
         print('Login must have at least 6 characters, try again!')
-        login = input('Enter student login: ')
+        login = input('\nEnter student login: ')
 
     return login
 
 
 def get_password():
 
-    password = input('Enter student password: ')
+    password = input('\nEnter student password: ')
 
-    while (len(pasword) < 6) or (has_digit(password) == 0):
+    while (len(password) < 6) or (has_digit(password) == 0):
         print('Password must have at least 6 characters and 1 digit, try again!')
-        password = input('Enter student password: ')
+        password = input('\nEnter student password: ')
 
     return password
 
 
 def get_name():
 
-    name = input('Enter student login: ')
+    name = input('\nEnter student name: ')
 
-    while len(name) < 4:
+    while (len(name) < 3) or (has_digit(name) == 1):
+        print('No digits allowed!')
         print('Name must have at least 3 characters, try again!')
-        name = input('Enter student name: ')
+        name = input('\nEnter student name: ')
 
     return name
 
 
 def get_surname():
 
-    surname = input('Enter student login: ')
+    surname = input('\nEnter student surname: ')
 
-    while len(surname) < 4 or :
+    while len(surname) < 3 or (has_digit(surname) == 1):
+        print('No digits allowed!')
         print('Surname must have at least 3 characters, try again!')
-        surname = input('Enter student surname: ')
+        surname = input('\nEnter student surname: ')
 
     return surname
 
@@ -74,7 +76,7 @@ def get_surname():
 def has_digit(item):
     has_digit = 0
     for char in item:
-        if char isdigit:
+        if char.isdigit():
             has_digit = 1
 
     return has_digit
