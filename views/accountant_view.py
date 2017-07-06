@@ -13,7 +13,7 @@ def choose_function():
     Asks an user for a number, representing function,
     and returns it
     '''
-    DEFAULT_VALUE = 0
+    DEFAULT_VALUE = ''
     choice = DEFAULT_VALUE
     possible_choices = [1, 0]
 
