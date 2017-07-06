@@ -1,6 +1,6 @@
 from controllers.mentor_controller import *
 from models.mentor_model import Mentor
-import re
+from datetime import datetime
 
 def print_welcome(user):
     print('\n' +'Witamy Szanownego kolegę {}a!'.format(user.name))
@@ -101,10 +101,13 @@ def get_string(item):
 
 def get_date():
     while True:
-        date = input('Provide date in format dd.mm.yyyy: ')
-        if re.match('^[0-9]{2}.[0-9]{2}.[0-9]{4}$', date):
-            return date
-        print('\nInvalid date format, please enter again: ')
+        date = input('Enter date in format dd.mm.yyyy: ')
+        try:
+            correct_date = datetime.strptime(date, '%d.%m.%Y')
+            return correct_date
+        except:
+            print('Wrong input!')
+
 
 def get_max_grade():
     while True:
