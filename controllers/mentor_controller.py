@@ -108,10 +108,10 @@ def check_attendance(canvas):
 
     index = 1
     for student in canvas.students:
-        print('\nStudent name:\n\n{}. {} {}'.format(index, student.name, student.surname))
 
         choice = ''
         while choice not in ['1','2','3']:
+            print('\nStudent name:\n\n{}. {} {}'.format(index, student.name, student.surname))
             print_attendance_menu()
             choice = get_choice()
             if choice == '1':
@@ -119,11 +119,10 @@ def check_attendance(canvas):
             elif choice == '2':
                 insert_late(canvas.attendances, student.login)
             elif choice == '3':
-                insert_late(canvas.attendances, student.login)
+                insert_presence(canvas.attendances, student.login)
                 print_done()
             elif choice not in ['1','2','3']:
                 print_bad_choice()
-                print('\nStudent name:\n\n{}. {} {}'.format(index, student.name, student.surname))
         index += 1
     print_done()
 
