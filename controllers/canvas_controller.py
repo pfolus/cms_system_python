@@ -235,6 +235,6 @@ def save_atendances_list_csv(canvas):
         writer = csv.writer(file, delimiter='|')
 
         for attendance in canvas.attendances:
-            writer.writerow([attendance.login,
+            writer.writerow([attendance.student_login,
                              attendance.average,
                              ",".join(attendance.student_attendances)])
