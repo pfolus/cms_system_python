@@ -9,7 +9,7 @@ def start_controller(canvas, user):
 
     while choice != exit:
         show_menu()
-        choice = choose_function
+        choice = choose_function()
 
         if choice == 1:
             show_students_list(canvas.students)
