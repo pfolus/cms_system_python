@@ -12,6 +12,7 @@ def show_students_list(students_list):
 
 def show_students_list_detailed(canvas):
     index = 1
+    student_attendance = 0
     for student in canvas.students:
         [grades_sum,
          max_grades_sum,
