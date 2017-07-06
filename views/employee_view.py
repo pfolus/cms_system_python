@@ -1,3 +1,6 @@
+from controllers.student_controller import calculate_grades
+
+
 def show_students_list(students_list):
     index = 1
     for student in students_list:
