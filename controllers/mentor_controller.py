@@ -93,17 +93,19 @@ def grade_assingment(canvas):
     show_submissions(canvas)
     submission = get_submission(canvas)
     print('\nSubmission Answer:\n{}'.format(submission.answer))
-
-    grade = get_int('Enter submission grade: ')
     max_grade = max_grade_by_title(canvas, submission)
 
+    print_grades_range_info(max_grade)
+    grade = get_int('Enter submission grade: ')
+
     while (grade > max_grade) or (grade < -3):
-        print('Grade must be in range <-3:{}>'.format(max_grade))
+        print_grades_range_info(max_grade)
         grade = get_int('Enter submission grade: ')
 
     submission.score = grade
     submission.is_checked = True
     print_done()
+
 
 def max_grade_by_title(canvas, submission):
 
@@ -111,14 +113,15 @@ def max_grade_by_title(canvas, submission):
         if item.title == submission.title:
             return item.max_grade
 
+
 def check_attendance(canvas):
 
     index = 1
     for student in canvas.students:
 
         choice = ''
-        while choice not in ['1','2','3']:
-            print('\nStudent name:\n\n{}. {} {}'.format(index, student.name, student.surname))
+        while choice not in ['1', '2', '3']:
+            show_numbered_student(index, student.name, student.surname)
             print_attendance_menu()
             choice = get_choice()
             if choice == '1':
@@ -127,19 +130,7 @@ def check_attendance(canvas):
                 insert_late(canvas.attendances, student.login)
             elif choice == '3':
                 insert_presence(canvas.attendances, student.login)
-            elif choice not in ['1','2','3']:
+            elif choice not in ['1', '2', '3']:
                 print_bad_choice()
         index += 1
     print_done()
-
-
-
-
-
-
-
-
-
-
-
-
