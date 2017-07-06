@@ -5,6 +5,7 @@ from models.canvas_model import Canvas
 from models.assingment_model import Assingment
 from views.employee_view import *
 from models.submission_model import Submission
+from models.attendance_model import Attendance
 
 def start_controller(canvas, user):
 
@@ -102,8 +103,13 @@ def max_grade_by_title(canvas, submission):
         if item.title == submission.title:
             return item.max_grade
 
-def check_attendance():
-    pass
+def check_attendance(canvas):
+
+    #show list of students, insert_presence for all, then pick
+    show_fullnames()
+    student = get_student(canvas)
+    print(student)
+
 
 
 
