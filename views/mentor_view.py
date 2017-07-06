@@ -82,5 +82,13 @@ def has_digit(item):
     return has_digit
 
 
-def get_student_name():
+def get_student_login():
     return input('\nType student login: ')
+
+
+def print_not_exist():
+    print('login does not exist, try again!')
+
+
+def print_done():
+    print('\nOperation done\n')
