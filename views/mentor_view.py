@@ -3,6 +3,7 @@ from models.mentor_model import Mentor
 from datetime import datetime
 from models.student_model import Student
 from models.canvas_model import Canvas
+from models.submission_model import Submission
 
 def print_welcome(user):
     print('\n' +'Witamy Szanownego kolegę {}a!'.format(user.name))
@@ -125,5 +126,12 @@ def show_logins(canvas):
     print('\nLogin list: ')
     for user in canvas.students:
         print('-> {}'.format(user.login))
+
+
+def show_submissions(canvas):
+
+    print('\nSubmissions list: \n')
+    for submission in canvas.submissions:
+        print('student -> {} submission title -> {}'.format(submission.user_login, submission.title ))
 
 
