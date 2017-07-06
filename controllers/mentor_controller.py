@@ -14,7 +14,7 @@ def start_controller(canvas, user):
         choice = get_choice()
 
         if choice == '1':
-            view_student_details()
+            show_students_list_detailed(canvas)
         elif choice == '2':
             add_assingment()
         elif choice == '3':
