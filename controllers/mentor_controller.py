@@ -106,29 +106,26 @@ def max_grade_by_title(canvas, submission):
 
 def check_attendance(canvas):
 
+    index = 1
     for student in canvas.students:
-        insert_presence(canvas.attendances, student.login)
+        print('\nStudent name:\n\n{}. {} {}'.format(index, student.name, student.surname))
 
-    choice = ''
-    while choice != '0':
-        print_attendance_menu()
-        choice = get_choice()
-
-        if choice == '1':
-            show_fullnames(canvas)
-            student = get_student(canvas)
-            insert_absence(canvas.attendances, student.login)
-            print_done()
-            
-        elif choice == '2':
-            show_fullnames(canvas)
-            student = get_student(canvas)
-            insert_late(canvas.attendances, student.login)
-            print_done()
-
-        elif choice != '0':
-            print_bad_choice()
-
+        choice = ''
+        while choice not in ['1','2','3']:
+            print_attendance_menu()
+            choice = get_choice()
+            if choice == '1':
+                insert_absence(canvas.attendances, student.login)
+            elif choice == '2':
+                insert_late(canvas.attendances, student.login)
+            elif choice == '3':
+                insert_late(canvas.attendances, student.login)
+                print_done()
+            elif choice not in ['1','2','3']:
+                print_bad_choice()
+                print('\nStudent name:\n\n{}. {} {}'.format(index, student.name, student.surname))
+        index += 1
+    print_done()
 
 
 
