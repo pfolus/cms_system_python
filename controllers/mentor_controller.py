@@ -43,6 +43,7 @@ def add_student(canvas):
     surname = get_surname()
 
     canvas.students.append(Student(login, password, name, surname))
+    canvas.attendances.append(Attendance(login))
     print_done()
 
 
