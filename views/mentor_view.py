@@ -1,5 +1,6 @@
 from controllers.mentor_controller import *
 from models.mentor_model import Mentor
+import re
 
 def print_welcome(user):
     print('\n' +'Witamy Szanownego kolegę {}a!'.format(user.name))
@@ -92,3 +93,24 @@ def print_not_exist():
 
 def print_done():
     print('\nOperation done\n')
+
+
+def get_string(item):
+    return input('\nEnter {}: '.format(item))
+
+
+def get_date():
+    while True:
+        date = input('Provide date in format dd.mm.yyyy: ')
+        if re.match('^[0-9]{2}.[0-9]{2}.[0-9]{4}$', date):
+            return date
+        print('\nInvalid date format, please enter again: ')
+
+def get_max_grade():
+    while True:
+        try:
+            max_grade = int(input('Enter max grade: '))
+            return max_grade
+        except:
+            print('Wrong input!')
+
