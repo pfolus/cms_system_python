@@ -64,3 +64,7 @@ def get_answer():
 
 def info_submission_added():
     print('Your new submission was added succesfully.')
+
+
+def show_grades_info(grades_sum, max_grades_sum, amount_of_grades):
+    print(Bcolors.BOLD + 'You have {} grades.\nYour score: {}/{}'.format(amount_of_grades, grades_sum, max_grades_sum) + Bcolors.ENDC)
