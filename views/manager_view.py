@@ -14,7 +14,7 @@ def print_menu():
 5. List students
 6. List students with details
 0. Log out
-          ''')
+''')
 
 
 def ask_for_option():
