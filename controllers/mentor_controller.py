@@ -1,5 +1,6 @@
 from models.mentor_model import Mentor
 from views.mentor_view import *
+from models.student_model import Student
 
 def start_controller(canvas, user):
 
@@ -27,7 +28,17 @@ def start_controller(canvas, user):
             print_bad_choice()
 
 
+def add_student():
+
+    login = get_login()
+    password = get_password()
+    name = get_name()
+    surname = get_surname()
+
+    Student(login, password, name, surname)
+
 def add_assignment():
+
     pass
 
 
@@ -43,7 +54,6 @@ def remove_assingment():
     pass
 
 
-def add_student():
-    pass
+
 
 
