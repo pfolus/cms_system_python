@@ -1,6 +1,7 @@
 from models.mentor_model import Mentor
 from views.mentor_view import *
 from models.student_model import Student
+from models.canvas_model import Canvas
 
 def start_controller(canvas, user):
 
@@ -19,9 +20,9 @@ def start_controller(canvas, user):
         elif choice == '3':
             grade_assingment()
         elif choice == '4':
-            check_assingment()
+            check_attendance()
         elif choice == '5':
-            remove_assingment()
+            remove_student()
         elif choice == '6':
             add_student()
         elif choice != '0':
@@ -37,6 +38,26 @@ def add_student():
 
     Student(login, password, name, surname)
 
+
+def remove_student():
+
+    show_student_login_list()
+    login = get_student_login()
+
+    while not login_exist():
+        login = gete_student_login()
+
+
+def login_exist(login):
+
+    login_exist = False
+    for item in Canvas.students:
+        if item.login == login:
+            login_exist = True
+
+    return login_exist
+
+
 def add_assignment():
 
     pass
@@ -46,12 +67,11 @@ def grade_assingment():
     pass
 
 
-def check_assingment():
+def check_attendance():
     pass
 
 
-def remove_assingment():
-    pass
+
 
 
 
