@@ -1,8 +1,5 @@
 from views.employee_view import *
-
-
-def greet(user):
-    print('Hey {}!'.format(user.name))
+from views.codecooler_view import *
 
 
 def print_menu():

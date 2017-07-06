@@ -1,9 +1,6 @@
 from views.assingment_view import *
 from views.bcolors import Bcolors
-
-
-def greet(user):
-    print('Hey {}!'.format(user.name))
+from views.codecooler_view import *
 
 
 def show_menu():
