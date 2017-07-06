@@ -43,7 +43,7 @@ def add_student(canvas):
 
 def remove_student(canvas):
 
-
+    show_logins(canvas)
     login = get_student_login()
 
     while not login_exist(login, canvas):
