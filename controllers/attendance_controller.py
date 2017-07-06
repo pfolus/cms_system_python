@@ -6,7 +6,7 @@ def get_average_percent(attendance):
         attendances_sum += number
 
     attendance.average = attendances_sum / len(attendance.student_attendances)
-    att.average *= 100
+    attendance.average *= 100
 
 
 
