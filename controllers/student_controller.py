@@ -39,22 +39,72 @@ def run_chosen_function(user_input, canvas, user):
     user = obj of Codecooler class
     '''
     if user_input == 1:
-        grades_sum, max_grades_sum, amount_of_grades = calculate_grades(canvas.assingments, canvas.submissions, user.login)
-        show_grades_info(grades_sum, max_grades_sum, amount_of_grades)
+        run_grades_functions(canvas, user)
     elif user_input == 2:
-        number = show_assingments(canvas.assingments)
-        chosen_assingment = choose_assingment(number, canvas.assingments)
-        check_if_submitted(chosen_assingment.title, canvas.submissions, user.login)
-        is_graded = check_if_graded(chosen_assingment.title, canvas.submissions, user.login)
-        if not is_graded:
-            new_sub = add_submission(chosen_assingment, canvas.submissions, user)
-            add_new_sub_to_list(canvas, new_sub)
-            info_submission_added()
+        run_submission_functions(canvas, user)
 
     return user_input
 
 
+def run_grades_functions(canvas, user):
+    '''
+    Handles flow of showing grades related functions.
+
+    Paramaters
+    ----------
+    canvas = obj of Canvas class
+    user = obj of Codecooler class
+
+    Returns
+    -------
+    None
+    '''
+    grades_sum, max_grades_sum, amount_of_grades = calculate_grades(canvas.assingments, canvas.submissions, user.login)
+    show_grades_info(grades_sum, max_grades_sum, amount_of_grades)
+
+
+def run_submission_functions(canvas, user):
+    '''
+    Handles flow of sending submission related functions.
+
+    Paramaters
+    ----------
+    canvas = obj of Canvas class
+    user = obj of Codecooler class
+
+    Returns
+    -------
+    None
+    '''
+    number = show_assingments(canvas.assingments)
+    chosen_assingment = choose_assingment(number, canvas.assingments)
+    check_if_submitted(chosen_assingment.title, canvas.submissions, user.login)
+    is_graded = check_if_graded(chosen_assingment.title, canvas.submissions, user.login)
+
+    if not is_graded:
+        new_sub = add_submission(chosen_assingment, canvas.submissions, user)
+        add_new_sub_to_list(canvas, new_sub)
+        info_submission_added()
+
+
 def calculate_grades(assingments, submissions, user_login):
+    '''
+    Basing on student's submissions calculates its sum of grades,
+    and maximum amount of grades, that could have been scored.
+    It also sums the number of graded submissions.
+
+    Paramaters
+    ----------
+    assingments = list (Assingment objects)
+    submissions = list (Submission objects)
+    user_login = str
+
+    Returns
+    -------
+    grades_sum = int
+    max_grades_sum = int
+    amount_of_grades = int
+    '''
     grades_sum = 0
     max_grades_sum = 0
     amount_of_grades = 0
