@@ -1,6 +1,10 @@
 from controllers.mentor_controller import *
 from models.mentor_model import Mentor
 from views.employee_view import *
+from datetime import datetime
+from models.student_model import Student
+from models.canvas_model import Canvas
+from models.submission_model import Submission
 
 def print_welcome(user):
     print('\n' +'Witamy Szanownego kolegę {}a!'.format(user.name))
@@ -93,3 +97,56 @@ def print_not_exist():
 
 def print_done():
     print('\nOperation done\n')
+
+
+def get_string(item):
+    return input('\nEnter {}: '.format(item))
+
+
+def get_date():
+    while True:
+        date = input('Enter date in format dd.mm.yyyy: ')
+        try:
+            correct_date = datetime.strptime(date, '%d.%m.%Y')
+            return correct_date
+        except:
+            print('Wrong input!')
+
+
+def get_int(message):
+    while True:
+        try:
+            max_grade = int(input(message))
+            return max_grade
+        except:
+            print('Wrong input!')
+
+
+def show_logins(canvas):
+
+    print('\nLogin list: ')
+    for user in canvas.students:
+        print('-> {}'.format(user.login))
+
+
+def show_submissions(canvas):
+
+
+    print('\nSubmissions list: \n')
+    index = 0
+    for submission in canvas.submissions:
+        if submission.is_checked == 'True':
+            print('{}.Student -> {} | Submission title -> {} (already rated)'.format(index, submission.user_login, submission.title ))
+        else:
+            print('{}.Student -> {} | Submission title -> {}'.format(index, submission.user_login, submission.title ))
+        index += 1
+
+
+def get_submission(canvas):
+    submission_index = get_int('Pick submission index: ')
+    while submission_index not in range(len(canvas.submissions)):
+        print('There is no such submission index')
+        submission_index = get_int('Pick submission index: ')
+
+    return canvas.submissions[submission_index]
+
