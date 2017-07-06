@@ -226,3 +226,14 @@ def export_codecooler(codecoolers):
                             codecooler.name,
                             codecooler.surname,
                             codecooler.__class__.__name__])
+
+
+def save_atendances_list_csv(canvas):
+
+    with open('csv_databases/attendances.csv', 'w') as file:
+        writer = csv.writer(file, delimiter='|')
+
+        for attendance in canvas.attendances:
+            writer.writerow([attendance.login,
+                             attendance.average,
+                             ",".join(attendance.student_attendances)])
