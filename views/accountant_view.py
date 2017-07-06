@@ -1,4 +1,4 @@
-rom views.codecooler_view import *
+from views.codecooler_view import *
 
 
 def show_menu():
