@@ -45,12 +45,15 @@ def load_submissions_list_csv(canvas):
 def create_and_add_submissions_objects(submissions, canvas):
 
     for item in submissions:
-        canvas.submissions.append(Submission(item[0], item[1], item[2], item[3], item[4], item[5]))
+        if item[5] == 'False':
+            canvas.submissions.append(Submission(item[0], item[1], item[2], item[3], item[4], ''))
+        else:
+            canvas.submissions.append(Submission(item[0], item[1], item[2], item[3], item[4], item[5]))
 
 
 def load_assingments_list_csv(canvas):
 
-    with open ('csv_databases/assingments.csv', 'r') as file:
+    with open('csv_databases/assingments.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
 
         assingments = []
