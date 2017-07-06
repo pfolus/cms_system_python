@@ -27,20 +27,22 @@ def option_error():
 def show_mentors_with_details(mentors):
 
     index = 1
-
+    print()
     for mentor in mentors:
-        print("{}. {} {} - {}".format(index, mentor.name,
+        print("({}) {} {} - {}".format(index, mentor.name,
                                       mentor.surname, mentor.login))
         index += 1
+    print()
 
 
 def show_mentors(mentors):
 
     index = 1
-
+    print()
     for mentor in mentors:
-        print("{}. {} {}".format(index, mentor.name, mentor.surname))
+        print("({}) {} {}".format(index, mentor.name, mentor.surname))
         index += 1
+    print()
 
 
 def ask_name():
