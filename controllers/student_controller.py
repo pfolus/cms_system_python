@@ -109,14 +109,18 @@ def check_if_submitted(assingment_name, submissions, user_login):
             show_sub(submission)
 
 
-def check_if_graded():
+def check_if_graded(assingment_name, submissions, user_name):
     '''
     Returns True if submission was already graded, otherwise returns False
     '''
-    pass
+    for submission in submissions:
+        if submission.title == assingment_name and user_name == submission.user_login and submission.is_checked:
+            return True
+        elif submission.title == assingment_name and user_name == submission.user_login and submission.is_checked is False:
+            return False
 
 
-def add_submission(assingment, user):
+def add_submission(assingment, submissions, user):
     '''
     Adds new submission from Student, for chosen
     assingment.
