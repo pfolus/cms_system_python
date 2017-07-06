@@ -6,7 +6,7 @@ from views.codecooler_view import *
 def show_menu():
     menu = ['1. Show my grades',
             '2. Submit assingment',
-            '0. Log out']
+            '0. Log out\n']
     for line in menu:
         print(line)
 
@@ -31,7 +31,7 @@ def choose_function():
 
 def show_assingments(assingments):
     number = 0
-    print('\nAll assingments:\n')
+    print(Bcolors.BLUE + '\nAll assingments:\n' + Bcolors.ENDC)
     for assingment in assingments:
         show_assingment(assingment, number)
         number += 1
@@ -50,11 +50,11 @@ def error_number():
 
 
 def print_assingment_done():
-    print(Bcolors.HEADER + 'You have already done this assingment' + Bcolors.ENDC)
+    print(Bcolors.BOLD + '\nYou have already done this assingment' + Bcolors.ENDC)
 
 
 def get_answer():
-    answer = input('Type the answer (preferably link to repo on github.com): ')
+    answer = input(Bcolors.UNDERLINE + 'Type the answer (preferably link to repo on github.com): ' + Bcolors.ENDC)
 
     return answer
 
@@ -64,4 +64,4 @@ def info_submission_added():
 
 
 def show_grades_info(grades_sum, max_grades_sum, amount_of_grades):
-    print(Bcolors.BOLD + 'You have {} grades.\nYour score: {}/{}'.format(amount_of_grades, grades_sum, max_grades_sum) + Bcolors.ENDC)
+    print(Bcolors.BOLD + '\nYou have {} grades.\nYour score: {}/{}\n'.format(amount_of_grades, grades_sum, max_grades_sum) + Bcolors.ENDC)
