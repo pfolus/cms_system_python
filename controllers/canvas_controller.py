@@ -23,6 +23,7 @@ def start_controller():
     load_codecoolers_list_csv(canvas)
     load_assingments_list_csv(canvas)
     load_submissions_list_csv(canvas)
+    load_attendances_list_csv(canvas)
     show_login_menu()
     logged_in = False
     while not logged_in:
