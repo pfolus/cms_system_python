@@ -151,10 +151,11 @@ def get_submission(canvas):
 
 
 def show_fullnames(canvas):
-
+    index = 0
     print('\nPresence List: \n')
     for user in canvas.students:
-        print('-> {} {}'.format(user.name, user.surname))
+        print('{} -> {} {}'.format(index, user.name, user.surname))
+        index += 1
 
 
 def get_student(canvas):
@@ -164,3 +165,14 @@ def get_student(canvas):
         student_index = get_int('Pick student index: ')
 
     return canvas.students[student_index]
+
+
+def print_attendance_menu():
+    menu = ['==================',
+            '(1)-->insert absence',
+            '(2)-->insert late',
+            '(0)-->back to menu',
+            '==================']
+
+    for item in menu:
+        print(item)
