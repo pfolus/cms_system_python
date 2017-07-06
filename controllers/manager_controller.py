@@ -1,5 +1,5 @@
 from views.manager_view import *
-#  from models.mentor_model import Mentor
+from models.mentor_model import Mentor
 
 
 def start_controller(canvas, user):
