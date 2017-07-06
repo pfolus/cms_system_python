@@ -13,3 +13,5 @@ def start_controller(canvas, user):
 
         if choice == 1:
             show_students_list(canvas.students)
+        elif choice == 2:
+            show_students_list_detailed(canvas)
