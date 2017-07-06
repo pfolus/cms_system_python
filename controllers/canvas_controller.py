@@ -3,7 +3,7 @@ import csv
 import datetime
 from models.codecooler_model import *
 from models.student_model import Student
-#from models.mentor_model import Mentor
+from models.mentor_model import Mentor
 from models.manager_model import Manager
 from models.accountant_model import Accountant
 from models.canvas_model import Canvas
@@ -107,8 +107,8 @@ def create_codecoolers_objects(codecoolers_list, canvas):
             add_user_to_list(canvas, Manager(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
         elif user[TYPE_INDEX] == "Accountant":
             add_user_to_list(canvas, Accountant(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
-        #elif user[TYPE_INDEX] == "Mentor":
-            #add_user_to_list(canvas, Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+        elif user[TYPE_INDEX] == "Mentor":
+            add_user_to_list(canvas, Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
 
 
 def add_user_to_list(canvas, user):
@@ -159,11 +159,11 @@ def export_data_to_csv(canvas):
 
     export_submissions(canvas.submissions)
     export_assingments(canvas.assingments)
-    '''for codecoolers in [canvas.mentors,
+    for codecoolers in [canvas.mentors,
                         canvas.managers,
                         canvas.students,
                         canvas.accountants]:
-        export_codecooler(codecoolers)'''
+        export_codecooler(codecoolers)
 
 
 def export_submissions(submissions):
