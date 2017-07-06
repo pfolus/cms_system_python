@@ -39,22 +39,35 @@ def run_chosen_function(user_input, canvas, user):
     user = obj of Codecooler class
     '''
     if user_input == 1:
-        show_grades(canvas.grades)
+        grades_sum, max_grades_sum, amount_of_grades = calculate_grades(canvas.assingments, canvas.submissions, user.login)
+        show_grades_info(grades_sum, max_grades_sum, amount_of_grades)
     elif user_input == 2:
         number = show_assingments(canvas.assingments)
         chosen_assingment = choose_assingment(number, canvas.assingments)
         check_if_submitted(chosen_assingment.title, canvas.submissions, user.login)
-        is_graded = check_if_graded()
+        is_graded = check_if_graded(chosen_assingment.title, canvas.submissions, user.login)
         if not is_graded:
-            new_sub = add_submission(chosen_assingment, user)
+            new_sub = add_submission(chosen_assingment, canvas.submissions, user)
             add_new_sub_to_list(canvas, new_sub)
             info_submission_added()
 
     return user_input
 
 
-def show_grades(grades):
-    pass
+def calculate_grades(assingments, submissions, user_login):
+    grades_sum = 0
+    max_grades_sum = 0
+    amount_of_grades = 0
+
+    for submission in submissions:
+        if submission.user_login == user_login and submission.is_checked:
+            grades_sum += submission.score
+            amount_of_grades += 1
+            for assingment in assingments:
+                if assingment.title == submission.title:
+                    max_grades_sum += assingment.max_grade
+
+    return grades_sum, max_grades_sum, amount_of_grades
 
 
 def choose_assingment(number, assingments):
