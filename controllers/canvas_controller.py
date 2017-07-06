@@ -210,4 +210,5 @@ def export_codecooler(codecoolers):
             writer.writerow([codecooler.login,
                             codecooler.password,
                             codecooler.name,
-                            codecooler.surname])
+                            codecooler.surname,
+                            codecooler.__class__.__name__])
