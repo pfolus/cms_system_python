@@ -6,6 +6,7 @@ from models.assingment_model import Assingment
 from views.employee_view import *
 from models.submission_model import Submission
 from models.attendance_model import Attendance
+from controllers.attendance_controller import *
 
 def start_controller(canvas, user):
 
@@ -24,7 +25,7 @@ def start_controller(canvas, user):
         elif choice == '3':
             grade_assingment(canvas)
         elif choice == '4':
-            check_attendance()
+            check_attendance(canvas)
         elif choice == '5':
             remove_student(canvas)
         elif choice == '6':
@@ -105,10 +106,30 @@ def max_grade_by_title(canvas, submission):
 
 def check_attendance(canvas):
 
-    #show list of students, insert_presence for all, then pick
-    show_fullnames()
-    student = get_student(canvas)
-    print(student)
+    for student in canvas.students:
+        insert_presence(canvas.attendances, student.login)
+
+    choice = ''
+    while choice != '0':
+        print_attendance_menu()
+        choice = get_choice()
+
+        if choice == '1':
+            show_fullnames(canvas)
+            student = get_student(canvas)
+            insert_absence(canvas.attendances, student.login)
+            print_done()
+            
+        elif choice == '2':
+            show_fullnames(canvas)
+            student = get_student(canvas)
+            insert_late(canvas.attendances, student.login)
+            print_done()
+
+        elif choice != '0':
+            print_bad_choice()
+
+
 
 
 
