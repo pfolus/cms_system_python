@@ -26,3 +26,55 @@ def get_choice():
 def print_bad_choice():
     print('\n' + 'There is no such option, try again!')
 
+
+def get_login():
+
+    login = input('Enter student login: ')
+
+    while len(login) < 6:
+        print('Login must have at least 6 characters, try again!')
+        login = input('Enter student login: ')
+
+    return login
+
+
+def get_password():
+
+    password = input('Enter student password: ')
+
+    while (len(pasword) < 6) or (has_digit(password) == 0):
+        print('Password must have at least 6 characters and 1 digit, try again!')
+        password = input('Enter student password: ')
+
+    return password
+
+
+def get_name():
+
+    name = input('Enter student login: ')
+
+    while len(name) < 4:
+        print('Name must have at least 3 characters, try again!')
+        name = input('Enter student name: ')
+
+    return name
+
+
+def get_surname():
+
+    surname = input('Enter student login: ')
+
+    while len(surname) < 4 or :
+        print('Surname must have at least 3 characters, try again!')
+        surname = input('Enter student surname: ')
+
+    return surname
+
+
+def has_digit(item):
+    has_digit = 0
+    for char in item:
+        if char isdigit:
+            has_digit = 1
+
+    return has_digit
