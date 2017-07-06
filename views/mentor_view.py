@@ -112,10 +112,10 @@ def get_date():
             print('Wrong input!')
 
 
-def get_max_grade():
+def get_int(message):
     while True:
         try:
-            max_grade = int(input('Enter max grade: '))
+            max_grade = int(input(message))
             return max_grade
         except:
             print('Wrong input!')
@@ -130,8 +130,22 @@ def show_logins(canvas):
 
 def show_submissions(canvas):
 
-    print('\nSubmissions list: \n')
-    for submission in canvas.submissions:
-        print('student -> {} submission title -> {}'.format(submission.user_login, submission.title ))
 
+    print('\nSubmissions list: \n')
+    index = 0
+    for submission in canvas.submissions:
+        if submission.is_checked == 'True':
+            print('{}.Student -> {} | Submission title -> {} (already rated)'.format(index, submission.user_login, submission.title ))
+        else:
+            print('{}.Student -> {} | Submission title -> {}'.format(index, submission.user_login, submission.title ))
+        index += 1
+
+
+def get_submission(canvas):
+    submission_index = get_int('Pick submission index: ')
+    while submission_index not in range(len(canvas.submissions)):
+        print('There is no such submission index')
+        submission_index = get_int('Pick submission index: ')
+
+    return canvas.submissions[submission_index]
 
