@@ -95,7 +95,7 @@ def ask_for_index():
         try:
             index = int(input("Enter index: "))
             if index < 1:
-                is_correct = False
+                option_error()
             else:
                 is_correct = True
         except ValueError:
