@@ -3,9 +3,11 @@ from controllers.student_controller import calculate_grades
 
 def show_students_list(students_list):
     index = 1
+    print()
     for student in students_list:
-        print('{}. {} {}'.format(index, student.name, student.surname))
+        print('({}). {} {}'.format(index, student.name, student.surname))
         index += 1
+    print()
 
 
 def show_students_list_detailed(canvas):
