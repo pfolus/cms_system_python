@@ -1,5 +1,4 @@
-def greet(user):
-    print('Hey {}!'.format(user.name))
+rom views.codecooler_view import *
 
 
 def show_menu():
