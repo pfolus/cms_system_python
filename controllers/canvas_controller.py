@@ -178,6 +178,7 @@ def export_data_to_csv(canvas):
 
     export_submissions(canvas.submissions)
     export_assingments(canvas.assingments)
+    save_atendances_list_csv(canvas)
     codecoolers = canvas.mentors + canvas.managers + canvas.students + canvas.accountants
     export_codecooler(codecoolers)
 
