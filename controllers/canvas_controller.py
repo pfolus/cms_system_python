@@ -130,7 +130,6 @@ def add_user_to_list(canvas, user):
 
 def login(canvas):
 
-    show_login_menu()
     login = get_login()
     password = get_password()
 
