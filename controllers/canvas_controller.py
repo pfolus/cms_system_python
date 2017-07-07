@@ -20,10 +20,14 @@ from controllers import mentor_controller
 
 def start_controller():
     canvas = Canvas()
-    load_codecoolers_list_csv(canvas)
-    load_assingments_list_csv(canvas)
-    load_submissions_list_csv(canvas)
-    load_attendances_list_csv(canvas)
+    try:
+        load_codecoolers_list_csv(canvas)
+        load_assingments_list_csv(canvas)
+        load_submissions_list_csv(canvas)
+        load_attendances_list_csv(canvas)
+    except FileNotFoundError:
+        print_file_not_found_error()
+        return False
     show_login_menu()
     logged_in = False
     while not logged_in:
@@ -40,7 +44,10 @@ def load_attendances_list_csv(canvas):
         for line in reader:
             login = line[0]
             average = line[1]
-            attendances = [float(number) for number in line[2].split(",")]
+            try:
+                attendances = [float(number) for number in line[2].split(",")]
+            except ValueError:
+                attendances = []
             canvas.attendances.append(Attendance(login, attendances, average))
 
 
