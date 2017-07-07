@@ -7,10 +7,24 @@ from models.canvas_model import Canvas
 from models.submission_model import Submission
 
 def print_welcome(user):
+    '''
+    Prints welcome message
+
+    Paramaters
+    ----------
+    user = obj of Mentor class
+
+    Returns
+    -------
+    None
+    '''
     print('\n' +'Witamy Szanownego kolegę {}a!'.format(user.name))
 
 
 def print_menu():
+    '''
+    Prints menu
+    '''
     menu = ['========================',
             '(1).View student details',
             '(2).Add assignment',
@@ -25,15 +39,31 @@ def print_menu():
 
 
 def get_choice():
+    '''
+    asks for choice
+
+    Returns
+    -------
+    input string
+    '''
     return input('Enter your choice: ')
 
 
 def print_bad_choice():
+    '''
+    Prints error message
+    '''
     print('\n' + 'There is no such option, try again!')
 
 
 def get_login():
+    ''' 
+    asks for login until its longer than 5 characters
 
+    Returns
+    -------
+    login = string
+    '''
     login = input('\nEnter student login: ')
 
     while len(login) < 6:
@@ -44,7 +74,14 @@ def get_login():
 
 
 def get_password():
+    ''' 
+    asks for password until its longer than 5 characters and have 
+    at least 1 digit
 
+    Returns
+    -------
+    password = string
+    '''
     password = input('\nEnter student password: ')
 
     while (len(password) < 6) or (has_digit(password) == 0):
@@ -55,7 +92,14 @@ def get_password():
 
 
 def get_name():
+    ''' 
+    asks for name until its longer than 3 characters. Checks if 
+    name have digits, if so it asks again.
 
+    Returns
+    -------
+    name = string
+    '''
     name = input('\nEnter student name: ')
 
     while (len(name) < 3) or (has_digit(name) == 1):
@@ -67,7 +111,14 @@ def get_name():
 
 
 def get_surname():
+    ''' 
+    asks for surname until its longer than 3 characters. Checks if 
+    name have digits, if so it asks again.
 
+    Returns
+    -------
+    surname = string
+    '''
     surname = input('\nEnter student surname: ')
 
     while len(surname) < 3 or (has_digit(surname) == 1):
@@ -79,6 +130,18 @@ def get_surname():
 
 
 def has_digit(item):
+    ''' 
+    Checks if item has digit.
+
+    Paramaters
+    ----------
+    item = string
+
+    Returns
+    -------
+    has_digit = int (0 or 1)
+    '''
+
     has_digit = 0
     for char in item:
         if char.isdigit():
@@ -104,6 +167,15 @@ def get_string(item):
 
 
 def get_date():
+    ''' 
+    Asks for date until date with correct format passed.
+    If not, prints error message.
+
+    Returns
+    -------
+    correct_date = datetime object
+    '''
+
     while True:
         date = input('Enter date in format dd.mm.yyyy: ')
         try:
@@ -114,6 +186,18 @@ def get_date():
 
 
 def get_int(message):
+    ''' 
+    Asks for input until digits provided. Otherwise,
+    error massage printed.
+
+    Paramaters
+    ----------
+    message = string
+
+    Returns
+    -------
+    max_grade = int
+    '''
     while True:
         try:
             max_grade = int(input(message))
@@ -123,6 +207,17 @@ def get_int(message):
 
 
 def show_logins(canvas):
+    ''' 
+    Prints all student logins.
+
+    Paramaters
+    ----------
+    canvas = object of Canvas class
+
+    Returns
+    -------
+    None
+    '''
 
     print('\nLogin list: ')
     for user in canvas.students:
@@ -130,7 +225,17 @@ def show_logins(canvas):
 
 
 def show_submissions(canvas):
+    ''' 
+    Prints all submissions title and author.
 
+    Paramaters
+    ----------
+    canvas = object of Canvas class
+
+    Returns
+    -------
+    None
+    '''
 
     print('\nSubmissions list: \n')
     index = 0
@@ -143,6 +248,18 @@ def show_submissions(canvas):
 
 
 def get_submission(canvas):
+    ''' 
+    Asks for submission index, and pick chosen submission.
+
+    Paramaters
+    ----------
+    canvas = object of Canvas class
+
+    Returns
+    -------
+    canvas.submissions[submission_index] = object of Submission class
+    '''
+
     submission_index = get_int('Pick submission index: ')
     while submission_index not in range(len(canvas.submissions)):
         print('There is no such submission index')
@@ -152,6 +269,18 @@ def get_submission(canvas):
 
 
 def show_fullnames(canvas):
+    '''
+    Shows all students full names.
+
+    Paramaters
+    ----------
+    canvas = object of Canvas class
+
+    Returns
+    -------
+    None
+    '''
+
     index = 0
     print('\nPresence List: \n')
     for user in canvas.students:
@@ -160,6 +289,10 @@ def show_fullnames(canvas):
 
 
 def print_attendance_menu():
+    '''
+    Prints menu
+    '''
+
     menu = ['\n==================',
             '(1)-->insert absence',
             '(2)-->insert late',
