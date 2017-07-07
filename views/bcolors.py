@@ -1,4 +1,8 @@
 class Bcolors:
+    '''
+    This class contains shortcuts to
+    make colored text
+    '''
 
     HEADER = '\033[95m'
     BLUE = '\033[94m'
