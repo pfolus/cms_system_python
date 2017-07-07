@@ -6,7 +6,6 @@ from models.student_model import Student
 from models.canvas_model import Canvas
 from models.submission_model import Submission
 
-<<<<<<< HEAD
 def print_welcome(user):
     '''
     Prints welcome message
