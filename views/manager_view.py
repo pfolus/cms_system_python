@@ -3,6 +3,9 @@ from views.codecooler_view import *
 
 
 def print_menu():
+    '''
+    Prints manager submenu
+    '''
 
     print('''1. List mentors
 2. List mentors with details
@@ -15,16 +18,31 @@ def print_menu():
 
 
 def ask_for_option():
+    '''
+    Get user inputfor choosing option in menu
+
+    Returns:
+        string
+    '''
 
     return input("Choose option: ")
 
 
 def option_error():
+    '''
+    Print error message
+    '''
 
     print("There isn't such option!")
 
 
 def show_mentors_with_details(mentors):
+    '''
+    Prints all mentors' details
+
+    Args:
+        mentors - list with objects
+    '''
 
     index = 1
     print()
@@ -36,6 +54,12 @@ def show_mentors_with_details(mentors):
 
 
 def show_mentors(mentors):
+    '''
+    Prints all mentors
+
+    Args:
+        mentors - list with objects
+    '''
 
     index = 1
     print()
@@ -46,6 +70,12 @@ def show_mentors(mentors):
 
 
 def ask_name():
+    '''
+    Gets name input from user
+
+    Rturns:
+        string
+    '''
 
     name = input("Name: ")
 
@@ -57,6 +87,12 @@ def ask_name():
 
 
 def ask_surname():
+    '''
+    Gets surname input from user
+
+    Rturns:
+        string
+    '''
 
     surname = input("Surame: ")
 
@@ -68,6 +104,12 @@ def ask_surname():
 
 
 def ask_login():
+    '''
+    Gets login input from user
+
+    Rturns:
+        string
+    '''
 
     login = input("Login: ")
 
@@ -79,6 +121,12 @@ def ask_login():
 
 
 def ask_password():
+    '''
+    Gets password input from user
+
+    Rturns:
+        string
+    '''
 
     password = input("Password: ")
 
@@ -90,6 +138,12 @@ def ask_password():
 
 
 def ask_for_index():
+    '''
+    Gets index input from user and convert it to int
+
+    Rturns:
+        int
+    '''
 
     is_correct = False
 
