@@ -2,6 +2,12 @@ from controllers.student_controller import calculate_grades
 
 
 def show_students_list(students_list):
+    '''
+    Show students name and surname from student's list
+
+    Args:
+        students_list - list with Student objects
+    '''
     index = 1
     print()
     for student in students_list:
@@ -11,6 +17,12 @@ def show_students_list(students_list):
 
 
 def show_students_list_detailed(canvas):
+    '''
+    Show detailes student's list
+
+    Args:
+        canvas - objact with lists containing objects of other classess
+    '''
     index = 1
     student_attendance = 0
     print()
