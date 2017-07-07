@@ -1,4 +1,5 @@
 from views.student_view import *
+from views.codecooler_view import *
 from views.submission_view import *
 from models.canvas_model import Canvas
 from models.submission_model import Submission

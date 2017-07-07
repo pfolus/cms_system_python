@@ -6,6 +6,7 @@ from models.student_model import Student
 from models.canvas_model import Canvas
 from models.submission_model import Submission
 
+<<<<<<< HEAD
 def print_welcome(user):
     '''
     Prints welcome message
@@ -19,7 +20,6 @@ def print_welcome(user):
     None
     '''
     print('\n' +'Witamy Szanownego kolegę {}a!'.format(user.name))
-
 
 def print_menu():
     '''
@@ -181,7 +181,7 @@ def get_date():
         try:
             correct_date = datetime.strptime(date, '%d.%m.%Y')
             return correct_date
-        except:
+        except ValueError:
             print('Wrong input!')
 
 
@@ -202,7 +202,7 @@ def get_int(message):
         try:
             max_grade = int(input(message))
             return max_grade
-        except:
+        except ValueError:
             print('Wrong input!')
 
 
@@ -237,13 +237,16 @@ def show_submissions(canvas):
     None
     '''
 
+
     print('\nSubmissions list: \n')
     index = 0
     for submission in canvas.submissions:
         if submission.is_checked == 'True':
-            print('{}.Student -> {} | Submission title -> {} (already rated)'.format(index, submission.user_login, submission.title ))
+            print('{}.Student -> {} | Submission title -> {} (Already rated)'.format(
+                index, submission.user_login, submission.title))
         else:
-            print('{}.Student -> {} | Submission title -> {}'.format(index, submission.user_login, submission.title ))
+            print('{}.Student -> {} | Submission title -> {}'.format(
+                index, submission.user_login, submission.title))
         index += 1
 
 
@@ -286,6 +289,14 @@ def show_fullnames(canvas):
     for user in canvas.students:
         print('{} -> {} {}'.format(index, user.name, user.surname))
         index += 1
+
+
+def print_grades_range_info(max_grade):
+    print('Grade must be in range <-3:{}>'.format(max_grade))
+
+
+def show_numbered_student(index, name, surname):
+    print('\nStudent name:\n\n{}. {} {}'.format(index, name, surname))
 
 
 def print_attendance_menu():

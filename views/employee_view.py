@@ -2,6 +2,17 @@ from controllers.student_controller import calculate_grades
 
 
 def show_students_list(students_list):
+    '''
+    Prints every student info in new line
+
+    Paramaters
+    ----------
+    students_list = list (of Student obj)
+
+    Returns
+    -------
+    None
+    '''
     index = 1
     print()
     for student in students_list:
@@ -11,6 +22,17 @@ def show_students_list(students_list):
 
 
 def show_students_list_detailed(canvas):
+    '''
+    Prints detailed info about every student in new line
+
+    Paramaters
+    ----------
+    canvas = obj of Canvas class
+
+    Returns
+    -------
+    None
+    '''
     index = 1
     student_attendance = 0
     print()
