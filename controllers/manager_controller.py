@@ -4,6 +4,19 @@ from models.mentor_model import Mentor
 
 
 def start_controller(canvas, user):
+    '''
+    Welcomes user, shows menu and asks
+    to choose a function
+
+    Paramaters
+    ----------
+    canvas = obj of Canvas class
+    user = obj of Codecooler class
+
+    Returns
+    -------
+    None
+    '''
 
     option = ""
     greet(user)
@@ -18,6 +31,15 @@ def start_controller(canvas, user):
 
 
 def choose_option(user_input, canvas, user):
+    '''
+    Runs appropriate functions, based on user choice.
+
+    Paramaters
+    ----------
+    user_input = int
+    canvas = obj of Canvas class
+    user = obj of Codecooler class
+    '''
 
     if user_input == "1":
         show_mentors(canvas.mentors)
@@ -38,6 +60,9 @@ def choose_option(user_input, canvas, user):
 
 
 def add_mentor(mentors):
+    '''
+    Takes user_inputs and appends mentors list with Mentor object
+    '''
 
     login = ask_login()
     password = ask_password()
@@ -48,6 +73,9 @@ def add_mentor(mentors):
 
 
 def remove_mentor(mentors):
+    '''
+    Removes mentor instance with index entered by user from mentors list
+    '''
 
     show_mentors(mentors)
 
