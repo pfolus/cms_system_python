@@ -1,6 +1,9 @@
 class Canvas:
 
     def __init__(self):
+        '''
+        Initializes Canvas instance
+        '''
         self.mentors = []
         self.managers = []
         self.students = []
