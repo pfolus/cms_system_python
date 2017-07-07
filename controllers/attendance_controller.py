@@ -1,4 +1,7 @@
 def get_average_percent(attendance):
+    '''
+    Calculates average attendance based on elements in list and it's length
+    '''
 
     attendances_sum = 0
 
@@ -11,6 +14,9 @@ def get_average_percent(attendance):
 
 
 def insert_presence(attendances, login):
+    '''
+    Appends user's attendance with integer = 1
+    '''
 
     for attendance in attendances:
         if attendance.student_login == login:
@@ -19,6 +25,9 @@ def insert_presence(attendances, login):
 
 
 def insert_absence(attendances, login):
+    '''
+    Appends user's attendance with integer = 0
+    '''
 
     for attendance in attendances:
         if attendance.student_login == login:
@@ -27,6 +36,9 @@ def insert_absence(attendances, login):
 
 
 def insert_late(attendances, login):
+    '''
+    Appends user's attendance with integer = 0.8
+    '''
 
     for attendance in attendances:
         if attendance.student_login == login:
