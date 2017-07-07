@@ -3,10 +3,15 @@ from controllers.student_controller import calculate_grades
 
 def show_students_list(students_list):
     '''
-    Show students name and surname from student's list
+    Prints every student info in new line
 
-    Args:
-        students_list - list with Student objects
+    Paramaters
+    ----------
+    students_list = list (of Student obj)
+
+    Returns
+    -------
+    None
     '''
     index = 1
     print()
@@ -18,10 +23,15 @@ def show_students_list(students_list):
 
 def show_students_list_detailed(canvas):
     '''
-    Show detailes student's list
+    Prints detailed info about every student in new line
 
-    Args:
-        canvas - objact with lists containing objects of other classess
+    Paramaters
+    ----------
+    canvas = obj of Canvas class
+
+    Returns
+    -------
+    None
     '''
     index = 1
     student_attendance = 0
