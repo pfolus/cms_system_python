@@ -4,15 +4,16 @@ from models.student_model import Student
 from models.canvas_model import Canvas
 from models.assingment_model import Assingment
 from views.employee_view import *
+from views.codecooler_view import *
 from models.submission_model import Submission
 from models.attendance_model import Attendance
 from controllers.attendance_controller import *
 
+
 def start_controller(canvas, user):
 
-    print_welcome(user)
+    greet(user)
     choice = '99'
-
 
     while choice != '0':
         print_menu()
@@ -42,6 +43,7 @@ def add_student(canvas):
     surname = get_surname()
 
     canvas.students.append(Student(login, password, name, surname))
+    canvas.attendances.append(Attendance(login))
     print_done()
 
 
@@ -57,6 +59,9 @@ def remove_student(canvas):
     for student in canvas.students:
         if student.login == login:
             canvas.students.remove(student)
+            for attendance in canvas.attendances:
+                if attendance.student_login == login:
+                    canvas.attendances.remove(attendance)
             print_done()
 
 
@@ -71,11 +76,13 @@ def login_exist(login, canvas):
 
 
 def add_assingment(canvas):
+    max_grade = 0
 
     title = get_string('title')
     content = get_string('content')
     date = get_date()
-    max_grade = get_int('Enter max grade: ')
+    while max_grade <= 0:
+        max_grade = get_int('Enter max grade: ')
 
     canvas.assingments.append(Assingment(title, content, date, max_grade))
     print_done()
@@ -86,17 +93,19 @@ def grade_assingment(canvas):
     show_submissions(canvas)
     submission = get_submission(canvas)
     print('\nSubmission Answer:\n{}'.format(submission.answer))
-
-    grade = get_int('Enter submission grade: ')
     max_grade = max_grade_by_title(canvas, submission)
 
+    print_grades_range_info(max_grade)
+    grade = get_int('Enter submission grade: ')
+
     while (grade > max_grade) or (grade < -3):
-        print('Grade must be in range <-3:{}>'.format(max_grade))
+        print_grades_range_info(max_grade)
         grade = get_int('Enter submission grade: ')
 
     submission.score = grade
     submission.is_checked = True
     print_done()
+
 
 def max_grade_by_title(canvas, submission):
 
@@ -104,14 +113,15 @@ def max_grade_by_title(canvas, submission):
         if item.title == submission.title:
             return item.max_grade
 
+
 def check_attendance(canvas):
 
     index = 1
     for student in canvas.students:
 
         choice = ''
-        while choice not in ['1','2','3']:
-            print('\nStudent name:\n\n{}. {} {}'.format(index, student.name, student.surname))
+        while choice not in ['1', '2', '3']:
+            show_numbered_student(index, student.name, student.surname)
             print_attendance_menu()
             choice = get_choice()
             if choice == '1':
@@ -120,19 +130,7 @@ def check_attendance(canvas):
                 insert_late(canvas.attendances, student.login)
             elif choice == '3':
                 insert_presence(canvas.attendances, student.login)
-            elif choice not in ['1','2','3']:
+            elif choice not in ['1', '2', '3']:
                 print_bad_choice()
         index += 1
     print_done()
-
-
-
-
-
-
-
-
-
-
-
-

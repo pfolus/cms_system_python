@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 from models.student_model import Student
 from models.mentor_model import Mentor
 from models.manager_model import Manager
 from models.accountant_model import Accountant
-=======
-<<<<<<< Updated upstream
-=======
 from views.codecooler_view import *
 from controllers.codecoolers_list_controller import *
 from controllers.accountant_controller import *
@@ -36,6 +32,3 @@ def login():
                 mentor_panel(login)
             if user[TYPE_INDEX] == 'Manager':
                 manager_panel(login)
-
->>>>>>> Stashed changes
->>>>>>> master
