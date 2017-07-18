@@ -9,7 +9,7 @@ from models.submission_model import Submission
 from models.attendance_model import Attendance
 
 
-def load_attendances_list_csv(canvas):
+def load_attendances_list_csv():
 
     with open('csv_databases/attendances.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
