@@ -1,7 +1,6 @@
 from views import student_view
 from views import codecooler_view
 from views import submission_view
-from models.canvas_model import Canvas
 from models.submission_model import Submission
 
 
