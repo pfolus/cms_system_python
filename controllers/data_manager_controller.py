@@ -153,12 +153,12 @@ def export_submissions(submissions):
                                 'False'])
 
 
-def export_assingments(assingments):
+def export_assingments():
 
     with open('csv_databases/assingments.csv', 'w') as file:
 
         writer = csv.writer(file, delimiter='|')
-        for assingment in assingments:
+        for assingment in Assingment.assingments:
             writer.writerow([assingment.title,
                              assingment.content,
                              assingment.date.strftime('%d.%m.%Y'),
