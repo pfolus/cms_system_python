@@ -26,7 +26,7 @@ class Attendance:
     @classmethod
     def get_student_attendances(cls, login):
 
-        student_attendances
+        student_attendances = []
 
         for attendance in cls.attendances:
             if attendance.student_login == login:
