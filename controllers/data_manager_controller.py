@@ -82,10 +82,10 @@ def load_codecoolers_list_csv(canvas):
         for line in reader:
             codecoolers_list.append(line)
 
-    create_codecoolers_objects(codecoolers_list, canvas)
+    create_codecoolers_objects(codecoolers_list)
 
 
-def create_codecoolers_objects(codecoolers_list, canvas):
+def create_codecoolers_objects(codecoolers_list):
 
     LOGIN_INDEX = 0
     PASSWORD_INDEX = 1
