@@ -1,7 +1,7 @@
 from controllers.student_controller import calculate_grades
 
 
-def show_students_list(students_list):
+def show_students_list(students):
     '''
     Prints every student info in new line
 
@@ -15,13 +15,13 @@ def show_students_list(students_list):
     '''
     index = 1
     print()
-    for student in students_list:
+    for student in students:
         print('({}) {} {}'.format(index, student.name, student.surname))
         index += 1
     print()
 
 
-def show_students_list_detailed(canvas):
+def show_students_list_detailed(students, attendances, assingments, submissions):
     '''
     Prints detailed info about every student in new line
 
@@ -36,14 +36,14 @@ def show_students_list_detailed(canvas):
     index = 1
     student_attendance = 0
     print()
-    for student in canvas.students:
+    for student in students:
         [grades_sum,
          max_grades_sum,
-         amount_of_grades] = calculate_grades(canvas.assingments,
-                                              canvas.submissions,
+         amount_of_grades] = calculate_grades(assingments,
+                                              submissions,
                                               student.login)
 
-        for attendance in canvas.attendances:
+        for attendance in attendances:
             if attendance.student_login == student.login:
                 student_attendance = attendance.average
 
