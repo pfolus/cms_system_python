@@ -17,14 +17,12 @@ def load_attendances_list_csv():
         for line in reader:
             login = line[0]
             average = line[1]
-            try:
-                attendances = [float(number) for number in line[2].split(",")]
-            except ValueError:
-                attendances = []
-            canvas.attendances.append(Attendance(login, attendances, average))
+            date = datetime.datetime.strptime(line[2], '%d.%m.%Y')
+
+            Attendance(login, value, date)
 
 
-def load_submissions_list_csv(canvas):
+def load_submissions_list_csv():
 
     with open('csv_databases/submissions.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
