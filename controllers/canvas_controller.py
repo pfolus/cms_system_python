@@ -1,4 +1,3 @@
-from models.canvas_model import Canvas
 from models.manager_model import Manager
 from models.student_model import Student
 from models.mentor_model import Mentor
