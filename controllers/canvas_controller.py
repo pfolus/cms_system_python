@@ -14,22 +14,22 @@ from controllers import data_manager_controller
 def start_controller():
     canvas = Canvas()
     try:
-        data_manager_controller.load_codecoolers_list_csv(canvas)
-        data_manager_controller.load_assingments_list_csv(canvas)
-        data_manager_controller.load_submissions_list_csv(canvas)
-        data_manager_controller.load_attendances_list_csv(canvas)
+        data_manager_controller.load_codecoolers_list_csv()
+        data_manager_controller.load_assingments_list_csv()
+        data_manager_controller.load_submissions_list_csv()
+        data_manager_controller.load_attendances_list_csv()
     except FileNotFoundError:
         canvas_view.print_file_not_found_error()
         return False
     canvas_view.show_login_menu()
     logged_in = False
     while not logged_in:
-        user, logged_in = login(canvas)
-    run_controller(user, canvas)
-    data_manager_controller.export_data_to_csv(canvas)
+        user, logged_in = login()
+    run_controller(user)
+    data_manager_controller.export_data_to_csv()
 
 
-def login(canvas):
+def login():
 
     login = canvas_view.get_login()
     password = canvas_view.get_password()
