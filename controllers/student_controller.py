@@ -2,9 +2,10 @@ from views import student_view
 from views import codecooler_view
 from views import submission_view
 from models.submission_model import Submission
+from models.assingment_model import Assingment
 
 
-def start_controller(canvas, user):
+def start_controller(user):
     '''
     Welcomes user, shows menu and asks
     to choose a function
@@ -25,10 +26,10 @@ def start_controller(canvas, user):
     while choice != EXIT:
         student_view.show_menu()
         choice = student_view.choose_function()
-        choice = run_chosen_function(choice, canvas, user)
+        choice = run_chosen_function(choice, user)
 
 
-def run_chosen_function(user_input, canvas, user):
+def run_chosen_function(user_input, user):
     '''
     Runs appropriate functions, based on user choice.
 
@@ -39,14 +40,14 @@ def run_chosen_function(user_input, canvas, user):
     user = obj of Codecooler class
     '''
     if user_input == 1:
-        run_grades_functions(canvas, user)
+        run_grades_functions(user)
     elif user_input == 2:
-        run_submission_functions(canvas, user)
+        run_submission_functions(user)
 
     return user_input
 
 
-def run_grades_functions(canvas, user):
+def run_grades_functions(user):
     '''
     Handles flow of showing grades related functions.
 
@@ -59,11 +60,11 @@ def run_grades_functions(canvas, user):
     -------
     None
     '''
-    grades_sum, max_grades_sum, amount_of_grades = calculate_grades(canvas.assingments, canvas.submissions, user.login)
+    grades_sum, max_grades_sum, amount_of_grades = calculate_grades(user.login)
     student_view.show_grades_info(grades_sum, max_grades_sum, amount_of_grades)
 
 
-def run_submission_functions(canvas, user):
+def run_submission_functions(user):
     '''
     Handles flow of sending submission related functions.
 
@@ -76,18 +77,17 @@ def run_submission_functions(canvas, user):
     -------
     None
     '''
-    number = student_view.show_assingments(canvas.assingments)
-    chosen_assingment = choose_assingment(number, canvas.assingments)
-    check_if_submitted(chosen_assingment.title, canvas.submissions, user.login)
-    is_graded = check_if_graded(chosen_assingment.title, canvas.submissions, user.login)
+    number = student_view.shows(Assingment.assingments)
+    chosen_assingment = choose_assingment(number)
+    check_if_submitted(chosen_assingment.title, user.login)
+    is_graded = check_if_graded(chosen_assingment.title, user.login)
 
     if not is_graded:
-        new_sub = add_submission(chosen_assingment, canvas.submissions, user)
-        add_new_sub_to_list(canvas, new_sub)
+        add_submission(chosen_assingment, user)
         student_view.info_submission_added()
 
 
-def calculate_grades(assingments, submissions, user_login):
+def calculate_grades(user_login):
     '''
     Basing on student's submissions calculates its sum of grades,
     and maximum amount of grades, that could have been scored.
@@ -109,18 +109,18 @@ def calculate_grades(assingments, submissions, user_login):
     max_grades_sum = 0
     amount_of_grades = 0
 
-    for submission in submissions:
+    for submission in Submission.submissions:
         if submission.user_login == user_login and submission.is_checked:
             grades_sum += submission.score
             amount_of_grades += 1
-            for assingment in assingments:
+            for assingment in Assingment.assingments:
                 if assingment.title == submission.title:
                     max_grades_sum += assingment.max_grade
 
     return grades_sum, max_grades_sum, amount_of_grades
 
 
-def choose_assingment(number, assingments):
+def choose_assingment(number):
     '''
     Asks user to choose on of possible
     assingment and returns it.
@@ -135,7 +135,7 @@ def choose_assingment(number, assingments):
     name_of_assingment = str
     '''
     choice = ''
-    possible_choices = range(0, len(assingments))
+    possible_choices = range(0, len(Assingment.assingments))
 
     while choice not in possible_choices:
 
@@ -144,12 +144,12 @@ def choose_assingment(number, assingments):
         except ValueError:
             student_view.error_number()
 
-    chosen_assingment = assingments[choice]
+    chosen_assingment = Assingment.assingments[choice]
 
     return chosen_assingment
 
 
-def check_if_submitted(assingment_name, submissions, user_login):
+def check_if_submitted(assingment_name, user_login):
     '''
     Based on provided assingment name, checks if Student
     already sent a submission for it and prints info about
@@ -166,24 +166,24 @@ def check_if_submitted(assingment_name, submissions, user_login):
     boolean = returns False if submission for this assingment
     wasn't sent by this Student yes, otherwise returns True.
     '''
-    for submission in submissions:
+    for submission in Submission.submissions:
         if submission.title == assingment_name and submission.user_login == user_login:
             student_view.print_assingment_done()
             submission_view.show_sub(submission)
 
 
-def check_if_graded(assingment_name, submissions, user_name):
+def check_if_graded(assingment_name, user_name):
     '''
     Returns True if submission was already graded, otherwise returns False
     '''
-    for submission in submissions:
+    for submission in Submission.submissions:
         if submission.title == assingment_name and user_name == submission.user_login and submission.is_checked:
             return True
-        elif submission.title == assingment_name and user_name == submission.user_login and submission.is_checked is False:
+        elif submission.title == assingment_name and user_name == submission.user_login and not submission.is_checked:
             return False
 
 
-def add_submission(assingment, submissions, user):
+def add_submission(assingment, user):
     '''
     Adds new submission from Student, for chosen
     assingment.
@@ -199,27 +199,8 @@ def add_submission(assingment, submissions, user):
     new_sub = obj of Submission class
     '''
     answer = student_view.get_answer()
-    for submission in submissions:
+    for submission in Submission.submissions:
         if assingment.title == submission.title and user.login == submission.user_login:
-            submissions.remove(submission)
+            Submission.submissions.remove(submission)
 
-    new_sub = Submission(user.login, assingment.title, answer)
-
-    return new_sub
-
-
-def add_new_sub_to_list(canvas, submission):
-    '''
-    Adds new submission to the list of submissions
-    in canvas object.
-
-    Paramaters
-    ----------
-    canvas = obj of Canvas class
-    submission = obj of Submission class
-
-    Returns
-    -------
-    None
-    '''
-    canvas.submissions.append(submission)
+    Submission(user.login, assingment.title, answer)

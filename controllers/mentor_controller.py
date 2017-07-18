@@ -1,23 +1,22 @@
 from models.mentor_model import Mentor
-from views import mentor_view
 from models.student_model import Student
-from models.canvas_model import Canvas
 from models.assingment_model import Assingment
-from views import employee_view
-from views import codecooler_view
 from models.submission_model import Submission
 from models.attendance_model import Attendance
+from views import mentor_view
+from views import employee_view
+from views import codecooler_view
 from controllers import attendance_controller
 
 
-def start_controller(canvas, user):
+def start_controller(user):
     '''
     Welcomes user, shows menu and asks
     to choose a function, then runs specific process
 
     Paramaters
     ----------
-    canvas = obj of Canvas class
+    None
     user = obj of Codecooler class
 
     Returns
@@ -33,30 +32,29 @@ def start_controller(canvas, user):
         choice = mentor_view.get_choice()
 
         if choice == '1':
-            employee_view.show_students_list_detailed(canvas)
+            employee_view.show_students_list_detailed()
         elif choice == '2':
-            add_assingment(canvas)
+            add_assingment()
         elif choice == '3':
-            grade_assingment(canvas)
+            grade_assingment()
         elif choice == '4':
-            check_attendance(canvas)
+            check_attendance()
         elif choice == '5':
-            remove_student(canvas)
+            remove_student()
         elif choice == '6':
-            add_student(canvas)
+            add_student()
         elif choice != '0':
             mentor_view.print_bad_choice()
 
 
-def add_student(canvas):
+def add_student():
     '''
     asks for login, password, name and surname, and
     then creates a student object and adds it to
-    canvas.students list
+    students list
 
     Paramaters
     ----------
-    canvas = obj of Canvas class
 
     Returns
     -------
@@ -67,12 +65,11 @@ def add_student(canvas):
     name = mentor_view.get_name()
     surname = mentor_view.get_surname()
 
-    canvas.students.append(Student(login, password, name, surname))
-    canvas.attendances.append(Attendance(login))
+    Student(login, password, name, surname)
     mentor_view.print_done()
 
 
-def remove_student(canvas):
+def remove_student():
     '''
     shows student logins as a list, then asks for login until
     correct login provided (existing), and removes proper
@@ -80,29 +77,29 @@ def remove_student(canvas):
 
     Paramaters
     ----------
-    canvas = obj of Canvas class
+    None
 
     Returns
     -------
     None
     '''
-    mentor_view.show_logins(canvas)
+    mentor_view.show_logins()
     login = mentor_view.get_student_login()
 
-    while not login_exist(login, canvas):
+    while not login_exist(login):
         mentor_view.print_not_exist()
         login = mentor_view.get_student_login()
 
-    for student in canvas.students:
+    for student in Student.students:
         if student.login == login:
-            canvas.students.remove(student)
-            for attendance in canvas.attendances:
+            Student.students.remove(student)
+            for attendance in Attendance.attendances:
                 if attendance.student_login == login:
-                    canvas.attendances.remove(attendance)
+                    Attendance.attendances.remove(attendance)
             mentor_view.print_done()
 
 
-def login_exist(login, canvas):
+def login_exist(login):
     '''
     iterates through students list, and returns
     True if student exists.
@@ -110,28 +107,27 @@ def login_exist(login, canvas):
     Paramaters
     ----------
     login = attribute (.login) of Student class
-    canvas = obj of Canvas class
 
     Returns
     -------
     login_exist = True or False
     '''
     login_exist = False
-    for item in canvas.students:
+    for item in Student.students:
         if item.login == login:
             login_exist = True
 
     return login_exist
 
 
-def add_assingment(canvas):
+def add_assingment():
     '''
     ask for title, content, date and max_grade, and then
     creates assingment and adds it to assingments list.
 
     Paramaters
     ----------
-    canvas = obj of Canvas class
+    None
 
     Returns
     ----------
@@ -145,11 +141,11 @@ def add_assingment(canvas):
     while max_grade <= 0:
         max_grade = mentor_view.get_int('Enter max grade: ')
 
-    canvas.assingments.append(Assingment(title, content, date, max_grade))
+    Assingment(title, content, date, max_grade)
     mentor_view.print_done()
 
 
-def grade_assingment(canvas):
+def grade_assingment():
     '''
     Shows submissions list, asks for submission title,
     prints chosen submissions content and ask for grade.
@@ -157,16 +153,16 @@ def grade_assingment(canvas):
 
     Paramaters
     ----------
-    canvas = obj of Canvas class
+    None
 
     Returns
     -------
     None
     '''
-    mentor_view.show_submissions(canvas)
-    submission = mentor_view.get_submission(canvas)
+    mentor_view.show_submissions()
+    submission = mentor_view.get_submission()
     print('\nSubmission Answer:\n{}'.format(submission.answer))
-    max_grade = max_grade_by_title(canvas, submission)
+    max_grade = max_grade_by_title(submission)
 
     mentor_view.print_grades_range_info(max_grade)
     grade = mentor_view.get_int('Enter submission grade: ')
@@ -180,7 +176,7 @@ def grade_assingment(canvas):
     mentor_view.print_done()
 
 
-def max_grade_by_title(canvas, submission):
+def max_grade_by_title(submission):
     '''
     iterate through assigments and search for assigment
     with the same title as submission, and returns its
@@ -188,7 +184,6 @@ def max_grade_by_title(canvas, submission):
 
     Paramaters
     ----------
-    canvas = obj of Canvas class
     submission = obj of Submission class
 
     Returns
@@ -196,12 +191,12 @@ def max_grade_by_title(canvas, submission):
     item.max_grade = attribute of Assingment class
     '''
 
-    for item in canvas.assingments:
+    for item in Assingment.assingments:
         if item.title == submission.title:
             return item.max_grade
 
 
-def check_attendance(canvas):
+def check_attendance():
     '''
     iterate through students, and for each student:
     prints its full name, submenu and asks to choose
@@ -209,7 +204,7 @@ def check_attendance(canvas):
 
     Paramaters
     ----------
-    canvas = obj of Canvas class
+    None
 
     Returns
     -------
@@ -217,7 +212,7 @@ def check_attendance(canvas):
     '''
 
     index = 1
-    for student in canvas.students:
+    for student in Student.students:
 
         choice = ''
         while choice not in ['1', '2', '3']:
@@ -225,11 +220,11 @@ def check_attendance(canvas):
             mentor_view.print_attendance_menu()
             choice = mentor_view.get_choice()
             if choice == '1':
-                attendance_controller.insert_absence(canvas.attendances, student.login)
+                attendance_controller.insert_absence(Attendance.attendances, student.login)
             elif choice == '2':
-                attendance_controller.insert_late(canvas.attendances, student.login)
+                attendance_controller.insert_late(Attendance.attendances, student.login)
             elif choice == '3':
-                attendance_controller.insert_presence(canvas.attendances, student.login)
+                attendance_controller.insert_presence(Attendance.attendances, student.login)
             elif choice not in ['1', '2', '3']:
                 mentor_view.print_bad_choice()
         index += 1

@@ -1,7 +1,6 @@
 from datetime import datetime
 from models.mentor_model import Mentor
 from models.student_model import Student
-from models.canvas_model import Canvas
 from models.submission_model import Submission
 
 def print_welcome(user):
@@ -203,13 +202,13 @@ def get_int(message):
             print('Wrong input!')
 
 
-def show_logins(canvas):
+def show_logins():
     '''
     Prints all student logins.
 
     Paramaters
     ----------
-    canvas = object of Canvas class
+    None
 
     Returns
     -------
@@ -217,17 +216,17 @@ def show_logins(canvas):
     '''
 
     print('\nLogin list: ')
-    for user in canvas.students:
+    for user in Student.students:
         print('-> {}'.format(user.login))
 
 
-def show_submissions(canvas):
+def show_submissions():
     '''
     Prints all submissions title and author.
 
     Paramaters
     ----------
-    canvas = object of Canvas class
+    None
 
     Returns
     -------
@@ -237,7 +236,7 @@ def show_submissions(canvas):
 
     print('\nSubmissions list: \n')
     index = 0
-    for submission in canvas.submissions:
+    for submission in Submission.submissions:
         if submission.is_checked == 'True':
             print('{}.Student -> {} | Submission title -> {} (Already rated)'.format(
                 index, submission.user_login, submission.title))
@@ -247,34 +246,34 @@ def show_submissions(canvas):
         index += 1
 
 
-def get_submission(canvas):
+def get_submission():
     '''
     Asks for submission index, and pick chosen submission.
 
     Paramaters
     ----------
-    canvas = object of Canvas class
+    None
 
     Returns
     -------
-    canvas.submissions[submission_index] = object of Submission class
+    Submission.submissions[submission_index] = object of Submission class
     '''
 
     submission_index = get_int('Pick submission index: ')
-    while submission_index not in range(len(canvas.submissions)):
+    while submission_index not in range(len(Submission.submissions)):
         print('There is no such submission index')
         submission_index = get_int('Pick submission index: ')
 
-    return canvas.submissions[submission_index]
+    return Submission.submissions[submission_index]
 
 
-def show_fullnames(canvas):
+def show_fullnames():
     '''
     Shows all students full names.
 
     Paramaters
     ----------
-    canvas = object of Canvas class
+    None
 
     Returns
     -------
@@ -283,7 +282,7 @@ def show_fullnames(canvas):
 
     index = 0
     print('\nPresence List: \n')
-    for user in canvas.students:
+    for user in Student.students:
         print('{} -> {} {}'.format(index, user.name, user.surname))
         index += 1
 
