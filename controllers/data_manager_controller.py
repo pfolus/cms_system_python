@@ -34,19 +34,19 @@ def load_submissions_list_csv():
             line[4] = int(line[4])
             submissions.append(line)
 
-    create_and_add_submissions_objects(submissions, canvas)
+    create_and_add_submissions_objects(submissions)
 
 
-def create_and_add_submissions_objects(submissions, canvas):
+def create_and_add_submissions_objects(submissions):
 
     for item in submissions:
         if item[5] == 'False':
-            canvas.submissions.append(Submission(item[0], item[1], item[2], item[3], item[4], ''))
+            Submission(item[0], item[1], item[2], item[3], item[4], '')
         else:
-            canvas.submissions.append(Submission(item[0], item[1], item[2], item[3], item[4], item[5]))
+            Submission(item[0], item[1], item[2], item[3], item[4], item[5])
 
 
-def load_assingments_list_csv(canvas):
+def load_assingments_list_csv():
 
     with open('csv_databases/assingments.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
