@@ -97,44 +97,30 @@ def create_codecoolers_objects(codecoolers_list, canvas):
 
     for user in codecoolers_list:
         if user[TYPE_INDEX] == "Student":
-            add_user_to_list(canvas, Student(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+            Student(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX])
         if user[TYPE_INDEX] == "Manager":
-            add_user_to_list(canvas, Manager(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+            Manager(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX])
         elif user[TYPE_INDEX] == "Accountant":
-            add_user_to_list(canvas, Accountant(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+            Accountant(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX])
         elif user[TYPE_INDEX] == "Mentor":
-            add_user_to_list(canvas, Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+            Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX])
 
 
-def add_user_to_list(canvas, user):
+def export_data_to_csv():
 
-    class_name = user.__class__.__name__
-
-    if class_name == "Student":
-        canvas.students.append(user)
-    elif class_name == "Mentor":
-        canvas.mentors.append(user)
-    elif class_name == "Accountant":
-        canvas.accountants.append(user)
-    elif class_name == "Manager":
-        canvas.managers.append(user)
-
-
-def export_data_to_csv(canvas):
-
-    export_submissions(canvas.submissions)
-    export_assingments(canvas.assingments)
-    save_atendances_list_csv(canvas)
-    codecoolers = canvas.mentors + canvas.managers + canvas.students + canvas.accountants
+    export_submissions()
+    export_assingments()
+    save_atendances_list_csv()
+    codecoolers = Mentor.mentors + Manager.managers + Student.students + Accountant.accountants
     export_codecooler(codecoolers)
 
 
-def export_submissions(submissions):
+def export_submissions():
 
     with open('csv_databases/submissions.csv', 'w') as file:
 
         writer = csv.writer(file, delimiter='|')
-        for submission in submissions:
+        for submission in Submission.submissions:
             if submission.is_checked:
                 writer.writerow([submission.user_login,
                                 submission.title,
