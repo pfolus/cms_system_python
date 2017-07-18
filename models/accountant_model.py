@@ -11,5 +11,13 @@ class Accountant(Employee):
         name - string
         surname - string
     '''
+
+    accountants = []
+
     def __init__(self, login, password, name, surname):
         super().__init__(login, password, name, surname)
+        Accountant.add_to_list(self)
+
+    @classmethod
+    def add_to_list(cls, object):
+        cls.accountants.append(object)
