@@ -69,10 +69,10 @@ def create_and_add_assingments_objects(assingments):
     MAXGRADE_INDEX = 3
 
     for item in assingments:
-        canvas.assingments.append(Assingment(item[0], item[1], item[2], item[3]))
+        Assingment(item[0], item[1], item[2], item[3])
 
 
-def load_codecoolers_list_csv(canvas):
+def load_codecoolers_list_csv():
 
     with open('csv_databases/codecoolers_list.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
