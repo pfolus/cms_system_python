@@ -47,15 +47,15 @@ def login(canvas):
     return None, False
 
 
-def run_controller(user, canvas):
+def run_controller(user):
 
     class_name = user.__class__.__name__
 
     if class_name == 'Student':
-        student_controller.start_controller(canvas, user)
+        student_controller.start_controller(user)
     if class_name == 'Mentor':
-        mentor_controller.start_controller(canvas, user)
+        mentor_controller.start_controller(user)
     if class_name == 'Accountant':
-        accountant_controller.start_controller(canvas, user)
+        accountant_controller.start_controller(user)
     if class_name == 'Manager':
-        manager_controller.start_controller(canvas, user)
+        manager_controller.start_controller(user)
