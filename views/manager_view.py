@@ -1,7 +1,3 @@
-from views.employee_view import *
-from views.codecooler_view import *
-
-
 def print_menu():
     '''
     Prints manager submenu
