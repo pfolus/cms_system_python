@@ -1,4 +1,7 @@
-from models.canvas_model import Canvas
+from models.manager_model import Manager
+from models.student_model import Student
+from models.mentor_model import Mentor
+from models.accountant_model import Accountant
 from views import canvas_view
 from controllers import manager_controller
 from controllers import student_controller
@@ -8,24 +11,23 @@ from controllers import data_manager_controller
 
 
 def start_controller():
-    canvas = Canvas()
     try:
-        data_manager_controller.load_codecoolers_list_csv(canvas)
-        data_manager_controller.load_assingments_list_csv(canvas)
-        data_manager_controller.load_submissions_list_csv(canvas)
-        data_manager_controller.load_attendances_list_csv(canvas)
+        data_manager_controller.load_codecoolers_list_csv()
+        data_manager_controller.load_assingments_list_csv()
+        data_manager_controller.load_submissions_list_csv()
+        data_manager_controller.load_attendances_list_csv()
     except FileNotFoundError:
         canvas_view.print_file_not_found_error()
         return False
     canvas_view.show_login_menu()
     logged_in = False
     while not logged_in:
-        user, logged_in = login(canvas)
-    run_controller(user, canvas)
-    data_manager_controller.export_data_to_csv(canvas)
+        user, logged_in = login()
+    run_controller(user)
+    data_manager_controller.export_data_to_csv()
 
 
-def login(canvas):
+def login():
 
     login = canvas_view.get_login()
     password = canvas_view.get_password()
@@ -33,7 +35,7 @@ def login(canvas):
     LOGIN_INDEX = 0
     PASSWORD_INDEX = 1
 
-    summary_list = canvas.mentors + canvas.managers + canvas.students + canvas.accountants
+    summary_list = Mentor.mentors + Manager.managers + Student.students + Accountant.accountants
 
     for user in summary_list:
         if user.login == login and user.password == password:
@@ -43,15 +45,15 @@ def login(canvas):
     return None, False
 
 
-def run_controller(user, canvas):
+def run_controller(user):
 
     class_name = user.__class__.__name__
 
     if class_name == 'Student':
-        student_controller.start_controller(canvas, user)
+        student_controller.start_controller(user)
     if class_name == 'Mentor':
-        mentor_controller.start_controller(canvas, user)
+        mentor_controller.start_controller(user)
     if class_name == 'Accountant':
-        accountant_controller.start_controller(canvas, user)
+        accountant_controller.start_controller(user)
     if class_name == 'Manager':
-        manager_controller.start_controller(canvas, user)
+        manager_controller.start_controller(user)

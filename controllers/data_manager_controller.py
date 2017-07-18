@@ -9,7 +9,7 @@ from models.submission_model import Submission
 from models.attendance_model import Attendance
 
 
-def load_attendances_list_csv(canvas):
+def load_attendances_list_csv():
 
     with open('csv_databases/attendances.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -17,14 +17,12 @@ def load_attendances_list_csv(canvas):
         for line in reader:
             login = line[0]
             average = line[1]
-            try:
-                attendances = [float(number) for number in line[2].split(",")]
-            except ValueError:
-                attendances = []
-            canvas.attendances.append(Attendance(login, attendances, average))
+            date = datetime.datetime.strptime(line[2], '%d.%m.%Y')
+
+            Attendance(login, value, date)
 
 
-def load_submissions_list_csv(canvas):
+def load_submissions_list_csv():
 
     with open('csv_databases/submissions.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -36,19 +34,19 @@ def load_submissions_list_csv(canvas):
             line[4] = int(line[4])
             submissions.append(line)
 
-    create_and_add_submissions_objects(submissions, canvas)
+    create_and_add_submissions_objects(submissions)
 
 
-def create_and_add_submissions_objects(submissions, canvas):
+def create_and_add_submissions_objects(submissions):
 
     for item in submissions:
         if item[5] == 'False':
-            canvas.submissions.append(Submission(item[0], item[1], item[2], item[3], item[4], ''))
+            Submission(item[0], item[1], item[2], item[3], item[4], '')
         else:
-            canvas.submissions.append(Submission(item[0], item[1], item[2], item[3], item[4], item[5]))
+            Submission(item[0], item[1], item[2], item[3], item[4], item[5])
 
 
-def load_assingments_list_csv(canvas):
+def load_assingments_list_csv():
 
     with open('csv_databases/assingments.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -60,10 +58,10 @@ def load_assingments_list_csv(canvas):
             line[3] = int(line[3])
             assingments.append(line)
 
-    create_and_add_assingments_objects(assingments, canvas)
+    create_and_add_assingments_objects(assingments)
 
 
-def create_and_add_assingments_objects(assingments, canvas):
+def create_and_add_assingments_objects(assingments):
 
     TITLE_INDEX = 0
     CONTENT_INDEX = 1
@@ -71,10 +69,10 @@ def create_and_add_assingments_objects(assingments, canvas):
     MAXGRADE_INDEX = 3
 
     for item in assingments:
-        canvas.assingments.append(Assingment(item[0], item[1], item[2], item[3]))
+        Assingment(item[0], item[1], item[2], item[3])
 
 
-def load_codecoolers_list_csv(canvas):
+def load_codecoolers_list_csv():
 
     with open('csv_databases/codecoolers_list.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -84,10 +82,10 @@ def load_codecoolers_list_csv(canvas):
         for line in reader:
             codecoolers_list.append(line)
 
-    create_codecoolers_objects(codecoolers_list, canvas)
+    create_codecoolers_objects(codecoolers_list)
 
 
-def create_codecoolers_objects(codecoolers_list, canvas):
+def create_codecoolers_objects(codecoolers_list):
 
     LOGIN_INDEX = 0
     PASSWORD_INDEX = 1
@@ -99,44 +97,30 @@ def create_codecoolers_objects(codecoolers_list, canvas):
 
     for user in codecoolers_list:
         if user[TYPE_INDEX] == "Student":
-            add_user_to_list(canvas, Student(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+            Student(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX])
         if user[TYPE_INDEX] == "Manager":
-            add_user_to_list(canvas, Manager(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+            Manager(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX])
         elif user[TYPE_INDEX] == "Accountant":
-            add_user_to_list(canvas, Accountant(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+            Accountant(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX])
         elif user[TYPE_INDEX] == "Mentor":
-            add_user_to_list(canvas, Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX]))
+            Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX])
 
 
-def add_user_to_list(canvas, user):
+def export_data_to_csv():
 
-    class_name = user.__class__.__name__
-
-    if class_name == "Student":
-        canvas.students.append(user)
-    elif class_name == "Mentor":
-        canvas.mentors.append(user)
-    elif class_name == "Accountant":
-        canvas.accountants.append(user)
-    elif class_name == "Manager":
-        canvas.managers.append(user)
-
-
-def export_data_to_csv(canvas):
-
-    export_submissions(canvas.submissions)
-    export_assingments(canvas.assingments)
-    save_atendances_list_csv(canvas)
-    codecoolers = canvas.mentors + canvas.managers + canvas.students + canvas.accountants
+    export_submissions()
+    export_assingments()
+    save_atendances_list_csv()
+    codecoolers = Mentor.mentors + Manager.managers + Student.students + Accountant.accountants
     export_codecooler(codecoolers)
 
 
-def export_submissions(submissions):
+def export_submissions():
 
     with open('csv_databases/submissions.csv', 'w') as file:
 
         writer = csv.writer(file, delimiter='|')
-        for submission in submissions:
+        for submission in Submission.submissions:
             if submission.is_checked:
                 writer.writerow([submission.user_login,
                                 submission.title,
@@ -153,12 +137,12 @@ def export_submissions(submissions):
                                 'False'])
 
 
-def export_assingments(assingments):
+def export_assingments():
 
     with open('csv_databases/assingments.csv', 'w') as file:
 
         writer = csv.writer(file, delimiter='|')
-        for assingment in assingments:
+        for assingment in Assingment.assingments:
             writer.writerow([assingment.title,
                              assingment.content,
                              assingment.date.strftime('%d.%m.%Y'),
@@ -177,12 +161,12 @@ def export_codecooler(codecoolers):
                             codecooler.__class__.__name__])
 
 
-def save_atendances_list_csv(canvas):
+def save_atendances_list_csv():
 
     with open('csv_databases/attendances.csv', 'w') as file:
         writer = csv.writer(file, delimiter='|')
 
-        for attendance in canvas.attendances:
+        for attendance in Attendance.attendances:
             writer.writerow([attendance.student_login,
                              attendance.average,
                              ",".join([str(number) for number in attendance.student_attendances])])
