@@ -5,7 +5,7 @@ class Attendance:
 
     attendances = []
 
-    def __init__(self, student_login, value):
+    def __init__(self, student_login, value, date=datetime.today()):
         '''
         Initializes Attendance object
         Args:
@@ -15,7 +15,7 @@ class Attendance:
         '''
         self.student_login = student_login
         self.value = value
-        self.date = datetime.today()
+        self.date = date
         Attendance.add_to_list(self)
 
     @classmethod
