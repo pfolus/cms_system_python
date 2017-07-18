@@ -2,9 +2,10 @@ from views import manager_view
 from views import codecooler_view
 from views import employee_view
 from models.mentor_model import Mentor
+from models.student_model import Student
 
 
-def start_controller(canvas, user):
+def start_controller(user):
     '''
     Welcomes user, shows menu and asks
     to choose a function
@@ -26,12 +27,12 @@ def start_controller(canvas, user):
         manager_view.print_menu()
         try:
             option = manager_view.ask_for_option()
-            choose_option(option, canvas, user)
+            choose_option(option, user)
         except KeyError:
             manager_view.option_error()
 
 
-def choose_option(user_input, canvas, user):
+def choose_option(user_input, user):
     '''
     Runs appropriate functions, based on user choice.
 
@@ -43,24 +44,27 @@ def choose_option(user_input, canvas, user):
     '''
 
     if user_input == "1":
-        manager_view.show_mentors(canvas.mentors)
+        manager_view.show_mentors(Mentor.mentors)
     elif user_input == "2":
-        manager_view.show_mentors_with_details(canvas.mentors)
+        manager_view.show_mentors_with_details(Mentor.mentors)
     elif user_input == "3":
-        add_mentor(canvas.mentors)
+        add_mentor()
     elif user_input == "4":
-        remove_mentor(canvas.mentors)
+        remove_mentor()
     elif user_input == "5":
-        employee_view.show_students_list(canvas.students)
+        employee_view.show_students_list(Student.students)
     elif user_input == "6":
-        employee_view.show_students_list_detailed(canvas)
+        employee_view.show_students_list_detailed(Student.students,
+                                                  Attendance.attendances,
+                                                  Assingment.assingments,
+                                                  Submission.submissions)
     elif user_input == "0":
         return user_input
     else:
         raise KeyError
 
 
-def add_mentor(mentors):
+def add_mentor():
     '''
     Takes user_inputs and appends mentors list with Mentor object
     '''
@@ -70,18 +74,18 @@ def add_mentor(mentors):
     name = manager_view.ask_name()
     surname = manager_view.ask_surname()
 
-    mentors.append(Mentor(login, password, name, surname))
+    Mentor(login, password, name, surname)
 
 
-def remove_mentor(mentors):
+def remove_mentor():
     '''
     Removes mentor instance with index entered by user from mentors list
     '''
 
-    manager_view.show_mentors(mentors)
+    manager_view.show_mentors(Mentor.mentors)
 
     try:
         index = manager_view.ask_for_index()
-        del mentors[index]
+        del Mentor.mentors[index]
     except IndexError:
         manager_view.option_error()
