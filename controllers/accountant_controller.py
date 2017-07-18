@@ -1,6 +1,6 @@
-from views.accountant_view import *
-from views.codecooler_view import *
-from views.employee_view import *
+from views import accountant_view
+from views import codecooler_view
+from views import employee_view
 
 
 def start_controller(canvas, user):
@@ -18,14 +18,14 @@ def start_controller(canvas, user):
     None
     '''
     exit = 0
-    greet(user)
+    codecooler_view.greet(user)
     choice = ''
 
     while choice != exit:
-        show_menu()
-        choice = choose_function()
+        accountant_view.show_menu()
+        choice = accountant_view.choose_function()
 
         if choice == 1:
-            show_students_list(canvas.students)
+            employee_view.show_students_list(canvas.students)
         elif choice == 2:
-            show_students_list_detailed(canvas)
+            employee_view.show_students_list_detailed(canvas)
