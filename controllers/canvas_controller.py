@@ -11,7 +11,6 @@ from controllers import data_manager_controller
 
 
 def start_controller():
-    canvas = Canvas()
     try:
         data_manager_controller.load_codecoolers_list_csv()
         data_manager_controller.load_assingments_list_csv()

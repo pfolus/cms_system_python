@@ -77,7 +77,7 @@ def run_submission_functions(user):
     -------
     None
     '''
-    number = student_view.shows(Assingment.assingments)
+    number = student_view.show_assingments(Assingment.assingments)
     chosen_assingment = choose_assingment(number)
     check_if_submitted(chosen_assingment.title, user.login)
     is_graded = check_if_graded(chosen_assingment.title, user.login)

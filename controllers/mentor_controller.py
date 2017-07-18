@@ -32,7 +32,7 @@ def start_controller(user):
         choice = mentor_view.get_choice()
 
         if choice == '1':
-            employee_view.show_students_list_detailed()
+            employee_view.show_students_list_detailed(Student.students, Attendance.attendances, Assingment.assingments, Submission.submissions)
         elif choice == '2':
             add_assingment()
         elif choice == '3':

@@ -3,6 +3,9 @@ from views import codecooler_view
 from views import employee_view
 from models.mentor_model import Mentor
 from models.student_model import Student
+from models.attendance_model import Attendance
+from models.assingment_model import Assingment
+from models.submission_model import Submission
 
 
 def start_controller(user):
