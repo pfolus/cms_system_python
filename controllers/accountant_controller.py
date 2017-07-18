@@ -30,6 +30,6 @@ def start_controller(canvas, user):
         choice = accountant_view.choose_function()
 
         if choice == 1:
-            employee_view.show_students_list(canvas.students)
+            employee_view.show_students_list(students)
         elif choice == 2:
-            employee_view.show_students_list_detailed(canvas)
+            employee_view.show_students_list_detailed(students, attendances, assingments, submissions)
