@@ -177,12 +177,12 @@ def export_codecooler(codecoolers):
                             codecooler.__class__.__name__])
 
 
-def save_atendances_list_csv(canvas):
+def save_atendances_list_csv():
 
     with open('csv_databases/attendances.csv', 'w') as file:
         writer = csv.writer(file, delimiter='|')
 
-        for attendance in canvas.attendances:
+        for attendance in Attendance.attendances:
             writer.writerow([attendance.student_login,
                              attendance.average,
                              ",".join([str(number) for number in attendance.student_attendances])])
