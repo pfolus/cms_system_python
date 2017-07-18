@@ -1,6 +1,5 @@
-from views.assingment_view import *
+from views import assingment_view
 from views.bcolors import Bcolors
-from views.codecooler_view import *
 
 
 def show_menu():
@@ -48,7 +47,7 @@ def show_assingments(assingments):
     amount_of_assingments = 0
     print(Bcolors.BLUE + '\nAll assingments:\n' + Bcolors.ENDC)
     for assingment in assingments:
-        show_assingment(assingment, amount_of_assingments)
+        assingment_view.show_assingment(assingment, amount_of_assingments)
         amount_of_assingments += 1
 
     return amount_of_assingments

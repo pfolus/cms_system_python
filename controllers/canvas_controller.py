@@ -1,7 +1,5 @@
-from models.codecooler_model import *
 from models.canvas_model import Canvas
-from views.codecooler_view import *
-from views.canvas_view import *
+from views import canvas_view
 from controllers import manager_controller
 from controllers import student_controller
 from controllers import accountant_controller
@@ -17,9 +15,9 @@ def start_controller():
         data_manager_controller.load_submissions_list_csv(canvas)
         data_manager_controller.load_attendances_list_csv(canvas)
     except FileNotFoundError:
-        print_file_not_found_error()
+        canvas_view.print_file_not_found_error()
         return False
-    show_login_menu()
+    canvas_view.show_login_menu()
     logged_in = False
     while not logged_in:
         user, logged_in = login(canvas)
@@ -29,8 +27,8 @@ def start_controller():
 
 def login(canvas):
 
-    login = get_login()
-    password = get_password()
+    login = canvas_view.get_login()
+    password = canvas_view.get_password()
 
     LOGIN_INDEX = 0
     PASSWORD_INDEX = 1
@@ -41,7 +39,7 @@ def login(canvas):
         if user.login == login and user.password == password:
             return user, True
 
-    wrong_user()
+    canvas_view.wrong_user()
     return None, False
 
 

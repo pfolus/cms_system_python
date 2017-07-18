@@ -1,7 +1,5 @@
-from controllers.mentor_controller import *
-from models.mentor_model import Mentor
-from views.employee_view import *
 from datetime import datetime
+from models.mentor_model import Mentor
 from models.student_model import Student
 from models.canvas_model import Canvas
 from models.submission_model import Submission
@@ -56,7 +54,7 @@ def print_bad_choice():
 
 
 def get_login():
-    ''' 
+    '''
     asks for login until its longer than 5 characters
 
     Returns
@@ -73,8 +71,8 @@ def get_login():
 
 
 def get_password():
-    ''' 
-    asks for password until its longer than 5 characters and have 
+    '''
+    asks for password until its longer than 5 characters and have
     at least 1 digit
 
     Returns
@@ -91,8 +89,8 @@ def get_password():
 
 
 def get_name():
-    ''' 
-    asks for name until its longer than 3 characters. Checks if 
+    '''
+    asks for name until its longer than 3 characters. Checks if
     name have digits, if so it asks again.
 
     Returns
@@ -110,8 +108,8 @@ def get_name():
 
 
 def get_surname():
-    ''' 
-    asks for surname until its longer than 3 characters. Checks if 
+    '''
+    asks for surname until its longer than 3 characters. Checks if
     name have digits, if so it asks again.
 
     Returns
@@ -129,7 +127,7 @@ def get_surname():
 
 
 def has_digit(item):
-    ''' 
+    '''
     Checks if item has digit.
 
     Paramaters
@@ -166,7 +164,7 @@ def get_string(item):
 
 
 def get_date():
-    ''' 
+    '''
     Asks for date until date with correct format passed.
     If not, prints error message.
 
@@ -185,7 +183,7 @@ def get_date():
 
 
 def get_int(message):
-    ''' 
+    '''
     Asks for input until digits provided. Otherwise,
     error massage printed.
 
@@ -206,7 +204,7 @@ def get_int(message):
 
 
 def show_logins(canvas):
-    ''' 
+    '''
     Prints all student logins.
 
     Paramaters
@@ -224,7 +222,7 @@ def show_logins(canvas):
 
 
 def show_submissions(canvas):
-    ''' 
+    '''
     Prints all submissions title and author.
 
     Paramaters
@@ -250,7 +248,7 @@ def show_submissions(canvas):
 
 
 def get_submission(canvas):
-    ''' 
+    '''
     Asks for submission index, and pick chosen submission.
 
     Paramaters

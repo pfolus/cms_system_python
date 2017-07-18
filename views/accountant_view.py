@@ -1,6 +1,3 @@
-from views.codecooler_view import *
-
-
 def show_menu():
     menu = ['1. Show list of students',
             '2. Show detailed list of students',
