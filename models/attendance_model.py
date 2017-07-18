@@ -1,9 +1,13 @@
+from datetime import datetime
+
+
 class Attendance:
+
+    attendances = []
 
     def __init__(self, student_login, value):
         '''
         Initializes Attendance object
-
         Args:
             student_login - string
             student_attendances - list with ints

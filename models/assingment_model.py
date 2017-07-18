@@ -1,5 +1,7 @@
 class Assingment:
 
+    assingments = []
+
     def __init__(self, title, content, date, max_grade):
         '''
         Initializes Assignment instance
@@ -14,3 +16,8 @@ class Assingment:
         self.content = content
         self.date = date
         self.max_grade = max_grade
+        Assingment.add_to_list(self)
+
+    @classmethod
+    def add_to_list(cls, object):
+        cls.assingments.append(object)
