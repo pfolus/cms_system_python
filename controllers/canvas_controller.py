@@ -37,7 +37,7 @@ def login():
     LOGIN_INDEX = 0
     PASSWORD_INDEX = 1
 
-    summary_list = canvas.mentors + canvas.managers + canvas.students + canvas.accountants
+    summary_list = Mentor.mentors + Manager.managers + Student.students + Accountant.accountants
 
     for user in summary_list:
         if user.login == login and user.password == password:
