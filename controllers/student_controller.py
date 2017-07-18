@@ -2,7 +2,7 @@ from views import student_view
 from views import codecooler_view
 from views import submission_view
 from models.submission_model import Submission
-from models.assignment_model import Assignment
+from models.assingment_model import Assingment
 
 
 def start_controller(user):
@@ -77,7 +77,7 @@ def run_submission_functions(user):
     -------
     None
     '''
-    number = student_view.show_assingments(Assingment.assingments)
+    number = student_view.shows(Assingment.assingments)
     chosen_assingment = choose_assingment(number)
     check_if_submitted(chosen_assingment.title, user.login)
     is_graded = check_if_graded(chosen_assingment.title, user.login)
