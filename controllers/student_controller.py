@@ -1,6 +1,6 @@
-from views.student_view import *
-from views.codecooler_view import *
-from views.submission_view import *
+from views import student_view
+from views import codecooler_view
+from views import submission_view
 from models.canvas_model import Canvas
 from models.submission_model import Submission
 
@@ -21,11 +21,11 @@ def start_controller(canvas, user):
     '''
     choice = ''
     EXIT = 0
-    greet(user)
+    codecooler_view.greet(user)
 
     while choice != EXIT:
-        show_menu()
-        choice = choose_function()
+        student_view.show_menu()
+        choice = student_view.choose_function()
         choice = run_chosen_function(choice, canvas, user)
 
 
@@ -61,7 +61,7 @@ def run_grades_functions(canvas, user):
     None
     '''
     grades_sum, max_grades_sum, amount_of_grades = calculate_grades(canvas.assingments, canvas.submissions, user.login)
-    show_grades_info(grades_sum, max_grades_sum, amount_of_grades)
+    student_view.show_grades_info(grades_sum, max_grades_sum, amount_of_grades)
 
 
 def run_submission_functions(canvas, user):
@@ -77,7 +77,7 @@ def run_submission_functions(canvas, user):
     -------
     None
     '''
-    number = show_assingments(canvas.assingments)
+    number = student_view.show_assingments(canvas.assingments)
     chosen_assingment = choose_assingment(number, canvas.assingments)
     check_if_submitted(chosen_assingment.title, canvas.submissions, user.login)
     is_graded = check_if_graded(chosen_assingment.title, canvas.submissions, user.login)
@@ -85,7 +85,7 @@ def run_submission_functions(canvas, user):
     if not is_graded:
         new_sub = add_submission(chosen_assingment, canvas.submissions, user)
         add_new_sub_to_list(canvas, new_sub)
-        info_submission_added()
+        student_view.info_submission_added()
 
 
 def calculate_grades(assingments, submissions, user_login):
@@ -141,9 +141,9 @@ def choose_assingment(number, assingments):
     while choice not in possible_choices:
 
         try:
-            choice = get_assingment_number()
+            choice = student_view.get_assingment_number()
         except ValueError:
-            error_number()
+            student_view.error_number()
 
     chosen_assingment = assingments[choice]
 
@@ -169,8 +169,8 @@ def check_if_submitted(assingment_name, submissions, user_login):
     '''
     for submission in submissions:
         if submission.title == assingment_name and submission.user_login == user_login:
-            print_assingment_done()
-            show_sub(submission)
+            student_view.print_assingment_done()
+            submission_view.show_sub(submission)
 
 
 def check_if_graded(assingment_name, submissions, user_name):
@@ -199,7 +199,7 @@ def add_submission(assingment, submissions, user):
     -------
     new_sub = obj of Submission class
     '''
-    answer = get_answer()
+    answer = student_view.get_answer()
     for submission in submissions:
         if assingment.title == submission.title and user.login == submission.user_login:
             submissions.remove(submission)
