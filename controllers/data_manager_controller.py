@@ -58,10 +58,10 @@ def load_assingments_list_csv():
             line[3] = int(line[3])
             assingments.append(line)
 
-    create_and_add_assingments_objects(assingments, canvas)
+    create_and_add_assingments_objects(assingments)
 
 
-def create_and_add_assingments_objects(assingments, canvas):
+def create_and_add_assingments_objects(assingments):
 
     TITLE_INDEX = 0
     CONTENT_INDEX = 1
