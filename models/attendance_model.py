@@ -1,9 +1,4 @@
-from datetime import datetime
-
-
 class Attendance:
-
-    attendances = []
 
     def __init__(self, student_login, value):
         '''
@@ -11,8 +6,8 @@ class Attendance:
 
         Args:
             student_login - string
-            value - float
-            date - datetime object
+            student_attendances - list with ints
+            average - float
         '''
         self.student_login = student_login
         self.value = value
