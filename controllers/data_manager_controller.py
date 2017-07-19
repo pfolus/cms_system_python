@@ -8,12 +8,15 @@ from models.assingment_model import Assingment
 from models.submission_model import Submission
 from models.attendance_model import Attendance
 from models.shoutbox_model import Shoutbox
+from models.event_model import Event
+from controllers import event_controller
 
 
 def load_data_from_csv():
 
-    load_codecoolers()
     load_assingments()
+    load_codecoolers()
+    load_events()
     load_submissions()
     load_attendances()
 
@@ -26,6 +29,7 @@ def export_data_to_csv():
     codecoolers = Mentor.mentors + Manager.managers + Student.students + Accountant.accountants
     export_codecoolers(codecoolers)
     export_shoutbox_messages()
+    export_events()
 
 
 def load_attendances():
