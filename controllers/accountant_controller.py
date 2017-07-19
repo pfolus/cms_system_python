@@ -2,6 +2,7 @@ from views import accountant_view
 from views import codecooler_view
 from views import employee_view
 from views import shoutbox_view
+from views import event_view
 from models.attendance_model import Attendance
 from models.student_model import Student
 from models.assingment_model import Assingment
@@ -43,3 +44,7 @@ def start_controller(user):
             os.system('clear')
             shoutbox_view.show_shoutbox_panel()
             shoutbox_view.enter_message(user.login)
+        elif choice == 5:
+            employee_controller.add_event()
+        elif choice == 6:
+            event_view.show_calendar(user.login)
