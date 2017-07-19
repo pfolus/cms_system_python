@@ -7,6 +7,7 @@ from models.accountant_model import Accountant
 from models.assingment_model import Assingment
 from models.submission_model import Submission
 from models.attendance_model import Attendance
+from models.shoutbox_model import Shoutbox
 
 
 def load_attendances_list_csv():
@@ -113,6 +114,7 @@ def export_data_to_csv():
     save_atendances_list_csv()
     codecoolers = Mentor.mentors + Manager.managers + Student.students + Accountant.accountants
     export_codecooler(codecoolers)
+    export_shoutbox_messages()
 
 
 def export_submissions():
@@ -170,3 +172,29 @@ def save_atendances_list_csv():
             writer.writerow([attendance.student_login,
                              attendance.average,
                              ",".join([str(number) for number in attendance.student_attendances])])
+
+
+def export_shoutbox_messages():
+
+    with open('csv_databases/shoutbox.csv', 'w') as file:
+
+        writer = csv.writer(file, delimiter='|')
+        for message in Shoutbox.messages:
+            writer.writerow([message.date.strftime('%d.%m.%y/%H:%M'),
+                             message.author,
+                             message.message])
+
+
+def load_shoutbox_messages():
+
+    with open('csv_databases/shoutbox.csv', 'r') as file:
+        reader = csv.reader(file, delimiter='|')
+
+        messages = []
+
+        for line in reader:
+            line[0] = datetime.datetime.strptime(line[0], '%d.%m.%y/%H:%M')
+            messages.append(line)
+
+    for item in messages:
+        Shoutbox(item[0], item[1], item[2])
