@@ -11,18 +11,23 @@ from controllers import data_manager_controller
 
 
 def start_controller():
+
     try:
-        data_manager_controller.load_codecoolers_list_csv()
-        data_manager_controller.load_assingments_list_csv()
-        data_manager_controller.load_submissions_list_csv()
-        data_manager_controller.load_attendances_list_csv()
+        data_manager_controller.load_shoutbox_messages()
+    except FileNotFoundError:
+        pass
+    try:
+        data_manager_controller.load_data_from_csv()
     except FileNotFoundError:
         canvas_view.print_file_not_found_error()
         return False
+
     canvas_view.show_login_menu()
+
     logged_in = False
     while not logged_in:
         user, logged_in = login()
+
     run_controller(user)
     data_manager_controller.export_data_to_csv()
 
@@ -42,6 +47,7 @@ def login():
             return user, True
 
     canvas_view.wrong_user()
+
     return None, False
 
 

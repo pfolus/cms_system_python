@@ -7,22 +7,41 @@ from models.accountant_model import Accountant
 from models.assingment_model import Assingment
 from models.submission_model import Submission
 from models.attendance_model import Attendance
+from models.shoutbox_model import Shoutbox
 
 
-def load_attendances_list_csv():
+def load_data_from_csv():
+
+    load_codecoolers()
+    load_assingments()
+    load_submissions()
+    load_attendances()
+
+
+def export_data_to_csv():
+
+    export_submissions()
+    export_assingments()
+    export_attendances()
+    codecoolers = Mentor.mentors + Manager.managers + Student.students + Accountant.accountants
+    export_codecoolers(codecoolers)
+    export_shoutbox_messages()
+
+
+def load_attendances():
 
     with open('csv_databases/attendances.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
 
         for line in reader:
             login = line[0]
-            average = line[1]
+            value = float(line[1])
             date = datetime.datetime.strptime(line[2], '%d.%m.%Y')
 
             Attendance(login, value, date)
 
 
-def load_submissions_list_csv():
+def load_submissions():
 
     with open('csv_databases/submissions.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -46,7 +65,7 @@ def create_and_add_submissions_objects(submissions):
             Submission(item[0], item[1], item[2], item[3], item[4], item[5])
 
 
-def load_assingments_list_csv():
+def load_assingments():
 
     with open('csv_databases/assingments.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -72,7 +91,7 @@ def create_and_add_assingments_objects(assingments):
         Assingment(item[0], item[1], item[2], item[3])
 
 
-def load_codecoolers_list_csv():
+def load_codecoolers():
 
     with open('csv_databases/codecoolers_list.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -105,14 +124,6 @@ def create_codecoolers_objects(codecoolers_list):
         elif user[TYPE_INDEX] == "Mentor":
             Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX])
 
-
-def export_data_to_csv():
-
-    export_submissions()
-    export_assingments()
-    save_atendances_list_csv()
-    codecoolers = Mentor.mentors + Manager.managers + Student.students + Accountant.accountants
-    export_codecooler(codecoolers)
 
 
 def export_submissions():
@@ -149,7 +160,7 @@ def export_assingments():
                              str(assingment.max_grade)])
 
 
-def export_codecooler(codecoolers):
+def export_codecoolers(codecoolers):
     with open('csv_databases/codecoolers_list.csv', 'w') as file:
 
         writer = csv.writer(file, delimiter='|')
@@ -161,12 +172,38 @@ def export_codecooler(codecoolers):
                             codecooler.__class__.__name__])
 
 
-def save_atendances_list_csv():
+def export_attendances():
 
     with open('csv_databases/attendances.csv', 'w') as file:
         writer = csv.writer(file, delimiter='|')
 
         for attendance in Attendance.attendances:
             writer.writerow([attendance.student_login,
-                             attendance.average,
-                             ",".join([str(number) for number in attendance.student_attendances])])
+                             str(attendance.value),
+                             attendance.date.strftime('%d.%m.%Y')])
+
+
+def export_shoutbox_messages():
+
+    with open('csv_databases/shoutbox.csv', 'w') as file:
+
+        writer = csv.writer(file, delimiter='|')
+        for message in Shoutbox.messages:
+            writer.writerow([message.date.strftime('%d.%m.%y/%H:%M'),
+                             message.author,
+                             message.message])
+
+
+def load_shoutbox_messages():
+
+    with open('csv_databases/shoutbox.csv', 'r') as file:
+        reader = csv.reader(file, delimiter='|')
+
+        messages = []
+
+        for line in reader:
+            line[0] = datetime.datetime.strptime(line[0], '%d.%m.%y/%H:%M')
+            messages.append(line)
+
+    for item in messages:
+        Shoutbox(item[0], item[1], item[2])

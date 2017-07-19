@@ -9,7 +9,8 @@ def print_menu():
 4. Remove mentor
 5. List students
 6. List students with details
-7. Change password
+7. Shoutbox message
+8. Change password
 0. Log out
 ''')
 

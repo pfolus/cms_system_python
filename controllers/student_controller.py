@@ -1,9 +1,11 @@
 from views import student_view
 from views import codecooler_view
 from views import submission_view
+from views import shoutbox_view
 from models.submission_model import Submission
 from models.assingment_model import Assingment
 from controllers import codecooler_controller
+import os
 
 
 def start_controller(user):
@@ -45,8 +47,11 @@ def run_chosen_function(user_input, user):
     elif user_input == 2:
         run_submission_functions(user)
     elif user_input == 3:
+        os.system('clear')
+        shoutbox_view.show_shoutbox_panel()
+        shoutbox_view.enter_message(user.login)
+    elif user_input == 4:
         codecooler_controller.edit_profile(user.login)
-
     return user_input
 
 
@@ -207,3 +212,19 @@ def add_submission(assingment, user):
             Submission.submissions.remove(submission)
 
     Submission(user.login, assingment.title, answer)
+
+
+def count_average_attendance(attendances_list):
+
+    avg_att = 0
+    counter = 0
+
+    for attendance in attendances_list:
+
+        avg_att += attendance.value
+        counter += 1
+
+    if counter > 0:
+        return avg_att / counter * 100
+    else:
+        return avg_att

@@ -1,3 +1,4 @@
+import os
 from models.mentor_model import Mentor
 from models.student_model import Student
 from models.assingment_model import Assingment
@@ -6,8 +7,10 @@ from models.attendance_model import Attendance
 from views import mentor_view
 from views import employee_view
 from views import codecooler_view
+from views import shoutbox_view
 from controllers import attendance_controller
 from controllers import codecooler_controller
+from controllers import employee_controller
 
 
 def start_controller(user):
@@ -33,7 +36,7 @@ def start_controller(user):
         choice = mentor_view.get_choice()
 
         if choice == '1':
-            employee_view.show_students_list_detailed(Student.students, Attendance.attendances, Assingment.assingments, Submission.submissions)
+            employee_controller.show_students_list_detailed()
         elif choice == '2':
             add_assingment()
         elif choice == '3':
@@ -45,6 +48,10 @@ def start_controller(user):
         elif choice == '6':
             add_student()
         elif choice == '7':
+            os.system('clear')
+            shoutbox_view.show_shoutbox_panel()
+            shoutbox_view.enter_message(user.login)
+        elif choice == '8':
             codecooler_controller.edit_profile(user.login)
         elif choice != '0':
             mentor_view.print_bad_choice()

@@ -3,19 +3,6 @@ from models.mentor_model import Mentor
 from models.student_model import Student
 from models.submission_model import Submission
 
-def print_welcome(user):
-    '''
-    Prints welcome message
-
-    Paramaters
-    ----------
-    user = obj of Mentor class
-
-    Returns
-    -------
-    None
-    '''
-    print('\n' +'Witamy Szanownego kolegę {}a!'.format(user.name))
 
 def print_menu():
     '''
@@ -28,7 +15,8 @@ def print_menu():
             '(4).Check attendance',
             '(5).Remove Student',
             '(6).Add student',
-            '(7).Change password',
+            '(7).Shoutbox message',
+            '(8).Change password',
             '(0).Exit',
             '========================']
     for option in menu:
