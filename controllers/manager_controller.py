@@ -2,6 +2,7 @@ from views import manager_view
 from views import codecooler_view
 from views import employee_view
 from views import shoutbox_view
+from views import event_view
 from models.mentor_model import Mentor
 from models.student_model import Student
 from models.attendance_model import Attendance
@@ -68,6 +69,10 @@ def choose_option(user_input, user):
             os.system('clear')
             shoutbox_view.show_shoutbox_panel()
             shoutbox_view.enter_message(user.login)
+    elif user_input == "9":
+        employee_controller.add_event()
+    elif user_input == "10":
+        event_view.show_calendar(user.login)
     elif user_input == "0":
         return user_input
     else:
