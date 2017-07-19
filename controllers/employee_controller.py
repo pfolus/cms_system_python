@@ -15,7 +15,7 @@ def show_students_list_detailed():
     for student in Student.students:
 
         attendances = Attendance.get_student_attendances(student.login)
-        avg_att = count_average_attendance(attendances)
+        avg_att = student_controller.count_average_attendance(attendances)
 
         [grades_sum,
          max_grades_sum,
@@ -27,14 +27,3 @@ def show_students_list_detailed():
         index += 1
 
     employee_view.print_detailed_students_list(list_to_print)
-
-
-def count_average_attendance(attendances_list):
-
-    avg_att = 0
-
-    for attendance in attendances_list:
-
-        avg_att += attendance.value
-
-    return avg_att
