@@ -132,6 +132,21 @@ def load_codecoolers():
     create_codecoolers_objects(codecoolers_list)
 
 
+def load_shoutbox_messages():
+
+    with open('csv_databases/shoutbox.csv', 'r') as file:
+        reader = csv.reader(file, delimiter='|')
+
+        messages = []
+
+        for line in reader:
+            line[0] = datetime.datetime.strptime(line[0], '%d.%m.%y/%H:%M')
+            messages.append(line)
+
+    for item in messages:
+        Shoutbox(item[0], item[1], item[2])
+
+
 def create_codecoolers_objects(codecoolers_list):
 
     LOGIN_INDEX = 0
