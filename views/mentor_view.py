@@ -28,6 +28,7 @@ def print_menu():
             '(4).Check attendance',
             '(5).Remove Student',
             '(6).Add student',
+            '(7).Change password',
             '(0).Exit',
             '========================']
     for option in menu:
