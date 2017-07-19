@@ -60,10 +60,10 @@ def add_student():
     -------
     None
     '''
-    login = mentor_view.get_login()
-    password = mentor_view.get_password()
-    name = mentor_view.get_name()
-    surname = mentor_view.get_surname()
+    login = codecooler_view.ask_login()
+    password = codecooler_view.ask_password()
+    name = codecooler_view.ask_name()
+    surname = codecooler_view.ask_surname()
 
     Student(login, password, name, surname)
     mentor_view.print_done()
