@@ -149,7 +149,7 @@ def export_assingments():
                              str(assingment.max_grade)])
 
 
-def export_codecooler(codecoolers):
+def export_codecoolers(codecoolers):
     with open('csv_databases/codecoolers_list.csv', 'w') as file:
 
         writer = csv.writer(file, delimiter='|')
