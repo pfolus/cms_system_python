@@ -17,6 +17,8 @@ def print_menu():
             '(6).Add student',
             '(7).Shoutbox message',
             '(8).Change password',
+            '(9).Add an event',
+            '(10).Show upcoming events',
             '(0).Exit',
             '========================']
     for option in menu:
