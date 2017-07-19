@@ -21,3 +21,7 @@ class Assingment:
     @classmethod
     def add_to_list(cls, object):
         cls.assingments.append(object)
+
+    @classmethod
+    def get_assingment_by_index(cls, index):
+        return cls.assingments[index]

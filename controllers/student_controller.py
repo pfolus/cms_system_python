@@ -144,7 +144,7 @@ def choose_assingment(number):
         except ValueError:
             student_view.error_number()
 
-    chosen_assingment = Assingment.assingments[choice]
+    chosen_assingment = Assingment.get_assingment_by_index(choice)
 
     return chosen_assingment
 

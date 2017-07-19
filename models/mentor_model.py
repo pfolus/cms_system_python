@@ -22,3 +22,7 @@ class Mentor(Employee):
     @classmethod
     def add_to_list(cls, object):
         cls.mentors.append(object)
+
+    @classmethod
+    def remove_mentor(cls, index):
+        del cls.mentors[index]
