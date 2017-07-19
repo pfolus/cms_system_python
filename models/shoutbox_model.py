@@ -15,7 +15,8 @@ class Shoutbox:
 
     @classmethod
     def get_recent_messages(cls):
-        if len(cls.messages) >= 10:
-            return cls.messages[-10:]
+        max_messages = 30
+        if len(cls.messages) >= max_messages:
+            return cls.messages[-max_messages:]
         else:
             return cls.messages
