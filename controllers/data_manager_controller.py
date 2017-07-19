@@ -161,12 +161,12 @@ def export_codecooler(codecoolers):
                             codecooler.__class__.__name__])
 
 
-def save_atendances_list_csv():
+def export_attendances():
 
     with open('csv_databases/attendances.csv', 'w') as file:
         writer = csv.writer(file, delimiter='|')
 
         for attendance in Attendance.attendances:
             writer.writerow([attendance.student_login,
-                             attendance.average,
-                             ",".join([str(number) for number in attendance.student_attendances])])
+                             str(attendance.value),
+                             attendance.date.strftime('%d.%m.%Y')])
