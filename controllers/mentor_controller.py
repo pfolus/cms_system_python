@@ -1,3 +1,4 @@
+import os
 from models.mentor_model import Mentor
 from models.student_model import Student
 from models.assingment_model import Assingment
@@ -7,6 +8,8 @@ from views import mentor_view
 from views import employee_view
 from views import codecooler_view
 from controllers import attendance_controller
+from views import shoutbox_view
+from controllers import data_manager_controller
 
 
 def start_controller(user):
@@ -28,6 +31,8 @@ def start_controller(user):
     choice = '99'
 
     while choice != '0':
+        os.system('clear')
+        shoutbox_view.show_shoutbox_panel()
         mentor_view.print_menu()
         choice = mentor_view.get_choice()
 
@@ -43,6 +48,8 @@ def start_controller(user):
             remove_student()
         elif choice == '6':
             add_student()
+        elif choice == '7':
+            shoutbox_view.enter_message(user.login)
         elif choice != '0':
             mentor_view.print_bad_choice()
 
