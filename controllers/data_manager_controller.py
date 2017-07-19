@@ -237,16 +237,14 @@ def export_shoutbox_messages():
                              message.message])
 
 
-def load_shoutbox_messages():
+def export_events():
 
-    with open('csv_databases/shoutbox.csv', 'r') as file:
-        reader = csv.reader(file, delimiter='|')
+    with open('csv_databases/events.csv', 'w') as file:
+        writer = csv.writer(file, delimiter='|')
 
-        messages = []
-
-        for line in reader:
-            line[0] = datetime.datetime.strptime(line[0], '%d.%m.%y/%H:%M')
-            messages.append(line)
-
-    for item in messages:
-        Shoutbox(item[0], item[1], item[2])
+        for event in Event.events:
+            if event.ev_type != 'Assingment':
+                writer.writerow([event.name,
+                                 event.date.strftime('%d.%m.%Y'),
+                                 event.login,
+                                 event.ev_type])
