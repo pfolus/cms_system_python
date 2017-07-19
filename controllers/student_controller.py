@@ -1,9 +1,10 @@
 from views import student_view
 from views import codecooler_view
 from views import submission_view
+from views import shoutbox_view
 from models.submission_model import Submission
 from models.assingment_model import Assingment
-
+import os
 
 def start_controller(user):
     '''
@@ -43,6 +44,10 @@ def run_chosen_function(user_input, user):
         run_grades_functions(user)
     elif user_input == 2:
         run_submission_functions(user)
+    elif user_input == 3:
+        os.system('clear')
+        shoutbox_view.show_shoutbox_panel()
+        shoutbox_view.enter_message(user.login)
 
     return user_input
 
