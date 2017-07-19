@@ -89,6 +89,6 @@ def remove_mentor():
 
     try:
         index = manager_view.ask_for_index()
-        del Mentor.mentors[index]
+        Mentor.remove_mentor(index)
     except IndexError:
         manager_view.option_error()
