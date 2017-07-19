@@ -93,3 +93,7 @@ def ask_password():
         password = input("Password: ")
 
     return password
+
+
+def print_change_password_info():
+    print(Bcolors.RED + '\nPassword was changed succesfully!\n' + Bcolors.ENDC)
