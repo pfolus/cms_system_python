@@ -63,7 +63,7 @@ def create_and_add_submissions_objects(submissions):
             Submission(item[0], item[1], item[2], item[3], item[4], item[5])
 
 
-def load_assingments_list_csv():
+def load_assingments():
 
     with open('csv_databases/assingments.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -89,7 +89,7 @@ def create_and_add_assingments_objects(assingments):
         Assingment(item[0], item[1], item[2], item[3])
 
 
-def load_codecoolers_list_csv():
+def load_codecoolers():
 
     with open('csv_databases/codecoolers_list.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
