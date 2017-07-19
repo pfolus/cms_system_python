@@ -9,20 +9,37 @@ from models.submission_model import Submission
 from models.attendance_model import Attendance
 
 
-def load_attendances_list_csv():
+def load_data_from_csv():
+
+    load_codecoolers()
+    load_assingments()
+    load_submissions()
+    load_attendances()
+
+
+def export_data_to_csv():
+
+    export_submissions()
+    export_assingments()
+    export_attendances()
+    codecoolers = Mentor.mentors + Manager.managers + Student.students + Accountant.accountants
+    export_codecoolers(codecoolers)
+
+
+def load_attendances():
 
     with open('csv_databases/attendances.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
 
         for line in reader:
             login = line[0]
-            average = line[1]
+            value = float(line[1])
             date = datetime.datetime.strptime(line[2], '%d.%m.%Y')
 
             Attendance(login, value, date)
 
 
-def load_submissions_list_csv():
+def load_submissions():
 
     with open('csv_databases/submissions.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -105,14 +122,6 @@ def create_codecoolers_objects(codecoolers_list):
         elif user[TYPE_INDEX] == "Mentor":
             Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX])
 
-
-def export_data_to_csv():
-
-    export_submissions()
-    export_assingments()
-    save_atendances_list_csv()
-    codecoolers = Mentor.mentors + Manager.managers + Student.students + Accountant.accountants
-    export_codecooler(codecoolers)
 
 
 def export_submissions():
