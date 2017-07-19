@@ -1,3 +1,7 @@
+from operator import attrgetter
+from datetime import datetime
+
+
 class Assingment:
 
     assingments = []
@@ -25,3 +29,18 @@ class Assingment:
     @classmethod
     def get_assingment_by_index(cls, index):
         return cls.assingments[index]
+
+    @classmethod
+    def get_coming_assingments(cls):
+        sorted_assingments = []
+
+        for assingment in cls.assingments:
+            if assingment.date > datetime.today():
+                sorted_assingments.append(assingment)
+
+        sorted_assingments.sort(key=attrgetter('date'))
+
+        if len(sorted_assingments) > 2:
+            return sorted_assingments[0:3]
+        else:
+            return sorted_assingments
