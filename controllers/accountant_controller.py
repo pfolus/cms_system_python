@@ -5,6 +5,7 @@ from models.attendance_model import Attendance
 from models.student_model import Student
 from models.assingment_model import Assingment
 from models.submission_model import Submission
+from controllers import codecooler_controller
 
 
 def start_controller(user):
@@ -33,3 +34,5 @@ def start_controller(user):
             employee_view.show_students_list(Student.students)
         elif choice == 2:
             employee_view.show_students_list_detailed(Student.students, Attendance.attendances, Assingment.assingments, Submission.submissions)
+        elif choice == 3:
+            codecooler_controller.edit_profile(user.login)
