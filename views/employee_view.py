@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 def show_students_list(students):
     '''
     Prints every student info in new line
@@ -42,3 +45,30 @@ def print_detailed_students_list(list_to_print):
                                                                  student[5]))
 
     print()
+
+
+def print_add_event():
+    print('Add new event, to the calendar: ')
+
+
+def get_date():
+    '''
+    Asks for date until date with correct format passed.
+    If not, prints error message.
+
+    Returns
+    -------
+    correct_date = datetime object
+    '''
+
+    while True:
+        date = input('Enter date in format dd.mm.yyyy: ')
+        try:
+            correct_date = datetime.strptime(date, '%d.%m.%Y')
+            return correct_date
+        except ValueError:
+            print('Wrong input!')
+
+
+def get_string(item):
+    return input('\nEnter {}: '.format(item))
