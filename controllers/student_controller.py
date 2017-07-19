@@ -3,6 +3,7 @@ from views import codecooler_view
 from views import submission_view
 from models.submission_model import Submission
 from models.assingment_model import Assingment
+from controllers import codecooler_controller
 
 
 def start_controller(user):
@@ -43,6 +44,8 @@ def run_chosen_function(user_input, user):
         run_grades_functions(user)
     elif user_input == 2:
         run_submission_functions(user)
+    elif user_input == 3:
+        codecooler_controller.edit_profile(user.login)
 
     return user_input
 
