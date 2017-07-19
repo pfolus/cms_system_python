@@ -7,6 +7,7 @@ from views import mentor_view
 from views import employee_view
 from views import codecooler_view
 from controllers import attendance_controller
+from controllers import employee_controller
 
 
 def start_controller(user):
@@ -32,7 +33,7 @@ def start_controller(user):
         choice = mentor_view.get_choice()
 
         if choice == '1':
-            employee_view.show_students_list_detailed(Student.students, Attendance.attendances, Assingment.assingments, Submission.submissions)
+            employee_controller.show_students_list_detailed()
         elif choice == '2':
             add_assingment()
         elif choice == '3':
