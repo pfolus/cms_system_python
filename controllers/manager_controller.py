@@ -70,10 +70,10 @@ def add_mentor():
     Takes user_inputs and appends mentors list with Mentor object
     '''
 
-    login = manager_view.ask_login()
-    password = manager_view.ask_password()
-    name = manager_view.ask_name()
-    surname = manager_view.ask_surname()
+    login = codecooler_view.ask_login()
+    password = codecooler_view.ask_password()
+    name = codecooler_view.ask_name()
+    surname = codecooler_view.ask_surname()
 
     Mentor(login, password, name, surname)
 
@@ -87,6 +87,6 @@ def remove_mentor():
 
     try:
         index = manager_view.ask_for_index()
-        del Mentor.mentors[index]
+        Mentor.remove_mentor(index)
     except IndexError:
         manager_view.option_error()

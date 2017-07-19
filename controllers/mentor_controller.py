@@ -61,10 +61,10 @@ def add_student():
     -------
     None
     '''
-    login = mentor_view.get_login()
-    password = mentor_view.get_password()
-    name = mentor_view.get_name()
-    surname = mentor_view.get_surname()
+    login = codecooler_view.ask_login()
+    password = codecooler_view.ask_password()
+    name = codecooler_view.ask_name()
+    surname = codecooler_view.ask_surname()
 
     Student(login, password, name, surname)
     mentor_view.print_done()
@@ -87,38 +87,16 @@ def remove_student():
     mentor_view.show_logins()
     login = mentor_view.get_student_login()
 
-    while not login_exist(login):
+    while not Student.check_if_login_exists(login):
         mentor_view.print_not_exist()
         login = mentor_view.get_student_login()
 
-    for student in Student.students:
-        if student.login == login:
-            Student.students.remove(student)
-            for attendance in Attendance.attendances:
-                if attendance.student_login == login:
-                    Attendance.attendances.remove(attendance)
-            mentor_view.print_done()
+    Student.remove_student(login)
 
-
-def login_exist(login):
-    '''
-    iterates through students list, and returns
-    True if student exists.
-
-    Paramaters
-    ----------
-    login = attribute (.login) of Student class
-
-    Returns
-    -------
-    login_exist = True or False
-    '''
-    login_exist = False
-    for item in Student.students:
-        if item.login == login:
-            login_exist = True
-
-    return login_exist
+    for attendance in Attendance.attendances:
+        if attendance.student_login == login:
+            Attendance.attendances.remove(attendance)
+    mentor_view.print_done()
 
 
 def add_assingment():
