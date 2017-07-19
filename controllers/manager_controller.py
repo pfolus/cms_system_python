@@ -6,6 +6,7 @@ from models.student_model import Student
 from models.attendance_model import Attendance
 from models.assingment_model import Assingment
 from models.submission_model import Submission
+from controllers import codecooler_controller
 
 
 def start_controller(user):
@@ -61,6 +62,8 @@ def choose_option(user_input, user):
                                                   Attendance.attendances,
                                                   Assingment.assingments,
                                                   Submission.submissions)
+    elif user_input == "7":
+        codecooler_controller.edit_profile(user.login)
     elif user_input == "0":
         return user_input
     else:
