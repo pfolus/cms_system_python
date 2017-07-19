@@ -9,8 +9,8 @@ from views import employee_view
 from views import codecooler_view
 from views import shoutbox_view
 from controllers import attendance_controller
+from controllers import codecooler_controller
 from controllers import employee_controller
-
 
 
 def start_controller(user):
@@ -51,6 +51,8 @@ def start_controller(user):
             os.system('clear')
             shoutbox_view.show_shoutbox_panel()
             shoutbox_view.enter_message(user.login)
+        elif choice == '8':
+            codecooler_controller.edit_profile(user.login)
         elif choice != '0':
             mentor_view.print_bad_choice()
 

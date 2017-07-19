@@ -1,9 +1,27 @@
 from views.bcolors import Bcolors
 
 
+def choose_function():
+    '''
+    Asks an user for a number, representing function,
+    and returns it
+    '''
+    DEFAULT_VALUE = ''
+    choice = DEFAULT_VALUE
+    possible_choices = [0, 1, 2, 3]
+
+    while choice not in possible_choices:
+        try:
+            choice = int(input('Choose function: '))
+        except ValueError:
+            print('Wrong choice.')
+
+    return choice
+
+
 def greet(user):
     '''
-    Prints welocme message with logged user's name
+    Prints welcome message with logged user's name
     '''
 
     print(Bcolors.RED + Bcolors.BOLD + "\nHello " + user.name + "!\n" + Bcolors.ENDC)
@@ -75,3 +93,7 @@ def ask_password():
         password = input("Password: ")
 
     return password
+
+
+def print_change_password_info():
+    print(Bcolors.RED + '\nPassword was changed succesfully!\n' + Bcolors.ENDC)

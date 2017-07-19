@@ -4,7 +4,9 @@ from views import submission_view
 from views import shoutbox_view
 from models.submission_model import Submission
 from models.assingment_model import Assingment
+from controllers import codecooler_controller
 import os
+
 
 def start_controller(user):
     '''
@@ -48,7 +50,8 @@ def run_chosen_function(user_input, user):
         os.system('clear')
         shoutbox_view.show_shoutbox_panel()
         shoutbox_view.enter_message(user.login)
-
+    elif user_input == 4:
+        codecooler_controller.edit_profile(user.login)
     return user_input
 
 
