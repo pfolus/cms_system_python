@@ -84,6 +84,30 @@ def load_assingments():
     create_and_add_assingments_objects(assingments)
 
 
+def load_events():
+
+    with open('csv_databases/events.csv', 'r') as file:
+        reader = csv.reader(file, delimiter='|')
+
+        events = []
+
+        for line in reader:
+            line[1] = datetime.datetime.strptime(line[1], '%d.%m.%Y')
+            events.append(line)
+
+    create_and_add_events_objects(events)
+
+
+def create_and_add_events_objects(events):
+    NAME = 0
+    DATE = 1
+    LOGIN = 2
+    EVENT_TYPE = 3
+
+    for ev in events:
+        Event(ev[NAME], ev[DATE], ev[LOGIN], ev[EVENT_TYPE])
+
+
 def create_and_add_assingments_objects(assingments):
 
     TITLE_INDEX = 0
