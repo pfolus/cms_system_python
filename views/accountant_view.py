@@ -1,6 +1,7 @@
 def show_menu():
     menu = ['1. Show list of students',
             '2. Show detailed list of students',
+            '3. Shoutbox message',
             '0. Log out']
     for line in menu:
         print(line)
@@ -13,7 +14,7 @@ def choose_function():
     '''
     DEFAULT_VALUE = ''
     choice = DEFAULT_VALUE
-    possible_choices = [0, 1, 2]
+    possible_choices = [0, 1, 2, 3]
 
     while choice not in possible_choices:
         try:
