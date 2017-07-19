@@ -13,6 +13,10 @@ from controllers import data_manager_controller
 def start_controller():
 
     try:
+        data_manager_controller.load_shoutbox_messages()
+    except FileNotFoundError:
+        pass
+    try:
         data_manager_controller.load_data_from_csv()
     except FileNotFoundError:
         canvas_view.print_file_not_found_error()
