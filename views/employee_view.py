@@ -1,6 +1,3 @@
-from controllers.student_controller import calculate_grades
-
-
 def show_students_list(students):
     '''
     Prints every student info in new line
@@ -21,7 +18,7 @@ def show_students_list(students):
     print()
 
 
-def show_students_list_detailed(students, attendances, assingments, submissions):
+def print_detailed_students_list(list_to_print):
     '''
     Prints detailed info about every student in new line
 
@@ -33,19 +30,15 @@ def show_students_list_detailed(students, attendances, assingments, submissions)
     -------
     None
     '''
-    index = 1
-    student_attendance = 0
     print()
-    for student in students:
-        [grades_sum,
-         max_grades_sum,
-         amount_of_grades] = calculate_grades(student.login)
 
-        for attendance in attendances:
-            if attendance.student_login == student.login:
-                student_attendance = attendance.average
+    for student in list_to_print:
 
-        print('({}) {} {}, Score: {}/{}, Attendance: {}%'.format(index, student.name, student.surname, grades_sum, max_grades_sum, student_attendance))
+        print('({}) {} {}, Score: {}/{}, Attendance: {}%'.format(student[0],
+                                                                 student[1],
+                                                                 student[2],
+                                                                 student[3],
+                                                                 student[4],
+                                                                 student[5]))
 
-        index += 1
     print()

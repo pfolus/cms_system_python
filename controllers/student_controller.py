@@ -204,3 +204,19 @@ def add_submission(assingment, user):
             Submission.submissions.remove(submission)
 
     Submission(user.login, assingment.title, answer)
+
+
+def count_average_attendance(attendances_list):
+
+    avg_att = 0
+    counter = 0
+
+    for attendance in attendances_list:
+
+        avg_att += attendance.value
+        counter += 1
+
+    if counter > 0:
+        return avg_att / counter * 100
+    else:
+        return avg_att

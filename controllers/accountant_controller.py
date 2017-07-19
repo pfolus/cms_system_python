@@ -5,6 +5,7 @@ from models.attendance_model import Attendance
 from models.student_model import Student
 from models.assingment_model import Assingment
 from models.submission_model import Submission
+from controllers import employee_controller
 
 
 def start_controller(user):
@@ -32,4 +33,4 @@ def start_controller(user):
         if choice == 1:
             employee_view.show_students_list(Student.students)
         elif choice == 2:
-            employee_view.show_students_list_detailed(Student.students, Attendance.attendances, Assingment.assingments, Submission.submissions)
+            employee_controller.show_students_list_detailed()
