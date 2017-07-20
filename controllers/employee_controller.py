@@ -1,4 +1,5 @@
 from views import employee_view
+from views import event_view
 from models.student_model import Student
 from models.attendance_model import Attendance
 from models.attendance_model import Attendance
@@ -36,3 +37,9 @@ def add_event():
     date = employee_view.get_date()
 
     Event(title, date)
+
+
+def remove_event(login):
+    events = event_view.get_calendar(login)
+    event_index = employee_view.get_event(events)
+    Event.remove_event(events[event_index])
