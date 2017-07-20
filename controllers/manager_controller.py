@@ -76,6 +76,13 @@ def choose_option(user_input, user):
         event_view.get_calendar(user.login)
     elif user_input == "11":
         employee_controller.remove_event(user.login)
+    elif user_input == "12":
+            os.system('clear')
+            codecooler_controller.show_logins()
+            receiver = codecooler_controller.get_correct_login()
+            os.system('clear')
+            PM_view.show_PM_panel(user.login, receiver)
+            PM_view.enter_message(user.login, receiver)
     elif user_input == "0":
         return user_input
     else:
