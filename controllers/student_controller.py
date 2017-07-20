@@ -58,7 +58,7 @@ def run_chosen_function(user_input, user):
         codecooler_controller.edit_profile(user.login)
     elif user_input == 5:
         event_controller.create_calendar(user.login)
-        event_view.get_calendar(user.login)
+        event_controller.get_calendar(user.login)
     elif user_input == 6:
         os.system('clear')
         codecooler_controller.show_logins()

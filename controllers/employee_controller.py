@@ -40,6 +40,6 @@ def add_event():
 
 
 def remove_event(login):
-    events = event_view.get_calendar(login)
+    events = event_controller.get_calendar(login)
     event_index = employee_view.get_event(events)
     Event.remove_event(events[event_index])
