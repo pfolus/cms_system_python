@@ -1,9 +1,9 @@
-from controllers.canvas_controller import *
+from controllers import canvas_controller
 
 
 def main():
 
-    start_controller()
+    canvas_controller.start_controller()
 
 
 if __name__ == "__main__":
