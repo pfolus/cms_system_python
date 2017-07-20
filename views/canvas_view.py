@@ -9,7 +9,7 @@ def show_login_menu():
 
     print("""
     ===== Welcome to =====
-    ======Canvas 1.0======
+    ======Canvas 2.0======
     """)
 
 
