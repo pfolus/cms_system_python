@@ -186,26 +186,6 @@ def get_submission():
     return Submission.submissions[submission_index]
 
 
-def show_fullnames():
-    '''
-    Shows all students full names.
-
-    Paramaters
-    ----------
-    None
-
-    Returns
-    -------
-    None
-    '''
-
-    index = 0
-    print('\nPresence List: \n')
-    for user in Student.students:
-        print('{} -> {} {}'.format(index, user.name, user.surname))
-        index += 1
-
-
 def print_grades_range_info(max_grade):
     print('Grade must be in range <-3:{}>'.format(max_grade))
 
