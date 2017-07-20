@@ -20,6 +20,7 @@ def print_menu():
             '(9).Add an event',
             '(10).Show upcoming events',
             '(11).Remove an event',
+            '(12).Private message',
             '(0).Exit',
             '========================']
     for option in menu:
