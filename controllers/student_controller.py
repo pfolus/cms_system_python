@@ -28,11 +28,13 @@ def start_controller(user):
     choice = ''
     EXIT = 0
     codecooler_view.greet(user)
+    event_controller.create_calendar(user.login)
 
     while choice != EXIT:
         student_view.show_menu()
         choice = student_view.choose_function()
         choice = run_chosen_function(choice, user)
+
 
 
 def run_chosen_function(user_input, user):
@@ -57,7 +59,6 @@ def run_chosen_function(user_input, user):
     elif user_input == 4:
         codecooler_controller.edit_profile(user.login)
     elif user_input == 5:
-        event_controller.create_calendar(user.login)
         event_controller.get_calendar(user.login)
     elif user_input == 6:
         os.system('clear')
