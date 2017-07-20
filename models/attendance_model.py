@@ -33,3 +33,12 @@ class Attendance:
                 student_attendances.append(attendance)
 
         return student_attendances
+
+    @classmethod
+    def get_student_attendance_by_date(cls, login, date):
+
+        for attendance in cls.attendances:
+
+            if attendance.student_login == login and attendance.date == date:
+
+                return attendance
