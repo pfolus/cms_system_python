@@ -30,9 +30,3 @@ class Event:
 
         else:
             return False
-
-    def __str__(self):
-        if self.is_passed:
-            return(Bcolors.RED + '{} | {} | {}'.format(self.name, self.date, self.ev_type) + Bcolors.ENDC)
-        else:
-            return(Bcolors.BOLD + '{} | {} | {}'.format(self.name, self.date, self.ev_type) + Bcolors.ENDC)
