@@ -1,5 +1,6 @@
 from views import assingment_view
 from views.bcolors import Bcolors
+from prettytable import PrettyTable
 
 
 def show_menu():
@@ -112,10 +113,11 @@ def show_grades_info(grades_sum, max_grades_sum, amount_of_grades):
     print(Bcolors.BOLD + '\nYou have {} grades.\nYour score: {}/{}\n'.format(amount_of_grades, grades_sum, max_grades_sum) + Bcolors.ENDC)
 
 
-def print_grades_row(row):
-    data_format = "{:40}{:^20}{:^5}{:^5}{:^5}"
-    print(data_format.format(row[0],
-                             row[1],
-                             row[2],
-                             row[3],
-                             row[4]))
+def print_grades_row(rows):
+
+    table = PrettyTable(['Assignment', 'Your grade', 'min', 'avg', 'max'])
+
+    for row in rows:
+        table.add_row([row[0], row[1], row[2], row[3], row[4]])
+
+    print(str(table) + "\n")

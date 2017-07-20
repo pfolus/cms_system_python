@@ -78,13 +78,8 @@ def run_grades_functions(user):
     grades_sum, max_grades_sum, amount_of_grades = calculate_grades(user.login)
     student_view.show_grades_info(grades_sum, max_grades_sum, amount_of_grades)
 
-    title_row = ['Assignment',
-                 'Your grade',
-                 'min',
-                 'avg',
-                 'max']
+    data_rows = []
 
-    student_view.print_grades_row(title_row)
     for assingment in Assingment.assingments:
         assingment_grades = []
         my_grade = 'None'
@@ -98,7 +93,9 @@ def run_grades_functions(user):
                     min(assingment_grades, default=0),
                     get_avg(assingment_grades),
                     max(assingment_grades, default=0)]
-        student_view.print_grades_row(data_row)
+        data_rows.append(data_row)
+
+    student_view.print_grades_row(data_rows)
 
 
 def run_submission_functions(user):
