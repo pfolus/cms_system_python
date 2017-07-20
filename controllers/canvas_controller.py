@@ -14,6 +14,7 @@ def start_controller():
 
     try:
         data_manager_controller.load_shoutbox_messages()
+        data_manager_controller.load_PM()
     except FileNotFoundError:
         pass
     try:

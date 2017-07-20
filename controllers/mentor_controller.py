@@ -5,11 +5,13 @@ from models.student_model import Student
 from models.assingment_model import Assingment
 from models.submission_model import Submission
 from models.attendance_model import Attendance
+from models.private_messages_model import PM
 from views import mentor_view
 from views import employee_view
 from views import codecooler_view
 from views import shoutbox_view
 from views import event_view
+from views import PM_view
 from controllers import attendance_controller
 from controllers import event_controller
 from controllers import codecooler_controller
@@ -62,6 +64,13 @@ def start_controller(user):
             event_controller.get_calendar(user.login)
         elif choice == '11':
             employee_controller.remove_event(user.login)
+        elif choice == '12':
+            os.system('clear')
+            codecooler_controller.show_logins()
+            receiver = codecooler_controller.get_correct_login()
+            os.system('clear')
+            PM_view.show_PM_panel(user.login, receiver)
+            PM_view.enter_message(user.login, receiver)
         elif choice != '0':
             mentor_view.print_bad_choice()
 
@@ -103,18 +112,22 @@ def remove_student():
     None
     '''
     mentor_view.show_logins()
-    login = mentor_view.get_student_login()
-
-    while not Student.check_if_login_exists(login):
-        mentor_view.print_not_exist()
-        login = mentor_view.get_student_login()
-
+    get_correct_login()
     Student.remove_student(login)
 
     for attendance in Attendance.attendances:
         if attendance.student_login == login:
             Attendance.attendances.remove(attendance)
     mentor_view.print_done()
+
+
+def get_correct_login():
+    login = mentor_view.get_student_login()
+
+    while not Student.check_if_login_exists(login):
+        mentor_view.print_not_exist()
+        login = mentor_view.get_student_login()
+    return login
 
 
 def add_assingment():

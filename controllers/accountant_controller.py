@@ -3,6 +3,7 @@ from views import codecooler_view
 from views import employee_view
 from views import shoutbox_view
 from views import event_view
+from views import PM_view
 from models.attendance_model import Attendance
 from models.student_model import Student
 from models.assingment_model import Assingment
@@ -50,3 +51,10 @@ def start_controller(user):
             event_controller.get_calendar(user.login)
         elif choice == 7:
             employee_controller.remove_event(user.login)
+        elif choice == 8:
+            os.system('clear')
+            codecooler_controller.show_logins()
+            receiver = codecooler_controller.get_correct_login()
+            os.system('clear')
+            PM_view.show_PM_panel(user.login, receiver)
+            PM_view.enter_message(user.login, receiver)
