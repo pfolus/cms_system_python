@@ -3,6 +3,7 @@ from views import codecooler_view
 from views import submission_view
 from views import shoutbox_view
 from views import event_view
+from views import PM_view
 from models.submission_model import Submission
 from models.assingment_model import Assingment
 from controllers import codecooler_controller
@@ -58,6 +59,13 @@ def run_chosen_function(user_input, user):
     elif user_input == 5:
         event_controller.create_calendar(user.login)
         event_view.get_calendar(user.login)
+    elif user_input == 6:
+        os.system('clear')
+        codecooler_controller.show_logins()
+        receiver = codecooler_controller.get_correct_login()
+        os.system('clear')
+        PM_view.show_PM_panel(user.login, receiver)
+        PM_view.enter_message(user.login, receiver)
     return user_input
 
 
