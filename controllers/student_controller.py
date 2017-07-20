@@ -74,8 +74,31 @@ def run_grades_functions(user):
     -------
     None
     '''
+
     grades_sum, max_grades_sum, amount_of_grades = calculate_grades(user.login)
     student_view.show_grades_info(grades_sum, max_grades_sum, amount_of_grades)
+
+    title_row = ['Assignment',
+                 'Your grade',
+                 'min',
+                 'avg',
+                 'max']
+
+    student_view.print_grades_row(title_row)
+    for assingment in Assingment.assingments:
+        assingment_grades = []
+        my_grade = 'None'
+        for submission in Submission.submissions:
+            if submission.title == assingment.title and submission.is_checked == 'True':
+                assingment_grades.append(submission.score)
+                if submission.user_login == user.login:
+                    my_grade = submission.score
+        data_row = [assingment.title,
+                    my_grade,
+                    min(assingment_grades, default=0),
+                    get_avg(assingment_grades),
+                    max(assingment_grades, default=0)]
+        student_view.print_grades_row(data_row)
 
 
 def run_submission_functions(user):
