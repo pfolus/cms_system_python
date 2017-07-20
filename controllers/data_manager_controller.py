@@ -9,6 +9,7 @@ from models.submission_model import Submission
 from models.attendance_model import Attendance
 from models.shoutbox_model import Shoutbox
 from models.event_model import Event
+from models.private_messages_model import PM
 from controllers import event_controller
 
 
