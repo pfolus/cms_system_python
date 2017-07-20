@@ -47,6 +47,6 @@ def start_controller(user):
         elif choice == 5:
             employee_controller.add_event()
         elif choice == 6:
-            event_view.get_calendar(user.login)
+            event_controller.get_calendar(user.login)
         elif choice == 7:
             employee_controller.remove_event(user.login)
