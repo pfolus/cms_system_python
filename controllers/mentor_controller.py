@@ -5,11 +5,13 @@ from models.student_model import Student
 from models.assingment_model import Assingment
 from models.submission_model import Submission
 from models.attendance_model import Attendance
+from models.private_messages_model import PM
 from views import mentor_view
 from views import employee_view
 from views import codecooler_view
 from views import shoutbox_view
 from views import event_view
+from views import PM_view
 from controllers import attendance_controller
 from controllers import event_controller
 from controllers import codecooler_controller
