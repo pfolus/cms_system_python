@@ -112,18 +112,22 @@ def remove_student():
     None
     '''
     mentor_view.show_logins()
-    login = mentor_view.get_student_login()
-
-    while not Student.check_if_login_exists(login):
-        mentor_view.print_not_exist()
-        login = mentor_view.get_student_login()
-
+    get_correct_login()
     Student.remove_student(login)
 
     for attendance in Attendance.attendances:
         if attendance.student_login == login:
             Attendance.attendances.remove(attendance)
     mentor_view.print_done()
+
+
+def get_correct_login():
+    login = mentor_view.get_student_login()
+
+    while not Student.check_if_login_exists(login):
+        mentor_view.print_not_exist()
+        login = mentor_view.get_student_login()
+    return login
 
 
 def add_assingment():
