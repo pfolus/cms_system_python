@@ -257,3 +257,13 @@ def count_average_attendance(attendances_list):
         return avg_att / counter * 100
     else:
         return avg_att
+
+
+def get_avg(int_list):
+    if int_list == []:
+        return 0
+    return sum(int_list) / float(len(int_list))
+
+
+def get_longest_assingment_len():
+    return max(Assingment.assingments, default=0)
