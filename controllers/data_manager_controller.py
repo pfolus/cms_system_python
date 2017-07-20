@@ -37,6 +37,7 @@ def load_attendances():
             login = line[0]
             value = float(line[1])
             date = datetime.datetime.strptime(line[2], '%d.%m.%Y')
+            date = date.date()
 
             Attendance(login, value, date)
 
