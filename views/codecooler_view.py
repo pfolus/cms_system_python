@@ -97,3 +97,9 @@ def ask_password():
 
 def print_change_password_info():
     print(Bcolors.RED + '\nPassword was changed succesfully!\n' + Bcolors.ENDC)
+
+def get_codecooler_login():
+    return input('\nType codecooler login: ')
+
+def print_login(user):
+    print('-> {}'.format(user.login))
