@@ -3,6 +3,7 @@ from views import codecooler_view
 from views import employee_view
 from views import shoutbox_view
 from views import event_view
+from views import PM_view
 from models.attendance_model import Attendance
 from models.student_model import Student
 from models.assingment_model import Assingment
