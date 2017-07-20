@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from models.mentor_model import Mentor
 from models.student_model import Student
 from models.assingment_model import Assingment
@@ -208,20 +209,46 @@ def check_attendance():
     '''
 
     index = 1
+
     for student in Student.students:
 
-        choice = ''
-        while choice not in ['1', '2', '3']:
+        attendance_dates = [att.date for att in Attendance.get_student_attendances(student.login)]
+
+        if datetime.today().date() in attendance_dates and Attendance.get_student_attendance_by_date(student.login, datetime.today().date()).value == 0:
+
             mentor_view.show_numbered_student(index, student.name, student.surname)
-            mentor_view.print_attendance_menu()
-            choice = mentor_view.get_choice()
-            if choice == '1':
-                attendance_controller.insert_absence(Attendance.attendances, student.login)
-            elif choice == '2':
-                attendance_controller.insert_late(Attendance.attendances, student.login)
-            elif choice == '3':
-                attendance_controller.insert_presence(Attendance.attendances, student.login)
-            elif choice not in ['1', '2', '3']:
-                mentor_view.print_bad_choice()
+            choice = ''
+
+            while choice not in ['y', 'n']:
+
+                choice = mentor_view.ask_for_late()
+
+                if choice == 'y':
+                    att = Attendance.get_student_attendance_by_date(student.login, datetime.today().date())
+                    att.value = 0.8
+
+        elif datetime.today().date() not in attendance_dates:
+
+            mentor_view.show_numbered_student(index, student.name, student.surname)
+            choice = ''
+
+            while choice not in ['1', '2', '3']:
+
+                mentor_view.print_attendance_menu()
+                choice = mentor_view.get_choice()
+
+                if choice == '1':
+                    Attendance(student.login, 1.0)
+
+                elif choice == '2':
+                    Attendance(student.login, 0.8)
+
+                elif choice == '3':
+                    Attendance(student.login, 0)
+
+                elif choice not in ['1', '2', '3']:
+                    mentor_view.print_bad_choice()
+
         index += 1
-    mentor_view.print_done()
+
+    mentor_view.attendance_checked()

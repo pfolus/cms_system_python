@@ -214,16 +214,24 @@ def show_numbered_student(index, name, surname):
     print('\nStudent name:\n\n{}. {} {}'.format(index, name, surname))
 
 
+def ask_for_late():
+
+    return input("Has she/he come yet? (y/n): ")
+
+
+def attendance_checked():
+
+    print("\nAttendance checked!")
+
+
 def print_attendance_menu():
     '''
     Prints menu
     '''
 
-    menu = ['\n==================',
-            '(1)-->insert absence',
-            '(2)-->insert late',
-            '(3)-->insert presence',
-            '==================']
+    menu = ['\n(1) Present!',
+            '(2) Late!',
+            '(3) Absent!']
 
     for item in menu:
         print(item)
