@@ -72,3 +72,16 @@ def get_date():
 
 def get_string(item):
     return input('\nEnter {}: '.format(item))
+
+
+def get_event(events):
+    event_number = ''
+    POSSIBLE_NUMBERS = range(1, len(events) + 1)
+    while event_number not in POSSIBLE_NUMBERS:
+        try:
+            event_number = int(input("Choose an event: "))
+
+        except ValueError:
+            print('Wrong number.')
+
+    return event_number - 1

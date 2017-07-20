@@ -72,7 +72,9 @@ def choose_option(user_input, user):
     elif user_input == "9":
         employee_controller.add_event()
     elif user_input == "10":
-        event_view.show_calendar(user.login)
+        event_view.get_calendar(user.login)
+    elif user_input == "11":
+        employee_controller.remove_event(user.login)
     elif user_input == "0":
         return user_input
     else:

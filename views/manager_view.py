@@ -13,6 +13,7 @@ def print_menu():
 8. Change password
 9. Add an event
 10. Show upcoming events
+11. Remove an event
 0. Log out
 ''')
 

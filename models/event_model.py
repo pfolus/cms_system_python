@@ -15,8 +15,12 @@ class Event:
         Event.add_to_list(self)
 
     @classmethod
-    def add_to_list(cls, object):
-        cls.events.append(object)
+    def add_to_list(cls, ev_object):
+        cls.events.append(ev_object)
+
+    @classmethod
+    def remove_event(cls, ev_object):
+        cls.events.remove(ev_object)
 
     def check_if_passed(self):
         today = datetime.date.today()

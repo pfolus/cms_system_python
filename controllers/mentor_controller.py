@@ -58,7 +58,9 @@ def start_controller(user):
         elif choice == '9':
             employee_controller.add_event()
         elif choice == '10':
-            event_view.show_calendar(user.login)
+            event_view.get_calendar(user.login)
+        elif choice == '11':
+            employee_controller.remove_event(user.login)
         elif choice != '0':
             mentor_view.print_bad_choice()
 
