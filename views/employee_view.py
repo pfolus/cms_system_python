@@ -1,4 +1,5 @@
 from datetime import datetime
+from prettytable import PrettyTable
 
 
 def show_students_list(students):
@@ -13,11 +14,13 @@ def show_students_list(students):
     -------
     None
     '''
+    table = PrettyTable(['', 'Name', 'Surname'])
     index = 1
     print()
     for student in students:
-        print('({}) {} {}'.format(index, student.name, student.surname))
+        table.add_row([index, student.name, student.surname])
         index += 1
+    print(table)
     print()
 
 
@@ -33,17 +36,16 @@ def print_detailed_students_list(list_to_print):
     -------
     None
     '''
+    table = PrettyTable(['', 'Name', 'Surname', 'Score', 'Attendance'])
     print()
 
     for student in list_to_print:
 
-        print('({}) {} {}, Score: {}/{}, Attendance: {}%'.format(student[0],
-                                                                 student[1],
-                                                                 student[2],
-                                                                 student[3],
-                                                                 student[4],
-                                                                 student[5]))
+        table.add_row([student[0], student[1], student[2],
+                        '{}/{}'.format(student[3], student[4]),
+                        '{}%'.format(student[5])])
 
+    print(table)
     print()
 
 
