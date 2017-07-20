@@ -2,7 +2,7 @@ from operator import attrgetter
 from models.event_model import Event
 
 
-def show_calendar(login):
+def get_calendar(login):
     print('Upcoming events:\n')
     events = Event.events[:]
     events.sort(key=attrgetter('date'))
