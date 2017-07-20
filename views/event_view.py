@@ -11,12 +11,16 @@ def show_calendar(login):
     for event in events:
         if event.login == login or event.login == 'all':
             events_to_print.append(event)
+    counter = 1
 
     if len(events_to_print) > 10:
-        for event in events_to_print[-10:-1]:
-            print(event)
-
+        for event in events_to_print[-11:-1]:
+            print('{}. {}'.format(counter, event))
+            counter += 1
     else:
         for event in events_to_print:
-            print(event)
+            print('{}. {}'.format(counter, event))
+            counter += 1
     print()
+
+    return events_to_print
