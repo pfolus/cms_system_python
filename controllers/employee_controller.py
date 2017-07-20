@@ -4,6 +4,7 @@ from models.attendance_model import Attendance
 from models.attendance_model import Attendance
 from models.assingment_model import Assingment
 from models.submission_model import Submission
+from models.event_model import Event
 from controllers import student_controller
 
 
@@ -27,3 +28,11 @@ def show_students_list_detailed():
         index += 1
 
     employee_view.print_detailed_students_list(list_to_print)
+
+
+def add_event():
+    employee_view.print_add_event()
+    title = employee_view.get_string('title')
+    date = employee_view.get_date()
+
+    Event(title, date)

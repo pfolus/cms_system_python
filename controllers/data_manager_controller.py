@@ -8,12 +8,15 @@ from models.assingment_model import Assingment
 from models.submission_model import Submission
 from models.attendance_model import Attendance
 from models.shoutbox_model import Shoutbox
+from models.event_model import Event
+from controllers import event_controller
 
 
 def load_data_from_csv():
 
-    load_codecoolers()
     load_assingments()
+    load_codecoolers()
+    load_events()
     load_submissions()
     load_attendances()
 
@@ -26,6 +29,7 @@ def export_data_to_csv():
     codecoolers = Mentor.mentors + Manager.managers + Student.students + Accountant.accountants
     export_codecoolers(codecoolers)
     export_shoutbox_messages()
+    export_events()
 
 
 def load_attendances():
@@ -80,6 +84,30 @@ def load_assingments():
     create_and_add_assingments_objects(assingments)
 
 
+def load_events():
+
+    with open('csv_databases/events.csv', 'r') as file:
+        reader = csv.reader(file, delimiter='|')
+
+        events = []
+
+        for line in reader:
+            line[1] = datetime.datetime.strptime(line[1], '%d.%m.%Y')
+            events.append(line)
+
+    create_and_add_events_objects(events)
+
+
+def create_and_add_events_objects(events):
+    NAME = 0
+    DATE = 1
+    LOGIN = 2
+    EVENT_TYPE = 3
+
+    for ev in events:
+        Event(ev[NAME], ev[DATE], ev[LOGIN], ev[EVENT_TYPE])
+
+
 def create_and_add_assingments_objects(assingments):
 
     TITLE_INDEX = 0
@@ -102,6 +130,21 @@ def load_codecoolers():
             codecoolers_list.append(line)
 
     create_codecoolers_objects(codecoolers_list)
+
+
+def load_shoutbox_messages():
+
+    with open('csv_databases/shoutbox.csv', 'r') as file:
+        reader = csv.reader(file, delimiter='|')
+
+        messages = []
+
+        for line in reader:
+            line[0] = datetime.datetime.strptime(line[0], '%d.%m.%y/%H:%M')
+            messages.append(line)
+
+    for item in messages:
+        Shoutbox(item[0], item[1], item[2])
 
 
 def create_codecoolers_objects(codecoolers_list):
@@ -194,16 +237,14 @@ def export_shoutbox_messages():
                              message.message])
 
 
-def load_shoutbox_messages():
+def export_events():
 
-    with open('csv_databases/shoutbox.csv', 'r') as file:
-        reader = csv.reader(file, delimiter='|')
+    with open('csv_databases/events.csv', 'w') as file:
+        writer = csv.writer(file, delimiter='|')
 
-        messages = []
-
-        for line in reader:
-            line[0] = datetime.datetime.strptime(line[0], '%d.%m.%y/%H:%M')
-            messages.append(line)
-
-    for item in messages:
-        Shoutbox(item[0], item[1], item[2])
+        for event in Event.events:
+            if event.ev_type != 'Assingment':
+                writer.writerow([event.name,
+                                 event.date.strftime('%d.%m.%Y'),
+                                 event.login,
+                                 event.ev_type])

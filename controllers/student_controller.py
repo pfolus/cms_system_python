@@ -2,9 +2,11 @@ from views import student_view
 from views import codecooler_view
 from views import submission_view
 from views import shoutbox_view
+from views import event_view
 from models.submission_model import Submission
 from models.assingment_model import Assingment
 from controllers import codecooler_controller
+from controllers import event_controller
 import os
 
 
@@ -44,6 +46,7 @@ def run_chosen_function(user_input, user):
     '''
     if user_input == 1:
         run_grades_functions(user)
+        Assingment.get_coming_assingments()
     elif user_input == 2:
         run_submission_functions(user)
     elif user_input == 3:
@@ -52,6 +55,9 @@ def run_chosen_function(user_input, user):
         shoutbox_view.enter_message(user.login)
     elif user_input == 4:
         codecooler_controller.edit_profile(user.login)
+    elif user_input == 5:
+        event_controller.create_calendar(user.login)
+        event_view.show_calendar(user.login)
     return user_input
 
 

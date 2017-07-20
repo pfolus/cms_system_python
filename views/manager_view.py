@@ -11,6 +11,8 @@ def print_menu():
 6. List students with details
 7. Shoutbox message
 8. Change password
+9. Add an event
+10. Show upcoming events
 0. Log out
 ''')
 
