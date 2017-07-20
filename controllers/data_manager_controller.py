@@ -251,3 +251,28 @@ def export_events():
                                  event.date.strftime('%d.%m.%Y'),
                                  event.login,
                                  event.ev_type])
+
+def load_PM():
+
+    with open('csv_databases/PM.csv', 'r') as file:
+        reader = csv.reader(file, delimiter='|')
+
+        messages = []
+
+        for line in reader:
+            line[0] = datetime.datetime.strptime(line[0], '%d.%m.%y/%H:%M')
+            messages.append(line)
+
+    for item in messages:
+        PM(item[0], item[1], item[2], item[3])
+
+def export_PM():
+
+    with open('csv_databases/PM.csv', 'w') as file:
+
+        writer = csv.writer(file, delimiter='|')
+        for message in PM.messages:
+            writer.writerow([message.date.strftime('%d.%m.%y/%H:%M'),
+                             message.author,
+                             message.receiver,
+                             message.message])
