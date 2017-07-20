@@ -1,3 +1,6 @@
+from prettytable import PrettyTable
+
+
 def print_menu():
     '''
     Prints manager submenu
@@ -45,12 +48,13 @@ def show_mentors_with_details(mentors):
         mentors - list with objects
     '''
 
+    table = PrettyTable(['', 'Name', 'Surname', 'Login'])
     index = 1
     print()
     for mentor in mentors:
-        print("({}) {} {} - {}".format(index, mentor.name,
-                                      mentor.surname, mentor.login))
+        table.add_row([index, mentor.name, mentor.surname, mentor.login])
         index += 1
+    print(table)
     print()
 
 
@@ -62,11 +66,13 @@ def show_mentors(mentors):
         mentors - list with objects
     '''
 
+    table = PrettyTable(['', 'Name', 'Surname'])
     index = 1
     print()
     for mentor in mentors:
-        print("({}) {} {}".format(index, mentor.name, mentor.surname))
+        table.add_row([index, mentor.name, mentor.surname])
         index += 1
+    print(table)
     print()
 
 
