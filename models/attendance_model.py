@@ -19,9 +19,9 @@ class Attendance:
         Attendance.add_to_list(self)
 
     @classmethod
-    def add_to_list(cls, object):
+    def add_to_list(cls, att_object):
 
-        cls.attendances.append(object)
+        cls.attendances.append(att_object)
 
     @classmethod
     def get_student_attendances(cls, login):
