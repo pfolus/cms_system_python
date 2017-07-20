@@ -30,6 +30,7 @@ def export_data_to_csv():
     export_codecoolers(codecoolers)
     export_shoutbox_messages()
     export_events()
+    export_PM()
 
 
 def load_attendances():
