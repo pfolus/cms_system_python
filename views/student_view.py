@@ -110,3 +110,12 @@ def show_grades_info(grades_sum, max_grades_sum, amount_of_grades):
     None
     '''
     print(Bcolors.BOLD + '\nYou have {} grades.\nYour score: {}/{}\n'.format(amount_of_grades, grades_sum, max_grades_sum) + Bcolors.ENDC)
+
+
+def print_grades_row(row):
+    data_format = "{:40}{:^20}{:^5}{:^5}{:^5}"
+    print(data_format.format(row[0],
+                             row[1],
+                             row[2],
+                             row[3],
+                             row[4]))

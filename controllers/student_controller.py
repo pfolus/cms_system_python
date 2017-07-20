@@ -74,8 +74,31 @@ def run_grades_functions(user):
     -------
     None
     '''
+
     grades_sum, max_grades_sum, amount_of_grades = calculate_grades(user.login)
     student_view.show_grades_info(grades_sum, max_grades_sum, amount_of_grades)
+
+    title_row = ['Assignment',
+                 'Your grade',
+                 'min',
+                 'avg',
+                 'max']
+
+    student_view.print_grades_row(title_row)
+    for assingment in Assingment.assingments:
+        assingment_grades = []
+        my_grade = 'None'
+        for submission in Submission.submissions:
+            if submission.title == assingment.title and submission.is_checked == 'True':
+                assingment_grades.append(submission.score)
+                if submission.user_login == user.login:
+                    my_grade = submission.score
+        data_row = [assingment.title,
+                    my_grade,
+                    min(assingment_grades, default=0),
+                    get_avg(assingment_grades),
+                    max(assingment_grades, default=0)]
+        student_view.print_grades_row(data_row)
 
 
 def run_submission_functions(user):
@@ -234,3 +257,13 @@ def count_average_attendance(attendances_list):
         return avg_att / counter * 100
     else:
         return avg_att
+
+
+def get_avg(int_list):
+    if int_list == []:
+        return 0
+    return sum(int_list) / float(len(int_list))
+
+
+def get_longest_assingment_len():
+    return max(Assingment.assingments, default=0)
