@@ -46,6 +46,8 @@ def get_calendar(login):
     None
     '''
     event_view.print_calendar_header()
+    events = Event.events[:]
+    events.sort(key=lambda item: item.date)
 
     events = sort_events()
     temp_list = []
@@ -73,6 +75,6 @@ def sort_events():
     Sorts events, based on their date (from oldest)
     '''
     events = Event.events[:]
-    events.sort(key=attrgetter('date'))
+    events.sort(key=lambda item: item.date)
 
     return events
