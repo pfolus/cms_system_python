@@ -31,6 +31,7 @@ def change_password(codecoolers, login):
             user.password = password
             codecooler_view.print_change_password_info()
 
+
 def get_correct_login():
     '''
     Asks for correct login of user
@@ -47,6 +48,7 @@ def get_correct_login():
 
 
 def check_if_login_exists(login):
+
     '''
     Checks if login exists in logins list
 
@@ -56,6 +58,7 @@ def check_if_login_exists(login):
     Returns:
         bool
     '''
+
     login_exist = False
 
     for item in Student.students + Mentor.mentors + Accountant.accountants + Manager.managers:
