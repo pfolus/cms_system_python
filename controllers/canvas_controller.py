@@ -11,12 +11,16 @@ from controllers import data_manager_controller
 
 
 def start_controller():
+    '''
+    Main flow of application
+    '''
 
     try:
         data_manager_controller.load_shoutbox_messages()
         data_manager_controller.load_PM()
     except FileNotFoundError:
         pass
+
     try:
         data_manager_controller.load_data_from_csv()
     except FileNotFoundError:
