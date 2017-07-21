@@ -114,7 +114,13 @@ def show_grades_info(grades_sum, max_grades_sum, amount_of_grades):
     print(Bcolors.BOLD + '\nYou have {} grades.\nYour score: {}/{}\n'.format(amount_of_grades, grades_sum, max_grades_sum) + Bcolors.ENDC)
 
 
-def print_grades_row(rows):
+def print_grades(rows):
+    '''
+    Prints talbe with grades info using prettytable
+
+    Args:
+        rows - list of lists
+    '''
 
     table = PrettyTable(['Assignment', 'Your grade', 'min', 'avg', 'max'])
 

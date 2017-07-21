@@ -46,6 +46,12 @@ class Student(Codecooler):
 
     @classmethod
     def remove_student(cls, login):
+        '''
+        Rmoves student of given login from class list
+
+        Args:
+            login - string
+        '''
         for student in cls.students:
             if student.login == login:
                 cls.students.remove(student)

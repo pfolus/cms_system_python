@@ -25,6 +25,15 @@ class Attendance:
 
     @classmethod
     def get_student_attendances(cls, login):
+        '''
+        Returns list of attendances which have student_login as atribute
+
+        Args:
+            login - string
+
+        Returns:
+            list - with Attendance object
+        '''
 
         student_attendances = []
 
@@ -36,6 +45,16 @@ class Attendance:
 
     @classmethod
     def get_student_attendance_by_date(cls, login, date):
+        '''
+        Returns attendance with given login and date
+
+        Args:
+            login - string
+            date - datetime object
+
+        Returns:
+            attendance - Attendance object
+        '''
 
         for attendance in cls.attendances:
 

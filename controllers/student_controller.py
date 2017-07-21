@@ -104,7 +104,7 @@ def run_grades_functions(user):
                     max(assingment_grades, default=0)]
         data_rows.append(data_row)
 
-    student_view.print_grades_row(data_rows)
+    student_view.print_grades(data_rows)
 
 
 def run_submission_functions(user):
@@ -250,6 +250,15 @@ def add_submission(assingment, user):
 
 
 def count_average_attendance(attendances_list):
+    '''
+    Counts average attendance of student
+
+    Args:
+        attendances_list - list with Attendance objects
+
+    Returns:
+        avg_att - float
+    '''
 
     avg_att = 0
     counter = 0
@@ -266,10 +275,22 @@ def count_average_attendance(attendances_list):
 
 
 def get_avg(int_list):
+    '''
+    Counts average from ints list
+
+    Args:
+        int_list - list of ints
+
+    Return:
+        float
+    '''
     if int_list == []:
         return 0
     return sum(int_list) / float(len(int_list))
 
 
 def get_longest_assingment_len():
+    '''
+    Gets assignment with longest name
+    '''
     return max(Assingment.assingments, default=0)

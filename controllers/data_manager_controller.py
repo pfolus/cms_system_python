@@ -14,6 +14,9 @@ from controllers import event_controller
 
 
 def load_data_from_csv():
+    '''
+    Runs all fucntions to load data from files
+    '''
 
     load_assingments()
     load_codecoolers()
@@ -23,6 +26,9 @@ def load_data_from_csv():
 
 
 def export_data_to_csv():
+    '''
+    Runs all functions to export data to files
+    '''
 
     export_submissions()
     export_assingments()
@@ -35,6 +41,9 @@ def export_data_to_csv():
 
 
 def load_attendances():
+    '''
+    Loads data attendances from file
+    '''
 
     with open('csv_databases/attendances.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -49,6 +58,10 @@ def load_attendances():
 
 
 def load_submissions():
+    '''
+    Loads data attendances from file
+    '''
+
 
     with open('csv_databases/submissions.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -73,6 +86,10 @@ def create_and_add_submissions_objects(submissions):
 
 
 def load_assingments():
+    '''
+    Loads data assignments from file
+    '''
+
 
     with open('csv_databases/assingments.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -88,6 +105,10 @@ def load_assingments():
 
 
 def load_events():
+    '''
+    Loads data events from file
+    '''
+
 
     with open('csv_databases/events.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -102,6 +123,10 @@ def load_events():
 
 
 def create_and_add_events_objects(events):
+    '''
+    Create events objects
+    '''
+
     NAME = 0
     DATE = 1
     LOGIN = 2
@@ -112,6 +137,9 @@ def create_and_add_events_objects(events):
 
 
 def create_and_add_assingments_objects(assingments):
+    '''
+    Create assingments objects
+    '''
 
     TITLE_INDEX = 0
     CONTENT_INDEX = 1
@@ -123,6 +151,10 @@ def create_and_add_assingments_objects(assingments):
 
 
 def load_codecoolers():
+    '''
+    Loads data codecoolers from file
+    '''
+
 
     with open('csv_databases/codecoolers_list.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -136,6 +168,9 @@ def load_codecoolers():
 
 
 def load_shoutbox_messages():
+    '''
+    Loads data shoutbox_messages from file
+    '''
 
     with open('csv_databases/shoutbox.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -151,6 +186,9 @@ def load_shoutbox_messages():
 
 
 def create_codecoolers_objects(codecoolers_list):
+    '''
+    Create codecoolers objects
+    '''
 
     LOGIN_INDEX = 0
     PASSWORD_INDEX = 1
@@ -171,8 +209,10 @@ def create_codecoolers_objects(codecoolers_list):
             Mentor(user[LOGIN_INDEX], user[PASSWORD_INDEX], user[NAME_INDEX], user[SURNAME_INDEX])
 
 
-
 def export_submissions():
+    '''
+    Exports submission data to file
+    '''
 
     with open('csv_databases/submissions.csv', 'w') as file:
 
@@ -195,6 +235,9 @@ def export_submissions():
 
 
 def export_assingments():
+    '''
+    Exports assingments data to file
+    '''
 
     with open('csv_databases/assingments.csv', 'w') as file:
 
@@ -207,6 +250,10 @@ def export_assingments():
 
 
 def export_codecoolers(codecoolers):
+    '''
+    Exports codecoolers data to file
+    '''
+
     with open('csv_databases/codecoolers_list.csv', 'w') as file:
 
         writer = csv.writer(file, delimiter='|')
@@ -219,6 +266,9 @@ def export_codecoolers(codecoolers):
 
 
 def export_attendances():
+    '''
+    Exports attendance data to file
+    '''
 
     with open('csv_databases/attendances.csv', 'w') as file:
         writer = csv.writer(file, delimiter='|')
@@ -230,6 +280,9 @@ def export_attendances():
 
 
 def export_shoutbox_messages():
+    '''
+    Exports shoutbox_messages data to file
+    '''
 
     with open('csv_databases/shoutbox.csv', 'w') as file:
 
@@ -241,6 +294,9 @@ def export_shoutbox_messages():
 
 
 def export_events():
+    '''
+    Exports events data to file
+    '''
 
     with open('csv_databases/events.csv', 'w') as file:
         writer = csv.writer(file, delimiter='|')
@@ -253,6 +309,9 @@ def export_events():
                                  event.ev_type])
 
 def load_PM():
+    '''
+    Loads PM data from file
+    '''
 
     with open('csv_databases/PM.csv', 'r') as file:
         reader = csv.reader(file, delimiter='|')
@@ -267,6 +326,9 @@ def load_PM():
         PM(item[0], item[1], item[2], item[3])
 
 def export_PM():
+    '''
+    Exports PM data to file
+    '''
 
     with open('csv_databases/PM.csv', 'w') as file:
 
