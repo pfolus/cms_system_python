@@ -20,7 +20,8 @@ def fill_student_calendar(login):
 def get_calendar(login):
     event_view.print_calendar_header()
     events = Event.events[:]
-    events.sort(key=attrgetter('date'))
+    events.sort(key=lambda item: item.date)
+
 
     temp_list = []
     for event in events:
@@ -40,3 +41,4 @@ def get_calendar(login):
             counter += 1
 
     event_view.print_calendar_table(events_to_print)
+    return events_to_print
