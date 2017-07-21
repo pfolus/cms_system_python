@@ -10,6 +10,7 @@ from models.assingment_model import Assingment
 from models.submission_model import Submission
 from controllers import codecooler_controller
 from controllers import employee_controller
+from controllers import event_controller
 import os
 
 
