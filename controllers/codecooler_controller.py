@@ -18,6 +18,7 @@ def change_password(codecoolers, login):
             user.password = password
             codecooler_view.print_change_password_info()
 
+
 def get_correct_login():
     login = codecooler_view.get_codecooler_login()
 
@@ -26,14 +27,16 @@ def get_correct_login():
         login = codecooler_view.get_student_login()
     return login
 
+
 def check_if_login_exists(login):
-        login_exist = False
+    login_exist = False
 
-        for item in Student.students + Mentor.mentors + Accountant.accountants + Manager.managers:
-            if item.login == login:
-                login_exist = True
+    for item in Student.students + Mentor.mentors + Accountant.accountants + Manager.managers:
+        if item.login == login:
+            login_exist = True
 
-        return login_exist
+    return login_exist
+
 
 def show_logins():
     print('\nLogin list: ')

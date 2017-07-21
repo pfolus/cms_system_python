@@ -4,14 +4,31 @@ from models.event_model import Event
 
 
 def print_numbered_event(counter, event):
+    '''
+    Prints event with the number, next to it
+    '''
     print('{}. {}'.format(counter, event))
 
 
 def print_calendar_header():
+    '''
+    Prints header
+    '''
     print('Upcoming events:\n')
 
 
 def print_calendar_table(events):
+    '''
+    Prints upcoming events in form of a table
+
+    Paramaters
+    ----------
+    events = list of Event objects
+
+    Returns
+    -------
+    None
+    '''
     table = PrettyTable(['', 'Name', 'Date', 'Type'])
     for event in events:
         is_past = Event.check_if_passed(event[1])
