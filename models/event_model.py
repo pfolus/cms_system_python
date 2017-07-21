@@ -16,13 +16,30 @@ class Event:
 
     @classmethod
     def add_to_list(cls, ev_object):
+        '''
+        Adds every new object, to events list
+        '''
         cls.events.append(ev_object)
 
     @classmethod
     def remove_event(cls, ev_object):
+        '''
+        Remove chosen event obj from events list
+
+        Parameters
+        ----------
+        ev_object = Event object
+
+        Returns
+        -------
+        boolean
+        '''
         cls.events.remove(ev_object)
 
     def check_if_passed(self):
+        '''
+        Checks whether event is passed, or in the future
+        '''
         today = datetime.date.today()
 
         if self.date < today:
