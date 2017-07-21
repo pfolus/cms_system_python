@@ -7,6 +7,7 @@ from models.assingment_model import Assingment
 from models.submission_model import Submission
 from models.event_model import Event
 from controllers import student_controller
+from controllers import event_controller
 
 
 def show_students_list_detailed():
@@ -42,4 +43,4 @@ def add_event():
 def remove_event(login):
     events = event_controller.get_calendar(login)
     event_index = employee_view.get_event(events)
-    Event.remove_event(events[event_index])
+    Event.remove_event(events[1][event_index])
