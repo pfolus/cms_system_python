@@ -14,7 +14,7 @@ def print_calendar_header():
     '''
     Prints header
     '''
-    print('Upcoming events:\n')
+    print('coming events:\n')
 
 
 def print_calendar_table(events):
