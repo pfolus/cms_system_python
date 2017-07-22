@@ -34,7 +34,7 @@ def print_calendar_table(events):
         ev_date = event[1].date
         ev_name = event[1].name
         ev_type = event[1].ev_type
-        is_past2 = Event.check_if_passed(event[1])
+        is_past2 = Event.check_if_passed(event[1])dsadas
         if is_past:
             ev_name = Bcolors.RED + event[1].name + Bcolors.ENDC
             ev_date = Bcolors.RED + str(event[1].date) + Bcolors.ENDC
