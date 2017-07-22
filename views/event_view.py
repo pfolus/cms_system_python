@@ -26,7 +26,7 @@ def print_calendar_table(events):
     events = list of Event objects
 
     Returns
-    -------
+    -------saa
     None
     '''
     table = PrettyTable(['', 'Name', 'Date', 'Type'])
