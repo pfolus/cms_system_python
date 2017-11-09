@@ -17,9 +17,10 @@ def enter_message(author):
     message = input(text)
     max_length = 40
     while len(message) > max_length:
-        print('Message has to be shorter than {} characters, try again!'.format(max_length))
+        print('Message has to be adasdshorter than {} characters, try again!'.format(max_length))
         message = input(text)
     if message == '~':
         pass
     else:
         Shoutbox(datetime.datetime.now(), author, message)
+swds

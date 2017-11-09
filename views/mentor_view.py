@@ -19,7 +19,7 @@ def print_menu():
             '(8).Change password',
             '(9).Add an event',
             '(10).Show upcoming events',
-            '(11).Remove an event',
+            '(11).Remove an event',das
             '(12).Private message',
             '(0).Exit',
             '========================']
